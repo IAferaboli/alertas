@@ -1,4 +1,0 @@
-Array
-(
-    [name] => Fija DC 1
-)

@@ -19,7 +19,8 @@ class FlawController extends Controller
     public function index($name = null)
     {
 
-            return Flaw::where('datesolution', null)->get();
+            // return Flaw::where('datesolution', null)->get();
+            return Flaw::all();
             // return Flaw::where('camera_id', ($camera->id))
             //     ->where('datesolution', NULL)
             //     ->count();
@@ -34,6 +35,24 @@ class FlawController extends Controller
      */
     public function store(FlawRequest $request)
     {
+        $array = $request->getContent();
+        
+        // $jsonCamera = json_encode($bodyContent);
+
+        //parse request ini to json
+        // $jsonCamera = json_decode($array, true);
+        $contenido = parse_ini_string($array, true);
+        
+        // file_put_contents('filename.txt', print_r($jsonCamera, true));
+        // $file = 'clientes.json';
+        // file_put_contents($file, $input);
+
+        return $contenido;
+        // return response()->json([
+        //     'res' => true,
+        //     'msg' => 'JSON',
+            
+        // ]);
     }
 
     /**

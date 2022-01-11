@@ -22,5 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('monitoreo/fallas', [FlawController::class,'index']);
+Route::post('monitoreo/fallas', [FlawController::class,'store']);
+
 Route::post('downcamera', [DownCameraController::class,'store']);
 Route::get('monitoreo/camaras', [CameraController::class,'index']);
