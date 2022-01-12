@@ -120,7 +120,6 @@
     <div class="row">
         <div class="col-lg-6 col-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
                     <canvas id="interventions" style="width:100%;max-width:700px"></canvas>
                 </div>

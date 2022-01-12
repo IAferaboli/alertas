@@ -19,7 +19,7 @@ class ReportController extends Controller
         $interventions = Intervention::whereBetween('date',[$request->datein, $request->dateout])
         ->orderBy('date')
         ->get();
-        return view('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
+        // return view('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
         $pdf = PDF::loadView('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
         return $pdf->download('interventions.pdf');
         

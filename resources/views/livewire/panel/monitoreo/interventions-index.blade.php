@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                         @foreach ($interventions as $intervention)
-                            <tr>
+                            <tr class="disabled">
                                 <td>{{ $intervention->id }}</td>
                                 <td>{{ $intervention->date }}</td>
                                 <td>{{ $intervention->hour }}</td>
@@ -66,7 +66,7 @@
                                     @can('panel.monitoreo.interventions.destroy')
                                         <form
                                             action="{{ route('panel.monitoreo.interventions.destroy', $intervention->id) }}"
-                                            method="POST">
+                                            method="POST" class="form-delete">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm" type="submit"><i
@@ -79,7 +79,7 @@
                                     @can('panel.monitoreo.interventions.viewrecord')
                                         {{-- Calcular dias entre dos fechas con Carbon --}}
                                             <a class="btn btn-secondary btn-sm"
-                                                href="http://192.168.100.{{ $intervention->camera->server }}:8601/Interface/Cameras/Playback/GetJPEGStream?Camera={{ $intervention->camera->name }}&StartDate={{ date('Y.m.d', strtotime($intervention->date)) }}&StartTime={{ date('h.i.s', strtotime($intervention->hour)) }}&EndDate={{ date('Y.m.d', strtotime($intervention->date)) }}&EndTime={{ date('H.i.s', strtotime($intervention->hour) + 60) }}&ResponseFormat=Text"
+                                                href="http://192.168.100.{{ $intervention->camera->server }}:8601/Interface/Cameras/Playback/GetJPEGStream?Camera={{ $intervention->camera->name }}&StartDate={{ date('Y.m.d', strtotime($intervention->date)) }}&StartTime={{ date('H.i.s', strtotime($intervention->hour)) }}&EndDate={{ date('Y.m.d', strtotime($intervention->date)) }}&EndTime={{ date('H.i.s', strtotime($intervention->hour) + 60) }}&ResponseFormat=Text"
                                                 target="_blank"><i class="fas fa-eye"></i></a>
 
 
@@ -102,5 +102,7 @@
 
     </div>
 
+
+    
 
 </div>

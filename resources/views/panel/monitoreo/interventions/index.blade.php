@@ -21,5 +21,31 @@
 @stop
 
 @section('js')
+    <script>
+        $('.form-delete').submit(function(e) {
+            e.preventDefault();
 
+            Swal.fire({
+                title: 'Estás seguro de eliminarlo?',
+                text: "La intervención quedará desactivada pero no visible!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sí, eliminar!'
+            }).then((result) => {
+                if (result.value) {
+                    // Swal.fire(
+                    //     'Deleted!',
+                    //     'Your file has been deleted.',
+                    //     'success'
+                    // )
+                    //Send form
+                    this.submit();
+                }
+            })
+
+        })
+    </script>
 @stop

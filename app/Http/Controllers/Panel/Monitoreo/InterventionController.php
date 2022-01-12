@@ -46,7 +46,7 @@ class InterventionController extends Controller
         ]);
   
         
-        $intervention = Intervention::create(array_merge($request->all(), ['user_id' => auth()->id()]));
+        $intervention = Intervention::create(array_merge($request->all(), ['user_id' => auth()->id(), 'status' => 1]));
         $camera = Camera::where('id',$request->camera_id)->first();
         $camera->update([
             'countintervention'=> $camera->countintervention+1,
@@ -88,8 +88,10 @@ class InterventionController extends Controller
     public function destroy(Intervention $intervention)
     {
         
-        $intervention->delete();
-            
+        // $intervention->delete();
+        $intervention->update([
+            'status'=> 0,
+        ]);
         return redirect()->route('panel.monitoreo.interventions.index')->with('info', 'La intervención se eliminó exitosamente.');
     }
 }

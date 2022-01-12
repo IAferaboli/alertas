@@ -47,6 +47,11 @@ class FlawController extends Controller
         // $file = 'clientes.json';
         // file_put_contents($file, $input);
 
+        //Agrego variables a $contenido
+        $contenido['dateflaw'] = now()->format('Y-m-d');
+        $contenido['timeflaw'] = now()->format('H:i:s');
+        $contenido['description'] = "Fuera de servicio";
+
         return $contenido;
         // return response()->json([
         //     'res' => true,
