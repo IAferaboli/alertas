@@ -26,7 +26,7 @@ class FlawsIndex extends Component
 
         if ($this->camara != null) {
             $flaws = Flaw::where('dateflaw', 'LIKE' , '%' . $this->fecha . '%')
-            ->where('camera_id', 'LIKE' , '%' . $this->camara . '%')
+            ->where('camera_id', '=',  $this->camara)
             ->orderByDesc('dateflaw')
             ->orderByDesc('timeflaw')
             ->paginate();
