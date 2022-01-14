@@ -20,6 +20,16 @@ class InterventionsIndex extends Component
     {
         $this->resetPage();
     }
+
+    public function updatingFecha()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingCamara()
+    {
+        $this->resetPage();
+    }
     
     protected $paginationTheme = "bootstrap";
     
