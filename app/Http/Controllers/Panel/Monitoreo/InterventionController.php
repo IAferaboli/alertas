@@ -54,7 +54,7 @@ class InterventionController extends Controller
         // return $camera;
         // Arr::add($intervention, 'lat', $camera->lat);
         // Arr::add($intervention, 'lng',  $camera->lng);
-        Arr::add($intervention, 'to',  831187074); //Privado NICO
+        Arr::add($intervention, 'to',  env('TELEGRAM_MONITOREO_INTERVENCIONES')); //Privado NICO
         Arr::add($intervention, 'content',  "*Fecha:* $request->date \n*Hora:* $request->hour \n*Intervención: * $request->detail");
 
 

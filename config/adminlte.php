@@ -253,6 +253,7 @@ return [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-video',
             'active'    =>   ['panel/monitoreo*'],
+            'can'   =>  'panel.monitoreo.cameras.index',
             'submenu' => [
                 //Listado de cámaras
                 [
@@ -314,6 +315,8 @@ return [
         [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-print',
+            'can'   => 'panel.users.index',
+
             'submenu' => [
                 [
                     'text' => 'Intervenciones',

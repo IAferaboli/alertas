@@ -14,7 +14,9 @@ class AddStatusToInterventions extends Migration
     public function up()
     {
         Schema::table('interventions', function (Blueprint $table) {
-            //
+            $table->bigInteger('status')
+                ->after('hour')
+                ->nullable();
         });
     }
 
@@ -26,9 +28,7 @@ class AddStatusToInterventions extends Migration
     public function down()
     {
         Schema::table('interventions', function (Blueprint $table) {
-            $table->bigInteger('status')
-                ->after('hour')
-                ->nullable();
+            
         });
     }
 }
