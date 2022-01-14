@@ -315,7 +315,7 @@ return [
         [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-print',
-            'can'   => 'panel.users.index',
+            'can'  => 'manage-blog',
 
             'submenu' => [
                 [
@@ -338,7 +338,7 @@ return [
             'icon'    => 'fas fa-fw fa-users',
             'active'    =>  ['panel/users*'],
             'route'  => 'panel.administracion.users.index',
-            'can'   => 'panel.users.index',
+            'can'  => 'manage-blog',
 
 
         ],
