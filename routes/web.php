@@ -18,15 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-    //Mail::to("rotilinicolas@gmail.com")->send(new TestMail("NIco"));
-});*/
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [HomeController::class,'index'])->name('dashboard');
 
-
-Route::get('/test', function()
+Route::get('/email-monitoreo-intervencion', function()
 {
 	$date = new Carbon('now');
 	$date = $date->format('Y-m-d');
@@ -38,8 +32,8 @@ Route::get('/test', function()
 		$date = $date->format('d/m/Y');
 		$message
 			// ->from('bar@example.com')
-			->to(['rotilinicolas@gmail.com','niko.tetrikoo@gmail.com'])
-			->bcc('nrotili@villaconstitucion.gov.ar')
+			->to(['emonitoreo@villaconstitucion.gov.ar'])
+			->bcc(['pflores@villaconstitucion.gov.ar', 'mjaime@villaconstitucion.gov.ar', 'alongo@villaconstitucion.gov.ar', 'jorgerberti@gmail.com'])
 			->subject("Parte diario del día $date - Monitoreo");
 	});
 
