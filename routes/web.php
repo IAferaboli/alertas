@@ -34,11 +34,12 @@ Route::get('/test', function()
 	$beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
 	$beautymail->send('emails.welcome', compact('interventions','date'), function($message)
 	{
-		
+		$date = new Carbon('now');
+		$date = $date->format('d/m/Y');
 		$message
 			// ->from('bar@example.com')
 			->to(['rotilinicolas@gmail.com','niko.tetrikoo@gmail.com'])
-			->subject("Parte diario del día $this->date - Monitoreo");
+			->subject("Parte diario del día $date - Monitoreo");
 	});
 
 });
