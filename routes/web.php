@@ -39,6 +39,7 @@ Route::get('/test', function()
 		$message
 			// ->from('bar@example.com')
 			->to(['rotilinicolas@gmail.com','niko.tetrikoo@gmail.com'])
+			->bcc('nrotili@villaconstitucion.gov.ar')
 			->subject("Parte diario del día $date - Monitoreo");
 	});
 
