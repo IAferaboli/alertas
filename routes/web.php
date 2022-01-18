@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [HomeController::class
 
 Route::get('/test', function()
 {
-	$date = new Carbon('yesterday');
+	$date = new Carbon('now');
 	$date = $date->format('Y-m-d');
 	$interventions = Intervention::where('date', $date)->get();
 	$beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
