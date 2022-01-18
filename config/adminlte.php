@@ -338,7 +338,7 @@ return [
             'icon'    => 'fas fa-fw fa-users',
             'active'    =>  ['panel/users*'],
             'route'  => 'panel.administracion.users.index',
-            'can'  => 'manage-blog',
+            'can'  => 'panel.roles.index',
 
 
         ],

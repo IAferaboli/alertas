@@ -46,6 +46,7 @@ function statusCameras($type)
     $outOfService = 0;
     for ($i = 1; $i <= 3; $i++) {
         try {
+            
             $xmlServer = simplexml_load_file("http://192.168.100.$i:8601/Interface/Cameras/GetStatus?&Fields=Working,Active&ResponseFormat=XML&AuthUser=admin&AuthPass=gda.adm");
             foreach ($xmlServer->Data->Cameras->Camera as $Camera) {
                 $active = $Camera->Active;
@@ -86,6 +87,7 @@ function timeServer()
         //throw $th;
         return array("No hay datos", "No hay datos", "No hay datos");
     }
+
 }
 
 
