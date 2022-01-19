@@ -35,7 +35,31 @@
     "Before proceeding, please check your email for a verification link.": "Antes de poder continuar, por favor, confirma tu correo electrónico con el enlace que te hemos enviado.",
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
-    "All rights reserved.":  "Todos los derechos reservados.",
+    "All rights reserved.": "Todos los derechos reservados.",
+
+    "Profile Information": "Información del perfil",
+    "Update your account's profile information and email address.": "Actualiza la información del perfil y la dirección de correo electrónico de tu cuenta.",
+    "Update Password": "Actualizar contraseña",
+    "Ensure your account is using a long, random password to stay secure.": "Asegúrate de que tu cuenta está usando una contraseña larga y aleatoria para mantenerte seguro.",
+    "Current Password": "Contraseña actual",
+    "New Password": "Nueva contraseña",
+    "Two Factor Authentication": "Autenticación de dos factores",
+    "Add additional security to your account using two factor authentication.": "Añade seguridad a tu cuenta usando la autenticación de dos factores.",
+    "You have not enabled two factor authentication.": "No has habilitado la autenticación de dos factores.",
+    "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.": "Cuando la autenticación de dos factores está activada, se te pedirá un código aleatorio de seguridad durante la autenticación. Puedes recuperar este código desde la aplicación de Google Authenticator de tu teléfono.",
+    "Browser Sessions": "Sesiones en el navegador",
+    "Manage and log out your active sessions on other browsers and devices.": "Administra y cierra las sesiones activas en otros navegadores y dispositivos.",
+    "If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.": "Si es necesario, puede cerrar sesión en todas sus otras sesiones de navegador en todos sus dispositivos. Algunas de sus sesiones recientes se enumeran a continuación; sin embargo, esta lista puede no ser exhaustiva. Si cree que su cuenta se ha visto comprometida, también debe actualizar su contraseña.",
+    "This device": "Este dispositivo",
+    "Delete Account": "Eliminar cuenta",
+    "Permanently delete your account.": "Elimina permanentemente tu cuenta.",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.",
+
+
+    "Log Out Other Browser Sessions": "Cerrar sesiones en otros navegadores",
+    "Enable": "Habilitar",
+    "Save": "Guardar",
+    "Delete Account": "Eliminar cuenta",
 
     "Not Found": "No encontrado",
     "Page Expired": "Página expirada"

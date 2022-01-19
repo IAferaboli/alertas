@@ -3,10 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Crear nuevo rol</h1>
+    
 @stop
 
 @section('content')
-
+  
+@include('profile.show')
 
 @stop
