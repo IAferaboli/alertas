@@ -42,9 +42,13 @@ Route::resource('administracion/roles', RoleController::class)->except('show')->
 
 // Notification::route('telegram', '831187074')->notify(new TelegramPrueba);
 
+//      --- CUENTA ---
+Route::get('myaccount', function () {
+    return view('panel.account.profile');
+});
+
 
 //      --- EMAILS ---
-
 
 Route::get('mail/intervencion', [MailController::class, 'interventionsMonitoreo'] );
             

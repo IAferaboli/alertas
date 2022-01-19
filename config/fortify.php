@@ -61,12 +61,12 @@ return [
     |
     */
 
-    // 'home' => RouteServiceProvider::HOME,
-    'home' => function(){
-        //if you want to go to a specific route
-        return route('dashboard');
+    'home' => RouteServiceProvider::HOME,
+    // 'home' => function(){
+    //     //if you want to go to a specific route
+    //     return route('dashboard');
     
-    },
+    // },
 
     /*
     |--------------------------------------------------------------------------
