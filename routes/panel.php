@@ -45,7 +45,7 @@ Route::resource('administracion/roles', RoleController::class)->except('show')->
 //      --- CUENTA ---
 Route::get('myaccount', function () {
     return view('panel.account.profile');
-});
+})->name('panel.myaccount');
 
 
 //      --- EMAILS ---

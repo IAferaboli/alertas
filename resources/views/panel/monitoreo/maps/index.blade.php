@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Municipio VC')
 
 @section('content_header')
     <h1>Ubicaciones de cámaras</h1>

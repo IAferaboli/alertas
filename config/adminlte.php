@@ -357,7 +357,8 @@ return [
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
             'text' => 'Perfil',
-            'url'  => '#',
+            'route'  => 'panel.myaccount',
+            'active' => ['panel.myaccount'],
             'icon' => 'fas fa-fw fa-user',
         ],
 
