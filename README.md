@@ -1,22 +1,29 @@
 # Smart VC - Web APP! 💻
-Smart VC surge con la necesidad de unificar sistemas IoT del Municipio de Villa Constitución. Si bien la versión 1 (Sistema de Estadísticas y Datos de Monitoreo) contemplaba funciones similares, en esta versión se cambiaron los stacks (laravel 8) para mejorar su funcionalidad, integridad y seguridad.
 
-## Versión 2
-### 2.1.1
-> 1. Se corrige redireccionamiento desde la pantalla de login.
-> 2. Se agregan traducciones al español.
-### 2.1.0
-> 1. Se implementa login de usuario.
-> 2. Se agrega middleware para trabajar roles y permisos.
-> 3. Se solicita verificación de correo electrónico mediante email.
-> 4. Se genera sección "Mi Cuenta" para visualizar y modificar información del perfil del usuario.
-> 5. Se automatiza envio de email para usuarios con jerarquía al finalizar el día con las intervenciones del día.
-### 2.0.0
->  1. Se implementa panel AdminLTE para Laravel 8.
->  2. Se genera dashboard con indicadores útiles y automatizados de cámaras.
->  3. Se implementa CRUD de intervenciones con aviso mediante bot a Telegram a su canal correspondiente. Se colocan 3 filtros (fecha, detalle y cámara) para facilitar búsqueda.
->  4. Se implementa CRUD de fallas de cámaras manual con aviso mediante bot a Telegram a su canal correspondiente. Se colocan 2 filtros para facilitar búsqueda (fecha y cámara)
->  5. Se automatiza la carga de fallas (de comunicación) de cámaras mediante solicitud HTTP realizada desde el VMS. Se contemplan dos minutos hasta que se envie la solicitud.
->  6. Se implementa CRUD de seguimiento de solicitudes realizadas desde ámbitos externos/internos.
->  7. Se coloca tabla con datos automatizados y relevantes de las cámaras, los mismos son solicitados mediante API a Digifort. Se agrega como novedad la visualización en vivo de cada una de las cámaras.
->  8. Se agrega mapa interactivo (biblioteca leaflet) para visualizar el estado y la ubicación de cada una de las cámaras. Datos consultados desde BD que se actualizan según información brindada por el VMS.
+Smart VC surge con la necesidad de unificar sistemas IoT del Municipio de Villa Constitución. Si bien la versión 1 (Sistema de Estadísticas y Datos de Monitoreo) contemplaba funciones similares, en esta se cambiaron los stacks para mejorar su funcionalidad, integridad y seguridad.
+
+## Comenzando 🚀
+
+_La solicitud de credenciales deberá realizarse al personal de cómputo y posteriormente se le otorgarán los permisos necesarios._
+
+**Monitoreo**
+La visualización de datos es a través de tablas que contienen filtros para agilizar búsqueda en caso que así sea necesario. La carga manual se realiza a través de formularios. 
+
+*Herramientas de la oficina:*
+- Listado de cámaras con información útil (permite visualización en vivo, no se recomienda usar por períodos mayor a 1 minuto)
+ - CRUD de intervenciones (con aviso por telegram)
+ - CRUD de fallas (manual y automatizadas, con aviso por telegram) 
+ - CRUD de expedientes.
+ - Mapa con ubicación y estado de cámaras (automático)
+
+## Construido con 🛠️
+* [Laravel](https://laravel.com/) - Framework usado
+* [TailwindCSS](https://tailwindcss.com/) - Framework usado
+* [Livewire](https://laravel-livewire.com/) - Framework usado
+* [Composer](https://getcomposer.org/) - Manejador de dependencias
+
+## Versionado 📌
+Uso [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/NRotili/alertas/blob/master/tags.md).
+
+## Autor ✒️
+ - Nicolás Rotili (Dev. Jr)

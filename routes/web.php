@@ -39,3 +39,13 @@ Route::get('/email-monitoreo-intervencion', function()
 
 });
 
+Route::get('/readme', function () {
+	//Show readme
+	return view('readme');
+});
+
+//Show readme.md
+Route::get('/readme.md', function () {
+	//Show readme
+	return view('readme');
+});
