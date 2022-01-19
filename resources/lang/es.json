@@ -5,7 +5,6 @@
     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "¡Bienvenido a Smart VC! Antes de comenzar, debés verificar tu dirección de correo electrónico haciendo clic en el enlace que te enviamos por email. Si no lo recibiste, podes solicitarlo nuevamente.",
     "Resend Verification Email": "Reenviar correo de verificación",
     "A new verification link has been sent to the email address you provided during registration.": "Se ha enviado un nuevo enlace de verificación a tu dirección de correo electrónico.",
-    "Not Found": "No encontrado",
     "Log Out": "Cerrar sesión",
     "Password": "Contraseña",
     "Remember me": "Recuérdame",
@@ -36,5 +35,8 @@
     "Before proceeding, please check your email for a verification link.": "Antes de poder continuar, por favor, confirma tu correo electrónico con el enlace que te hemos enviado.",
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
-    "All rights reserved.":  "Todos los derechos reservados."
+    "All rights reserved.":  "Todos los derechos reservados.",
+
+    "Not Found": "No encontrado",
+    "Page Expired": "Página expirada"
 }
