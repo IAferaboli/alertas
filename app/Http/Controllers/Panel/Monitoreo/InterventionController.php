@@ -65,8 +65,10 @@ class InterventionController extends Controller
 
     public function edit(Intervention $intervention)
     {
-        $cameras = Camera::orderBy('name','asc')->pluck('name', 'id');
 
+        $this->authorize('author', $intervention);
+
+        $cameras = Camera::orderBy('name','asc')->pluck('name', 'id');
         return view('panel.monitoreo.interventions.edit', compact('intervention','cameras'));
 
     }

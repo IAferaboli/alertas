@@ -2,6 +2,7 @@
 ## Versión 2
 ### 2.2.1
 > 1. Se modifican las páginas de errores.
+> 2. Se añaden políticas de seguridad al editar intervenciones.
 ### 2.2.0
 > 1. Se añade auditoría de modelos específicos.
 > 2. Se agregan validaciones a algunos campos de form.
