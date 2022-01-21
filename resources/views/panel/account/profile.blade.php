@@ -8,6 +8,6 @@
 
 @section('content')
   
-@include('profile.show')
+    @include('profile.show')
 
 @stop

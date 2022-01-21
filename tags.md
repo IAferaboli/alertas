@@ -1,5 +1,9 @@
 # Versionado 📌
 ## Versión 2
+### 2.2.0
+> 1. Se añade auditoría de modelos específicos.
+> 2. Se agregan validaciones a algunos campos de form.
+
 ### 2.1.1
 > 1. Se corrige redireccionamiento desde la pantalla de login.
 > 2. Se agregan traducciones al español.

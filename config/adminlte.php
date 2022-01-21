@@ -352,7 +352,7 @@ return [
         [
             'text' => 'Auditoría',
             'icon'  => 'fas fa-fw fa-file-contract',
-            'url'  => '#',
+            'route'  => 'panel.administracion.auditing.index',
         ],
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [

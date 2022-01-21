@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
 use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Auditable as AuditingAuditable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Auditable
 {
     use HasApiTokens;
     use HasFactory;
@@ -20,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use AuditingAuditable;
 
     /**
      * The attributes that are mass assignable.

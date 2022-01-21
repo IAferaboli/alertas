@@ -74,7 +74,7 @@ class FlawController extends Controller
 
         $flaw->update($request->all());
 
-        return redirect()->route('panel.monitoreo.flaws.edit', $flaw)->with('info', 'La falla se actualizó exitosamente.');
+        return redirect()->route('panel.monitoreo.flaws.index', $flaw)->with('info', 'La falla se actualizó exitosamente.');
     }
 
 

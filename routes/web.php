@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Panel\HomeController;
 use App\Models\Intervention;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -40,12 +41,6 @@ Route::get('/email-monitoreo-intervencion', function()
 });
 
 Route::get('/readme', function () {
-	//Show readme
-	return view('readme');
-});
-
-//Show readme.md
-Route::get('/readme.md', function () {
 	//Show readme
 	return view('readme');
 });

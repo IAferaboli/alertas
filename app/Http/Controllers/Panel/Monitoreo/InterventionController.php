@@ -39,7 +39,7 @@ class InterventionController extends Controller
     {
 
         $request->validate([
-            'detail' => 'required',
+            'detail' => 'required|max:750',
             'date' => 'required',
             'hour' => 'required',
             'camera_id' => 'required'
@@ -67,14 +67,14 @@ class InterventionController extends Controller
     {
         $cameras = Camera::orderBy('name','asc')->pluck('name', 'id');
 
-        return view('panel.monitoreo.interventions.edit', compact('intervention','cameras'))->with('info', 'La intervención se actualizó exitosamente.');
+        return view('panel.monitoreo.interventions.edit', compact('intervention','cameras'));
 
     }
 
     public function update(Request $request, Intervention $intervention)
     {
         $request->validate([
-            'detail' => 'required',
+            'detail' => 'required|max:750',
             'date' => 'required',
             'hour' => 'required',
             'camera_id' => 'required'
