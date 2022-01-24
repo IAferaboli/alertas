@@ -33,8 +33,7 @@ Route::get('/email-monitoreo-intervencion', function()
 		$date = $date->format('d/m/Y');
 		$message
 			// ->from('bar@example.com')
-			->to(['emonitoreo@villaconstitucion.gov.ar'])
-			->bcc(['pflores@villaconstitucion.gov.ar', 'mjaime@villaconstitucion.gov.ar', 'alongo@villaconstitucion.gov.ar', 'jorgerberti@gmail.com'])
+			->to(['rotilinicolas@gmail.com'])
 			->subject("Parte diario del día $date - Monitoreo");
 	});
 
