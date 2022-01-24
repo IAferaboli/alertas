@@ -44,7 +44,7 @@
                         @can('panel.monitoreo.cameras.viewcamera')
 
                             <td>
-                                <a href="http://192.168.100.1:8601/Interface/Cameras/GetJPEGStream?Camera={{ $camera['Name'] }}&AuthUser=api&AuthPass=DaxIcEc1eD835iKAkIzI"
+                                <a href="http://192.168.100.1:8601/Interface/Cameras/GetJPEGStream?Camera={{ $camera['Name'] }}&AuthUser={{env('DIGIFORT_USER')}}&AuthPass={{env('DIGIFORT_PASSWORD')}}"
                                     target="_blank" class="btn btn-secondary btn-xs @if (!$camera['Working'] == 'TRUE') disabled @endif">
                                     <i class="fas fa-video"></i></a>
                             </td>
