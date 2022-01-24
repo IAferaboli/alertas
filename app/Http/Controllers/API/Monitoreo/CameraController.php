@@ -17,7 +17,7 @@ class CameraController extends Controller
      */
     public function index($status = null)
     {
-        return Camera::all();
+        return Camera::where('published', 1)->get();
     }
 
     /**
