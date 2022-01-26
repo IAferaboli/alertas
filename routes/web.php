@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\HomeController;
+use App\Http\Controllers\Panel\ReportController;
 use App\Models\Intervention;
 use App\Models\User;
 use Carbon\Carbon;
@@ -42,8 +43,4 @@ Route::get('/email-monitoreo-intervencion', function()
 
 });
 
-Route::get('/readme', function () {
-	$pdf = App::make('dompdf.wrapper');
-	$pdf->loadHTML('<h1>Test</h1>');
-    return $pdf->stream();
-});
+Route::get('reporte', [ReportController::class, 'pdfInterventions'])->name('reporte');

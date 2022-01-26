@@ -16,12 +16,15 @@ class ReportController extends Controller
 
     public function pdfInterventions(Request $request)
     {
-        $interventions = Intervention::whereBetween('date',[$request->datein, $request->dateout])
-        ->orderBy('date')
-        ->get();
+        // $interventions = Intervention::whereBetween('date',[$request->datein, $request->dateout])
+        // ->orderBy('date')
+        // ->get();
+
+        $interventions = Intervention::take(10)->where('status', 1)->get();
         // return view('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
-        $pdf = PDF::loadView('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
-        return $pdf->download('interventions.pdf');
+        $pdf = PDF::loadView('panel.reports.monitoreo.pdfInterventions', compact('interventions','request'));
+        // return $pdf->download('interventions.pdf');
+        return $pdf->stream('');
         
     }
 }
