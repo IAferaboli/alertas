@@ -71,7 +71,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($interventions as $intervention)
+                {{-- @foreach ($interventions as $intervention)
 
                     <tr>
                         <td class="px-0 py-0 whitespace-nowrap">
@@ -85,7 +85,7 @@
                         </td>
 
                     </tr>
-                @endforeach
+                @endforeach --}}
 
                 <!-- More people... -->
             </tbody>
