@@ -26,7 +26,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box @if (statusCameras('FUERA')==0) bg-success @else bg-danger @endif">
+            <div class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
                     <h3>{{ statusCameras('FUERA') }}</h3>
 
@@ -42,7 +42,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box @if (statusCameras('ACTIVE')==0) bg-success @else bg-danger @endif">
+            <div class="small-box @if (statusCameras('ACTIVE') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
                     <h3>{{ statusCameras('ACTIVE') }}</h3>
 
@@ -57,7 +57,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box @if (getLicenses() <=10) bg-danger @else bg-info @endif">
+            <div class="small-box @if (getLicenses() <= 10) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
 
@@ -119,11 +119,89 @@
 
     <div class="row">
         <div class="col-lg-6 col-12">
-            <div class="panel panel-default">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line"></i>
+                        Intervenciones anuales
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <canvas id="interventions" style="width:100%;max-width:700px"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            {{-- <div class="panel panel-default">
                 <div class="panel-body">
                     <canvas id="interventions" style="width:100%;max-width:700px"></canvas>
                 </div>
-            </div>
+            </div> --}}
+        </div>
+
+
+
+        
+
+        <div class="col-lg-6 col-12">
+            {{-- <div class="info-box">
+                <span class="info-box-icon bg-warning">
+
+                </span>
+                <div class="info-box-content">
+                    <div class="info-box-text">
+                        123a
+                    </div>
+                    <div class="info-box-number">
+                        1
+                    </div>
+                </div>
+            </div> --}}
+
+            @isset($weather)
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header bg-info">
+                        <h3 class="widget-user-username">Villa Constitución</h3>
+                        <h5 class="widget-user-desc">{{ $weather['clima'] }}</h5>
+                    </div>
+                    <div class="widget-user-image">
+                        <img class="img-circle elevation-2"
+                            src="https://openweathermap.org/img/wn/{{ $weather['icono'] }}@2x.png" alt="User Avatar">
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['temp'] - 273.1 }}ºC</h5>
+                                    <span class="description-text">Temperatura</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['humidity'] }}%</h5>
+                                    <span class="description-text">Humedad</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['temp_min'] - 273.1 }}ºC -
+                                        {{ $weather['main']['temp_max'] - 273.1 }}ºC</h5>
+                                    <span class="description-text">Mín. - Máx.</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            @endisset
+
         </div>
     </div>
 
@@ -137,11 +215,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
     <script>
-        var _ydata=JSON.parse('{!! json_encode($monthCount) !!}');
-        var _ydataLast=JSON.parse('{!! json_encode($monthCountLast) !!}');
-        let month= ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        var _ydata = JSON.parse('{!! json_encode($monthCount) !!}');
+        var _ydataLast = JSON.parse('{!! json_encode($monthCountLast) !!}');
+        let month = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
+            'Noviembre', 'Diciembre'
+        ]
         var year = new Date().getFullYear()
-        
+
 
         if (document.getElementById("interventions")) {
             var myChart = new Chart("interventions", {
@@ -154,7 +234,7 @@
                         borderColor: "red",
                         fill: false,
                     }, {
-                        label: year-1,
+                        label: year - 1,
                         data: _ydataLast,
                         borderColor: "green",
                         fill: false

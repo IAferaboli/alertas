@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::get('/email-monitoreo-intervencion', function()
 });
 
 Route::get('/readme', function () {
-	//Show readme
-	return view('readme');
+	$pdf = App::make('dompdf.wrapper');
+	$pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
 });

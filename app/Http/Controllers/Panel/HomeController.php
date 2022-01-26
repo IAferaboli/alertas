@@ -17,6 +17,30 @@ class HomeController extends Controller
 
         list($serv1, $serv2, $serv3) = timeServer();
 
+        try {
+            $weather = Http::get("https://api.openweathermap.org/data/2.5/weather?id=3832778&appid=".env('OPENWEATHER_API')."")->json();
+            if ($weather) {
+                foreach ($weather['weather'] as $key => $value) {
+                    $weather['icono'] = $value['icon'];
+                    $weather['clima'] = $value['main'];
+                }
+
+                switch ($weather['clima']) {
+                    case "Clouds":
+                        $weather['clima'] = "Nublado";
+                        break;
+                    case "Rain":
+                        $weather['clima'] = "Lluvioso";
+                        break;
+                }
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
+
+
 
         $interventions = Intervention::whereYear('date', '>=', date('Y'))
 
@@ -39,10 +63,10 @@ class HomeController extends Controller
 
         $monthCountLast = [];
         foreach ($interventionsLast as $count) {
-           $monthCountLast[] = $count->total;
+            $monthCountLast[] = $count->total;
         }
         // $responses = Http::get(url('/api/fallas'))->json();
         // return $responses;
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount','monthCountLast'));
+        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather'));
     }
 }

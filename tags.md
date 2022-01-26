@@ -2,7 +2,8 @@
 ## Versión 2
 ### 2.2.2
 > 1. Se elimina autenticación para ver intervenciones.
-> 1. Se elimina autenticación para ver imagen en vivo de cámara.
+> 2. Se elimina autenticación para ver imagen en vivo de cámara.
+> 3. Se añade widget del clima.
 ### 2.2.1
 > 1. Se modifican las páginas de errores.
 > 2. Se añaden políticas de seguridad al editar intervenciones.
