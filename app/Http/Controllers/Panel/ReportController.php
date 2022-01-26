@@ -22,7 +22,7 @@ class ReportController extends Controller
 
         $interventions = Intervention::take(10)->where('status', 1)->get();
         // return view('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
-        $pdf = PDF::loadView('panel.reports.monitoreo.pdfInterventions', compact('interventions','request'));
+        $pdf = PDF::loadView('panel.reports.monitoreo.pdfinterventions', compact('interventions','request'));
         // return $pdf->download('interventions.pdf');
         return $pdf->stream('');
         
