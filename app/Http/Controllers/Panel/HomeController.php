@@ -32,7 +32,7 @@ class HomeController extends Controller
                     case "Rain":
                         $weather['clima'] = "Lluvioso";
                         break;
-                    case "Clean":
+                    case "Clear":
                         $weather['clima'] = "Despejado";
                         break;
                 }
