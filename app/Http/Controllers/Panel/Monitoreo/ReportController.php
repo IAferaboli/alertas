@@ -30,7 +30,7 @@ class ReportController extends Controller
 
         $request->validate([
             'dateinInterventions' => 'required',
-            'dateoutInterventions' => 'required'
+            'dateoutInterventions' => 'required|after_or_equal:dateinInterventions',
         ]);
 
         $interventions = Intervention::whereBetween('date',[$request->dateinInterventions, $request->dateoutInterventions])
