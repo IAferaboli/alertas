@@ -32,6 +32,9 @@ class HomeController extends Controller
                     case "Rain":
                         $weather['clima'] = "Lluvioso";
                         break;
+                    case "Clean":
+                        $weather['clima'] = "Despejado";
+                        break;
                 }
             }
         } catch (\Throwable $th) {
