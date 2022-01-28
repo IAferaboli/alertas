@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::all()->orderBy('description', 'asc');
+        $roles = Role::all();
         return view('panel.administracion.users.create', compact('roles'));
     }
 
