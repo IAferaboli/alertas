@@ -2,7 +2,8 @@
 ## Versión 2
 ### 2.2.3
 > 1. Se agregan traducciones al widget del clima.
-> 2. Se empieza a generar el módulo de reporte.
+> 2. Se agrega generación de reporte de intervenciones.
+> 3. Se dejan formularios hechos para reportes de Fallas, Concejo y Expedientes.
 ### 2.2.2
 > 1. Se elimina autenticación para ver intervenciones.
 > 2. Se elimina autenticación para ver imagen en vivo de cámara.

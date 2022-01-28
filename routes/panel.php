@@ -19,7 +19,7 @@ Route::get('',[HomeController::class, 'index'])->middleware('can:panel.home')->n
 
 //      --- MONITOREO ---
 
-Route::get('reports/monitoreo/interventions', [ReportController::class, 'interventions'])->name('panel.reports.monitoreo.interventions');
+Route::get('reports/monitoreo', [ReportController::class, 'interventions'])->name('panel.reports.monitoreo');
 Route::post('reports/monitoreo/interventions/pdf', [ReportController::class, 'pdfInterventions'])->name('panel.reports.monitoreo.interventions.pdf');
 Route::get('monitoreo/cameras', [CameraController::class, 'index'])->name('panel.monitoreo.cameras.index');
 

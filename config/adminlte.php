@@ -315,22 +315,9 @@ return [
         [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-print',
-            'can'  => 'manage-blog',
-
-            'submenu' => [
-                [
-                    'text' => 'Intervenciones',
-                    'route'  => 'panel.reports.monitoreo.interventions',
-                ],
-                [
-                    'text' => 'Fallas',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Concejo',
-                    'url'     => '#',
-                ],
-            ],
+            'route'  => 'panel.reports.monitoreo',
+            'active' => ['panel.reports.monitoreo'],
+            'can'  => 'panel.reports.monitoreo',
         ],
         ['header' => 'ADMINISTRACIÓN'],
         [
