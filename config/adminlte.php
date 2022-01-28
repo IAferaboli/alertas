@@ -311,7 +311,8 @@ return [
                 ],
             ],
         ],
-        ['header' => 'REPORTES'],
+        ['header' => 'REPORTES',
+            'can'   =>  'panel.reports.menu',],
         [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-print',

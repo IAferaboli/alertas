@@ -10,9 +10,19 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function interventions()
+
+    public function __construct()
     {
-        return view('panel.reports.monitoreo.interventions');
+        $this->middleware('can:panel.reports.monitoreo')->only('index');
+        $this->middleware('can:panel.reports.monitoreo.interventions')->only('pdfInterventions');
+        $this->middleware('can:panel.reports.monitoreo.flaws')->only('pdfFlaws');
+        $this->middleware('can:panel.reports.monitoreo.files')->only('pdfFiles');
+        $this->middleware('can:panel.reports.monitoreo.concejo')->only('pdfConcejo');
+
+    }
+    public function index()
+    {
+        return view('panel.reports.monitoreo.index');
     }
 
     public function pdfInterventions(Request $request)
