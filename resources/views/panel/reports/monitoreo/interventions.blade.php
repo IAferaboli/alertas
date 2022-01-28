@@ -16,6 +16,7 @@
     <div class="card">
         <div class="card-body">
             {!! Form::open(['route' => 'panel.reports.monitoreo.interventions.pdf']) !!}
+            @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         {!! Form::label('datein', 'Fecha inicio') !!}

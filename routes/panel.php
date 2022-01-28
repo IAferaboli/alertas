@@ -10,7 +10,7 @@ use App\Http\Controllers\Panel\Monitoreo\FileController;
 use App\Http\Controllers\Panel\Monitoreo\FlawController;
 use App\Http\Controllers\Panel\Monitoreo\InterventionController;
 use App\Http\Controllers\Panel\Monitoreo\MapController;
-use App\Http\Controllers\Panel\ReportController;
+use App\Http\Controllers\Panel\Monitoreo\ReportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,7 +20,7 @@ Route::get('',[HomeController::class, 'index'])->middleware('can:panel.home')->n
 //      --- MONITOREO ---
 
 Route::get('reports/monitoreo/interventions', [ReportController::class, 'interventions'])->name('panel.reports.monitoreo.interventions');
-Route::get('reports/monitoreo/interventions/pdf', [ReportController::class, 'pdfInterventions'])->name('panel.reports.monitoreo.interventions.pdf');
+Route::post('reports/monitoreo/interventions/pdf', [ReportController::class, 'pdfInterventions'])->name('panel.reports.monitoreo.interventions.pdf');
 Route::get('monitoreo/cameras', [CameraController::class, 'index'])->name('panel.monitoreo.cameras.index');
 
 Route::resource('monitoreo/interventions', InterventionController::class)->except('show')->names('panel.monitoreo.interventions');

@@ -162,7 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         
-        Barryvdh\DomPDF\ServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
 
         /*
@@ -232,8 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PDF' => \Barryvdh\DomPDF\Facade::class,
 
+        'FPDF' => Codedge\Fpdf\Fpdf\Fpdf::class,
     ],
 
 ];
