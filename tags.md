@@ -2,6 +2,7 @@
 ## Versión 2
 ### 2.2.3
 > 1. Se agregan traducciones al widget del clima.
+> 2. Se empieza a generar el módulo de reporte.
 ### 2.2.2
 > 1. Se elimina autenticación para ver intervenciones.
 > 2. Se elimina autenticación para ver imagen en vivo de cámara.
