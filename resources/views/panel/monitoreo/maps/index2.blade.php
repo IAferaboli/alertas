@@ -95,6 +95,7 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
+
         const mymap = L.map('issMap').setView([0, 0], 6);
         const attribution =
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -177,7 +178,7 @@
 
         mymap.setView([-33.233425, -60.324238], 13);
         getISS();
-        setInterval(getISS, 120000)
+        setInterval(getISS, 10000)
     </script>
 
 @stop

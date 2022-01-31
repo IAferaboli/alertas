@@ -21,6 +21,7 @@
         "laraveles/spanish": "^1.5",
         "livewire/livewire": "^2.0",
         "mtownsend/request-xml": "^2.1",
+        "ndum/laravel-snmp": "^1.7",
         "nesbot/carbon": "^2.52",
         "owen-it/laravel-auditing": "^12.0",
         "snowfire/beautymail": "^1.1",

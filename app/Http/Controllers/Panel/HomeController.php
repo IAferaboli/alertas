@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Camera;
+use Ndum\Laravel\Snmp;
 use App\Models\Intervention;
 use Illuminate\Support\Facades\Http;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,8 +13,11 @@ class HomeController extends Controller
     public function index()
     {
 
+        //Tiempo actividad servidores
         list($serv1, $serv2, $serv3) = timeServer();
 
+
+        //API CLIMA
         try {
             $weather = Http::get("https://api.openweathermap.org/data/2.5/weather?id=3832778&appid=".env('OPENWEATHER_API')."")->json();
             if ($weather) {
@@ -41,10 +42,7 @@ class HomeController extends Controller
             //throw $th;
         }
 
-
-
-
-
+        // Gráfico de Intervenciones
         $interventions = Intervention::whereYear('date', '>=', date('Y'))
 
             ->select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
@@ -68,8 +66,15 @@ class HomeController extends Controller
         foreach ($interventionsLast as $count) {
             $monthCountLast[] = $count->total;
         }
-        // $responses = Http::get(url('/api/fallas'))->json();
-        // return $responses;
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather'));
+
+
+        //SNMP Temperatura Servers
+        $snmp = new Snmp();
+        $snmp->newClient(env('IP_TEMP_SERVER'), 2, 'mvc');
+        $tempServer = $snmp->getValue(env('OID_TEMP_SERVER')); ## hostname
+        
+
+        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer'));
+
     }
 }

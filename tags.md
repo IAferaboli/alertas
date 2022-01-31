@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.3.0
+> 1. Se añade SNPM Sun Etherpower
+> 2. Se añade gráfico en Dashboard de temperatura de servidores.
 ### 2.2.3
 > 1. Se agregan traducciones al widget del clima.
 > 2. Se agrega generación de reporte de intervenciones.
