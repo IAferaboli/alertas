@@ -3,6 +3,8 @@
 use App\Models\Camera;
 use Illuminate\Support\Facades\Http;
 use PhpParser\Node\Stmt\TryCatch;
+use Ndum\Laravel\Snmp;
+
 
 function cantCameras()
 {
@@ -158,12 +160,12 @@ function getCameras()
     }
 }
 
-function getSessionDigifort(){
+function getTemperatureDC(){
 
-    if (!session('digifort')) {
+    $snmp = new Snmp();
+    $snmp->newClient(env('IP_TEMP_SERVER'), 2, 'mvc');
+    $tempServer = $snmp->getValue(env('OID_TEMP_SERVER'));
 
-        
-
-    }
+    return $tempServer;
 
 }

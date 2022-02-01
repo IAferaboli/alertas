@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.3.1
+> 1. Se añade alerta por TG de Temperaturas.
 ### 2.3.0
 > 1. Se añade SNPM Sun Etherpower
 > 2. Se añade gráfico en Dashboard de temperatura de servidores.

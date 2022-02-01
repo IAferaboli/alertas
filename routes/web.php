@@ -3,9 +3,13 @@
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Monitoreo\ReportController;
 use App\Models\Intervention;
+use App\Notifications\TelegramPrueba;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-
+use Ndum\Laravel\Snmp;
+use Illuminate\Http\Request;
 
 
 
@@ -31,3 +35,18 @@ Route::get('/email-monitoreo-intervencion', function()
 });
 
 Route::get('reporte', [ReportController::class, 'pdfInterventions'])->name('reporte');
+
+Route::get('telegram-dc-temperatura', function () {
+	
+	$tempServer = getTemperatureDC();
+
+	$request = new Request();
+	$request->request->add([
+		'to' => env('TELEGRAM_DATACENTER'),
+		'content' => "*Temperatura del DC*: $tempServer"
+	]);
+
+	if ($tempServer >= 210) {
+		$request->notify(new TelegramPrueba);
+	}
+});

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use Ndum\Laravel\Snmp;
 use App\Models\Intervention;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 
@@ -67,12 +67,8 @@ class HomeController extends Controller
             $monthCountLast[] = $count->total;
         }
 
-
         //SNMP Temperatura Servers
-        $snmp = new Snmp();
-        $snmp->newClient(env('IP_TEMP_SERVER'), 2, 'mvc');
-        $tempServer = $snmp->getValue(env('OID_TEMP_SERVER')); ## hostname
-        
+        $tempServer = getTemperatureDC();
 
         return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer'));
 
