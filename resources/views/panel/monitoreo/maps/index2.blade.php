@@ -84,30 +84,16 @@
         crossorigin=""></script>
     <script>
 
-        const mymap = L.map('issMap').setView([0, 0], 6);
-        const attribution =
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-
-        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        const tiles = L.tileLayer(tileUrl, {
-            attribution
-        });
-        tiles.addTo(mymap);
-
         const api_url = 'http://alertas.test/api/monitoreo/camaras';
         const api_url2 = 'http://alertas.test/api/monitoreo/camaras/0';
-
-        let firstTime = true;
-
+        var domos = L.layerGroup();
+        var fijas = L.layerGroup();
 
         async function getISS() {
-            const response = await fetch(api_url);
+            const response = await fetch(api_url)
             const data = await response.json();
-
-            const response2 = await fetch(api_url2);
-            const data2 = await response2.json();
-
-            document.getElementById('statusCamera').innerHTML = data2;
+            console.log(response)
+            console.log(data)
 
             var markers = [];
 
@@ -139,6 +125,7 @@
                 iconAnchor: [25, 25]
             });
 
+
             for (var i = 0; i < markers.length; i++) {
 
                 let icon = ""
@@ -146,33 +133,80 @@
                 if (markers[i][4] === 1) {
                     if (markers[i][3] === 1) {
                         icon = fixedIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(fijas);
                     } else {
                         icon = domeIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
                     }
                 } else {
                     if (markers[i][3] === 1) {
                         icon = fixedOutIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                                icon: icon
+                            })
+                            .bindPopup("Nombre: " + markers[i][0]).addTo(fijas);
                     } else {
                         icon = domeOutIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
+
                     }
                 }
 
-
-                marker = new L.marker([markers[i][1], markers[i][2]], {
-                        icon: icon
-                    })
-
-                    .bindPopup("Nombre: " + markers[i][0])
-                    .addTo(mymap);
             }
-
-            console.log(markers)
 
         }
 
-        mymap.setView([-33.233425, -60.324238], 13);
         getISS();
-        setInterval(getISS, 5000)
+
+        var mbAttr =
+            'Dirección de Tecnología y Sistemas - Municipio de Villa Constitución';
+        var mbUrl =
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+        var grayscale = L.tileLayer(mbUrl, {
+            id: 'mapbox/light-v9',
+            tileSize: 512,
+            zoomOffset: -1,
+            attribution: mbAttr
+        });
+        var streets = L.tileLayer(mbUrl, {
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            attribution: mbAttr
+        });
+
+        var map = L.map('issMap', {
+            center: [-33.233425, -60.324238],
+            zoom: 14,
+            layers: [grayscale, domos, fijas]
+        });
+
+        var baseLayers = {
+            'Grises': grayscale,
+            'Color': streets
+        };
+
+        var overlays = {
+            'Domos': domos,
+            'Fijas': fijas
+        };
+
+        var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+        function rechargeMap() {
+            domos.clearLayers();
+            fijas.clearLayers();
+            getISS();
+        }
+
+        setInterval(rechargeMap, 60000);
     </script>
 
 @stop
