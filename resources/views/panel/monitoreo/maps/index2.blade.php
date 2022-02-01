@@ -172,7 +172,7 @@
 
         mymap.setView([-33.233425, -60.324238], 13);
         getISS();
-        setInterval(getISS, 120000)
+        setInterval(getISS, 5000)
     </script>
 
 @stop
