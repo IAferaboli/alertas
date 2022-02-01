@@ -17,7 +17,15 @@ class CameraController extends Controller
      */
     public function index($status = null)
     {
-        return Camera::where('published', 1)->get();
+        if ($status != null) {
+            $cameras = Camera::where('status', $status)
+                            ->where('published', 1)
+                            ->count();
+        } else {
+            $cameras = Camera::where('published', 1)
+                            ->get();
+        }
+        return $cameras;
     }
 
     /**

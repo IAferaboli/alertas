@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row position-fixed fixed-bottom ml-3 mr-3">
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
@@ -24,11 +24,11 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
-                    <h3>{{ statusCameras('FUERA') }}</h3>
+                    <h3 id="statusCamera">{{ statusCameras('FUERA') }}</h3>
 
                     <p>Fuera de Servicio</p>
                 </div>
@@ -38,21 +38,9 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box @if (statusCameras('ACTIVE') == 0) bg-success @else bg-danger @endif">
-                <div class="inner">
-                    <h3>{{ statusCameras('ACTIVE') }}</h3>
-
-                    <p>Cámaras Desactivadas</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-minus-circled"></i>
-                </div>
-            </div>
-        </div>
+        
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box @if (getLicenses() <= 10) bg-danger @else bg-info @endif">
                 <div class="inner">
@@ -107,6 +95,7 @@
         tiles.addTo(mymap);
 
         const api_url = 'http://alertas.test/api/monitoreo/camaras';
+        const api_url2 = 'http://alertas.test/api/monitoreo/camaras/0';
 
         let firstTime = true;
 
@@ -114,6 +103,11 @@
         async function getISS() {
             const response = await fetch(api_url);
             const data = await response.json();
+
+            const response2 = await fetch(api_url2);
+            const data2 = await response2.json();
+
+            document.getElementById('statusCamera').innerHTML = data2;
 
             var markers = [];
 
@@ -178,7 +172,7 @@
 
         mymap.setView([-33.233425, -60.324238], 13);
         getISS();
-        setInterval(getISS, 10000)
+        setInterval(getISS, 120000)
     </script>
 
 @stop

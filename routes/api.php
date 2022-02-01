@@ -26,3 +26,4 @@ Route::post('monitoreo/fallas', [FlawController::class,'store']);
 
 Route::post('downcamera', [DownCameraController::class,'store']);
 Route::get('monitoreo/camaras', [CameraController::class,'index']);
+Route::get('monitoreo/camaras/{status}', [CameraController::class,'index']);
