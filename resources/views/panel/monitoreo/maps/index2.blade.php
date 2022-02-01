@@ -91,10 +91,12 @@
 
         async function getISS() {
             const response = await fetch(api_url)
+            const response2 = await fetch(api_url2)
             const data = await response.json();
-            console.log(response)
-            console.log(data)
-
+            const data2 = await response2.json();
+            
+            document.getElementById('statusCamera').innerHTML = data2;
+            
             var markers = [];
 
             for (const camera of data) {
