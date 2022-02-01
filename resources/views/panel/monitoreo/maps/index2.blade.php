@@ -8,6 +8,22 @@
 
 @section('content')
 
+
+    <div class="row position-fixed fixed-top ml-3 mr-3">
+        <div class="col-lg-4 col-6 ml-auto">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div id="canvas-holder" style="width:100%">
+                    <canvas id="temperaturaServer"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ./col -->
+
+
     <div class="row position-fixed fixed-bottom ml-3 mr-3">
         <div class="col-lg-4 col-6">
             <!-- small box -->
@@ -79,16 +95,19 @@
 @stop
 
 @section('js')
+
+    <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+    <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
         const api_url = 'http://alertas.test/api/monitoreo/camaras';
         const api_url2 = 'http://alertas.test/api/monitoreo/camaras/0';
+        const api_url3 = 'http://alertas.test/api/datacenter/temperatura';
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
         var out = L.layerGroup();
-        var status = 0;
 
 
         async function getISS() {
@@ -96,8 +115,6 @@
             const response2 = await fetch(api_url2)
             const data = await response.json();
             const data2 = await response2.json();
-
-
 
             document.getElementById('statusCamera').innerHTML = data2;
 
@@ -147,7 +164,7 @@
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
-                        
+
                     }
                 } else {
                     if (markers[i][3] === 1) {
@@ -156,7 +173,7 @@
                                 icon: icon
                             })
                             .bindPopup("Nombre: " + markers[i][0]).addTo(fijas);
-                            var marker = L.marker([markers[i][1], markers[i][2]], {
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
                                 icon: icon
                             })
                             .bindPopup("Nombre: " + markers[i][0]).addTo(out);
@@ -175,9 +192,6 @@
             }
 
         }
-
-
-
 
 
         var mbAttr =
@@ -220,16 +234,74 @@
 
         getISS();
 
+
+        //Gauge
+
+        var ctx = document.getElementById("temperaturaServer").getContext("2d");
+        var chart = new Chart(ctx, {
+            type: 'gauge',
+            data: {
+                datasets: [{
+                    value: 10/ 10,
+                    minValue: 0,
+                    data: [16, 26, 42],
+                    backgroundColor: ['lightblue', 'green', 'red'],
+                }]
+            },
+            options: {
+                needle: {
+                    radiusPercentage: 2,
+                    widthPercentage: 3.2,
+                    lengthPercentage: 80,
+                    color: 'rgba(0, 0, 0, 1)'
+                },
+                valueLabel: {
+                    display: true,
+                    formatter: (value) => {
+                        return value + "ºC";
+                    },
+                    color: 'rgba(255, 255, 255, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 1)',
+                    borderRadius: 5,
+                    padding: {
+                        top: 10,
+                        bottom: 10
+                    }
+                }
+            }
+        });
+
+        function addData(data) {
+            chart.data.datasets[0].value = 20;
+            chart.update();
+        }
+
+        async function getTemp() {
+            const response = await fetch(api_url3)
+            const data = await response.json();
+            addData(data);
+        }
+
+        getTemp();
+
+
+
+        // getEtherFlower();
+
+
+
         var value = true;
         setInterval(function() {
             if (value) {
                 domos.clearLayers();
                 fijas.clearLayers();
                 value = false;
+                getTemp();
             } else {
                 out.clearLayers();
                 getISS();
                 value = true;
+                getTemp();
             }
         }, 60000);
     </script>
