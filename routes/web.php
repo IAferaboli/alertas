@@ -3,9 +3,9 @@
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Monitoreo\ReportController;
 use App\Models\Intervention;
+use App\Models\Notification;
 use App\Notifications\TelegramPrueba;
 use Carbon\Carbon;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Ndum\Laravel\Snmp;
@@ -40,13 +40,11 @@ Route::get('telegram-dc-temperatura', function () {
 	
 	$tempServer = getTemperatureDC();
 
-	$request = new Request();
-	$request->request->add([
-		'to' => env('TELEGRAM_DATACENTER'),
-		'content' => "*Temperatura del DC*: $tempServer"
-	]);
+	$notification = new Notification;
+	$notification->setContent("*Temperatura del DC*: ".$tempServer/10);
+	$notification->setTo(env('TELEGRAM_DATACENTER'));
 
-	if ($tempServer >= 210) {
-		$request->notify(new TelegramPrueba);
+	if ($tempServer >= 260) {
+		$notification->notify(new TelegramPrueba);
 	}
 });
