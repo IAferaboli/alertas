@@ -38,7 +38,7 @@
             </div>
         </div>
         <!-- ./col -->
-        
+
         <!-- ./col -->
         <div class="col-lg-4 col-6">
             <!-- small box -->
@@ -83,20 +83,24 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-
         const api_url = 'http://alertas.test/api/monitoreo/camaras';
         const api_url2 = 'http://alertas.test/api/monitoreo/camaras/0';
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
+        var out = L.layerGroup();
+        var status = 0;
+
 
         async function getISS() {
             const response = await fetch(api_url)
             const response2 = await fetch(api_url2)
             const data = await response.json();
             const data2 = await response2.json();
-            
+
+
+
             document.getElementById('statusCamera').innerHTML = data2;
-            
+
             var markers = [];
 
             for (const camera of data) {
@@ -143,6 +147,7 @@
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
+                        
                     }
                 } else {
                     if (markers[i][3] === 1) {
@@ -151,11 +156,18 @@
                                 icon: icon
                             })
                             .bindPopup("Nombre: " + markers[i][0]).addTo(fijas);
+                            var marker = L.marker([markers[i][1], markers[i][2]], {
+                                icon: icon
+                            })
+                            .bindPopup("Nombre: " + markers[i][0]).addTo(out);
                     } else {
                         icon = domeOutIcon
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(out);
 
                     }
                 }
@@ -164,7 +176,9 @@
 
         }
 
-        getISS();
+
+
+
 
         var mbAttr =
             'Dirección de Tecnología y Sistemas - Municipio de Villa Constitución';
@@ -187,8 +201,9 @@
         var map = L.map('issMap', {
             center: [-33.233425, -60.324238],
             zoom: 14,
-            layers: [grayscale, domos, fijas]
+            layers: [grayscale, domos, fijas, out]
         });
+
 
         var baseLayers = {
             'Grises': grayscale,
@@ -197,18 +212,26 @@
 
         var overlays = {
             'Domos': domos,
-            'Fijas': fijas
+            'Fijas': fijas,
+            'Sin Funcionar': out
         };
 
         var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
 
-        function rechargeMap() {
-            domos.clearLayers();
-            fijas.clearLayers();
-            getISS();
-        }
+        getISS();
 
-        setInterval(rechargeMap, 60000);
+        var value = true;
+        setInterval(function() {
+            if (value) {
+                domos.clearLayers();
+                fijas.clearLayers();
+                value = false;
+            } else {
+                out.clearLayers();
+                getISS();
+                value = true;
+            }
+        }, 60000);
     </script>
 
 @stop
