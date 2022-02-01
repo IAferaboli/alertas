@@ -272,7 +272,7 @@
         });
 
         function addData(data) {
-            chart.data.datasets[0].value = 20;
+            chart.data.datasets[0].value = data;
             chart.update();
         }
 
