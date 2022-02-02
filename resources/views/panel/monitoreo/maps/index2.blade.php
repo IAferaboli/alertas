@@ -9,13 +9,17 @@
 @section('content')
 
 
-    <div class="row position-fixed fixed-top ml-3 mr-3">
+    <div class="row position-fixed fixed-top mt-3 ml-3 mr-3">
         <div class="col-lg-4 col-6 ml-auto">
             <!-- small box -->
-            <div class="small-box bg-info">
-                <div id="canvas-holder" style="width:100%">
+            <div class="small-box bg-info ">
+                <div id="canvas-holder" class="pt-3 pl-2" style="width:15vw">
                     <canvas id="temperaturaServer"></canvas>
                 </div>
+                <div class="inner text-center">
+                    <p>Temperatura Data Center</p>
+                </div>
+               
 
             </div>
         </div>
@@ -34,7 +38,8 @@
                     <p>Cámaras Totales</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-ios-videocam-outline"></i>
+                    <i class="fas fa-info-circle text-white"></i>
+
                 </div>
 
             </div>
@@ -49,7 +54,7 @@
                     <p>Fuera de Servicio</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-minus-circled"></i>
+                    <i class="fas fa-exclamation-triangle text-white"></i>
                 </div>
             </div>
         </div>
@@ -57,7 +62,6 @@
 
         <!-- ./col -->
         <div class="col-lg-4 col-6">
-            <!-- small box -->
             <div class="small-box @if (getLicenses() <= 10) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
@@ -65,11 +69,10 @@
                     <p>Licencias Disponibles</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-ios-information-outline"></i>
+                    <i class="fas fa-info-circle text-white"></i>
                 </div>
             </div>
         </div>
-        <!-- ./col -->
     </div>
 
     <div id="issMap"></div>
@@ -87,6 +90,10 @@
             position: relative;
             width: 100%;
             height: 100vh;
+        }
+
+        #temperaturaServer{
+            margin-left: 50%;
         }
 
     </style>

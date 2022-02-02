@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.3.2
+> 1. Se modifica vista de map.
 ### 2.3.1
 > 1. Se añade alerta por TG de Temperaturas.
 > 2. Bug Fix
