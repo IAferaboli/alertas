@@ -302,6 +302,12 @@ return [
                             'active' => ['panel.monitoreo.maps.index'],
                             'can'   =>  'panel.monitoreo.maps.index',
                         ],
+                        [
+                            'text' => 'Mapa TV',
+                            'route'  => 'panel.monitoreo.maps.index',
+                            'active' => ['panel.monitoreo.maps.index2'],
+                            'can'   =>  'panel.monitoreo.maps.TV',
+                        ],
                         // [
                         //     'text'    => 'Mapa de calor',
                         //     'url'     => '#',
