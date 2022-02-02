@@ -2,7 +2,6 @@
 
 use App\Models\Camera;
 use Illuminate\Support\Facades\Http;
-use PhpParser\Node\Stmt\TryCatch;
 use Ndum\Laravel\Snmp;
 
 
@@ -167,5 +166,11 @@ function getTemperatureDC(){
     $tempServer = $snmp->getValue(env('OID_TEMP_SERVER'));
 
     return $tempServer;
+}
+
+function sendMessageToMonitoreo($message){
+
+    $responses = Http::get("http://192.168.100.1:8601/Interface/GlobalEvents/TriggerGlobalEvent?Event=Smart%20VC&OverrideOperatorMessage=$message&ResponseFormat=JSON&AuthUser=".env('DIGIFORT_USER')."&AuthPass=".env('DIGIFORT_PASSWORD'))->json();
+    return $responses;
 
 }

@@ -6,11 +6,7 @@ use App\Models\Intervention;
 use App\Models\Notification;
 use App\Notifications\TelegramPrueba;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use Ndum\Laravel\Snmp;
-use Illuminate\Http\Request;
-
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [HomeController::class,'index'])->name('dashboard');
@@ -43,8 +39,11 @@ Route::get('telegram-dc-temperatura', function () {
 	$notification = new Notification;
 	$notification->setContent("*Temperatura del DC*: ".$tempServer/10);
 	$notification->setTo(env('TELEGRAM_DATACENTER'));
+	$message = "La temperatura de los servidores (". $tempServer/10 ."ºC) es elevada, por favor dar conocimiento INMEDIATO a su superior.";
 
 	if ($tempServer >= 260) {
 		$notification->notify(new TelegramPrueba);
+		sendMessageToMonitoreo($message);
 	}
+	
 });
