@@ -13,6 +13,7 @@
 @section('content')
 
     @livewire('panel.monitoreo.interventions-index')
+    
 
 @stop
 

@@ -62,7 +62,7 @@
 
         <!-- ./col -->
         <div class="col-lg-4 col-6">
-            <div class="small-box @if (getLicenses() <= 10) bg-danger @else bg-info @endif">
+            <div class="small-box @if (getLicenses() <= 5) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
 

@@ -104,6 +104,13 @@
 
     </div>
 
+    <x-adminlte-modal id="modalPurple" title="Theme Purple" theme="purple"
+    icon="fas fa-bolt" size='lg' disable-animations>
+    This is a purple theme modal without animations.
+</x-adminlte-modal>
+{{-- Example button to open modal --}}
+<x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalPurple" class="bg-purple"/>
+
 
     
 
