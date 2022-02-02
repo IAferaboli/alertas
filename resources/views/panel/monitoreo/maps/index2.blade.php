@@ -252,7 +252,7 @@
                     value: 10/ 10,
                     minValue: 0,
                     data: [16, 26, 42],
-                    backgroundColor: ['lightblue', 'green', 'red'],
+                    backgroundColor: ['blue', 'green', 'red'],
                 }]
             },
             options: {
