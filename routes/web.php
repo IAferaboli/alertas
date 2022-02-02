@@ -44,7 +44,7 @@ Route::get('telegram-dc-temperatura', function () {
 	$notification->setContent("*Temperatura del DC*: ".$tempServer/10);
 	$notification->setTo(env('TELEGRAM_DATACENTER'));
 
-	if ($tempServer >= 210) {
+	if ($tempServer >= 260) {
 		$notification->notify(new TelegramPrueba);
 	}
 });
