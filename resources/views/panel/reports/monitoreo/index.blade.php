@@ -56,7 +56,7 @@
                 <div class="card">
                     <div class="card-header">Fallas</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'panel.reports.monitoreo.interventions.pdf']) !!}
+                        {!! Form::open(['route' => 'panel.reports.monitoreo.flaws.pdf']) !!}
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -79,7 +79,7 @@
 
                         </div>
 
-                        {{-- {!! Form::submit('Generar reporte', ['class'=> 'btn btn-primary btn-block hidden']) !!} --}}
+                        {!! Form::submit('Generar reporte', ['class'=> 'btn btn-primary btn-block']) !!}
 
                         {!! Form::close() !!}
 
@@ -94,7 +94,7 @@
                 <div class="card">
                     <div class="card-header">Concejo</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'panel.reports.monitoreo.interventions.pdf']) !!}
+                        {!! Form::open(['route' => 'panel.reports.monitoreo.concejo.pdf']) !!}
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -116,7 +116,7 @@
                             </div>
 
                         </div>
-
+                        {!! Form::submit('Generar reporte', ['class'=> 'btn btn-primary btn-block']) !!}
 
                         {!! Form::close() !!}
 
@@ -130,7 +130,7 @@
                 <div class="card">
                     <div class="card-header">Expedientes</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'panel.reports.monitoreo.interventions.pdf']) !!}
+                        {!! Form::open(['route' => 'panel.reports.monitoreo.files.pdf']) !!}
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -153,7 +153,7 @@
 
                         </div>
 
-                        {{-- {!! Form::submit('Generar reporte', ['class'=> 'btn btn-primary btn-block hidden']) !!} --}}
+                        {!! Form::submit('Generar reporte', ['class'=> 'btn btn-primary btn-block']) !!}
 
                         {!! Form::close() !!}
 

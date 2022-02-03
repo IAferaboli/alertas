@@ -21,6 +21,10 @@ Route::get('',[HomeController::class, 'index'])->middleware('can:panel.home')->n
 
 Route::get('reports/monitoreo', [ReportController::class, 'index'])->name('panel.reports.monitoreo');
 Route::post('reports/monitoreo/interventions/pdf', [ReportController::class, 'pdfInterventions'])->name('panel.reports.monitoreo.interventions.pdf');
+Route::post('reports/monitoreo/flaws/pdf', [ReportController::class, 'pdfFlaws'])->name('panel.reports.monitoreo.flaws.pdf');
+Route::post('reports/monitoreo/files/pdf', [ReportController::class, 'pdfFiles'])->name('panel.reports.monitoreo.files.pdf');
+Route::post('reports/monitoreo/concejo/pdf', [ReportController::class, 'pdfConcejo'])->name('panel.reports.monitoreo.concejo.pdf');
+
 Route::get('monitoreo/cameras', [CameraController::class, 'index'])->name('panel.monitoreo.cameras.index');
 
 Route::resource('monitoreo/interventions', InterventionController::class)->except('show')->names('panel.monitoreo.interventions');

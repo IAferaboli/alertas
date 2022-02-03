@@ -3,6 +3,9 @@
 ### 2.3.2
 > 1. Se modifica vista de mapa monitor.
 > 2. Se añade alerta de temperatura a monitoreo mediante Digifort.
+> 3. Se añade reporte de fallas.
+> 3. Se añade reporte para el Concejo.
+> 3. Se añade reporte de expedientes.
 ### 2.3.1
 > 1. Se añade alerta por TG de Temperaturas.
 > 2. Bug Fix

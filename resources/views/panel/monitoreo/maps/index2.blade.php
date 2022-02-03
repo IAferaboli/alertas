@@ -19,7 +19,7 @@
                 <div class="inner text-center">
                     <p>Temperatura Data Center</p>
                 </div>
-               
+
 
             </div>
         </div>
@@ -92,8 +92,14 @@
             height: 100vh;
         }
 
-        #temperaturaServer{
+        #temperaturaServer {
             margin-left: 50%;
+        }
+
+        .my-label {
+            position: absolute;
+            width: 50px;
+            font-size: 5px;
         }
 
     </style>
@@ -238,7 +244,6 @@
         };
 
         var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
-
         getISS();
 
 
@@ -249,7 +254,7 @@
             type: 'gauge',
             data: {
                 datasets: [{
-                    value: 10/ 10,
+                    value: 10 / 10,
                     minValue: 0,
                     data: [16, 26, 42],
                     backgroundColor: ['blue', 'green', 'red'],
@@ -279,7 +284,7 @@
         });
 
         function addData(data) {
-            chart.data.datasets[0].value = data/10;
+            chart.data.datasets[0].value = data / 10;
             chart.update();
         }
 
@@ -290,11 +295,6 @@
         }
 
         getTemp();
-
-
-
-        // getEtherFlower();
-
 
 
         var value = true;
@@ -311,6 +311,7 @@
                 getTemp();
             }
         }, 60000);
+        
     </script>
 
 @stop
