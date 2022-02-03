@@ -262,7 +262,7 @@ class ReportController extends Controller
         foreach ($cameras as $camera) {
             $pdf->Cell(50, 4, "", 0, 0, 'C', 0);
             $pdf->Cell(40, 4, $camera->name, 'T', 0, 'C', 0);
-            $pdf->Cell(40, 4, ($camera->name = 1 ? 'Funcionando' : 'Sin funcionar'), 'T', 0, 'C', 0);
+            $pdf->Cell(40, 4, ($camera->status == 1 ? 'Funcionando' : 'Sin funcionar'), 'T', 0, 'C', 0);
             $pdf->Ln(4);
         }
 
