@@ -304,7 +304,7 @@ return [
                         ],
                         [
                             'text' => 'Mapa TV',
-                            'route'  => 'panel.monitoreo.maps.index',
+                            'route'  => 'panel.monitoreo.maps.index2',
                             'active' => ['panel.monitoreo.maps.index2'],
                             'can'   =>  'panel.monitoreo.maps.TV',
                         ],
