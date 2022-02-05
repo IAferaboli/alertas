@@ -34,7 +34,7 @@ Route::resource('monitoreo/flaws', FlawController::class)->except('show')->names
 Route::get('monitoreo/maps/camaras', [MapController::class,'cameras'])->name('panel.monitoreo.maps.index');
 Route::get('monitor', function () {
     return view('panel.monitoreo.maps.index2');
-});
+})->name('panel.monitoreo.maps.index2');
 
 
 //      --- ADMINISTRACIÓN ---
