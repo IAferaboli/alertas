@@ -8,24 +8,27 @@
 
 @section('content')
 
+    
+        <div class="row position-fixed fixed-top mt-3 ml-3 mr-3">
+            
+            <div class="col-lg-4 col-6 ml-auto">
+                <!-- small box -->
+                <div class="small-box bg-info ">
+                    <div id="canvas-holder" class="pt-3 pl-2" style="width:15vw">
+                        <canvas id="temperaturaServer"></canvas>
+                    </div>
+                    <div class="inner text-center">
+                        <p>Temperatura Data Center</p>
+                    </div>
 
-    <div class="row position-fixed fixed-top mt-3 ml-3 mr-3">
-        <div class="col-lg-4 col-6 ml-auto">
-            <!-- small box -->
-            <div class="small-box bg-info ">
-                <div id="canvas-holder" class="pt-3 pl-2" style="width:15vw">
-                    <canvas id="temperaturaServer"></canvas>
+
                 </div>
-                <div class="inner text-center">
-                    <p>Temperatura Data Center</p>
-                </div>
-
-
             </div>
-        </div>
-    </div>
 
-    <!-- ./col -->
+        </div>
+
+       
+        
 
 
     <div class="row position-fixed fixed-bottom ml-3 mr-3">
@@ -73,9 +76,15 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    </div> 
 
     <div id="issMap"></div>
+
+ 
+    
+    
+   
 
 @stop
 
@@ -90,6 +99,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
+            z-index: 1;
         }
 
         #temperaturaServer {
@@ -311,7 +321,6 @@
                 getTemp();
             }
         }, 60000);
-        
     </script>
 
 @stop

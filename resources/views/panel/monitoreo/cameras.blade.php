@@ -26,8 +26,10 @@
 
             @if ($cameras1 && $cameras2 && $cameras3)
                 @foreach ($cameras1['Response']['Data']['Cameras'] as $camera)
+
                     <tr>
                         <td>{{ $camera['Name'] }}</td>
+
                         @if ($camera['Working'] == 'TRUE')
                             <td class="text-success">Funcionando</td>
                         @else
@@ -44,13 +46,15 @@
                         @can('panel.monitoreo.cameras.viewcamera')
 
                             <td>
-                                <a href="http://192.168.100.1:8601/Interface/Cameras/GetJPEGStream?Camera={{ $camera['Name'] }}&AuthUser={{env('DIGIFORT_USER')}}&AuthPass={{env('DIGIFORT_PASSWORD')}}"
+                                <a href="http://192.168.100.1:8601/Interface/Cameras/GetJPEGStream?Camera={{ $camera['Name'] }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"
                                     target="_blank" class="btn btn-secondary btn-xs @if (!$camera['Working'] == 'TRUE') disabled @endif">
                                     <i class="fas fa-video"></i></a>
                             </td>
                         @endcan
 
                     </tr>
+
+
                 @endforeach
 
                 @foreach ($cameras2['Response']['Data']['Cameras'] as $camera)

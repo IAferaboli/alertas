@@ -122,7 +122,7 @@ function getCameras()
 
                 $camera = Camera::where('name', $response['Name'])->first();
 
-                $responses2 = Http::get("http://192.168.100.$i:8601/Interface/Cameras/GetStatus?Cameras=" . $response['Name'] . "*&ResponseFormat=JSON&AuthUser=admin&AuthPass=gda.adm")->json();
+                $responses2 = Http::get("http://192.168.100.$i:8601/Interface/Cameras/GetStatus?Cameras=" . $response['Name'] . "&ResponseFormat=JSON&AuthUser=admin&AuthPass=gda.adm")->json();
                 $type = 0;
                 if (Str::contains($response['Name'], 'Domo')) {
                     $type = 0;

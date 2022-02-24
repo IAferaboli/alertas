@@ -19,6 +19,7 @@ class CameraController extends Controller
         $cameras2 = listCameras(2);
         $cameras3 = listCameras(3);
 
+
         return view('panel.monitoreo.cameras', compact('cameras1','cameras2','cameras3'));
     }
 }
