@@ -13,7 +13,7 @@ class InterventionPolicy
        //function author
        public function author(User $user, Intervention $intervention)
        {   
-           if ($user->id == $intervention->user_id) {
+           if ($user->id == $intervention->user_id || auth()->user()->roles->pluck('name')->contains('Supervisor de Monitoreo')) {
                return true;
            } else {
                return false;

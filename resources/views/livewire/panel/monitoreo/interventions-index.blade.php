@@ -57,10 +57,11 @@
                                 <td>{{ $intervention->detail }} </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.interventions.edit')
-                                        <a class="btn btn-warning btn-sm @if ($intervention->user_id != auth()->user()->id || $intervention->created_at != $intervention->updated_at) disabled @endif"
+                                        <a class="btn btn-warning btn-sm @if (($intervention->user_id == auth()->user()->id && $intervention->created_at == $intervention->updated_at) || auth()->user()->roles->pluck('name')->contains('Supervisor de Monitoreo')) enabled @else disabled @endif"
                                             href="{{ route('panel.monitoreo.interventions.edit', $intervention) }}"><i
                                                 class="fas fa-pen"></i></a>
                                     @endcan
+
                                 </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.interventions.destroy')

@@ -11,6 +11,7 @@ use App\Http\Controllers\Panel\Monitoreo\FlawController;
 use App\Http\Controllers\Panel\Monitoreo\InterventionController;
 use App\Http\Controllers\Panel\Monitoreo\MapController;
 use App\Http\Controllers\Panel\Monitoreo\ReportController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,4 +55,3 @@ Route::get('myaccount', function () {
 //      --- EMAILS ---
 
 Route::get('mail/intervencion', [MailController::class, 'interventionsMonitoreo'] );
-            
