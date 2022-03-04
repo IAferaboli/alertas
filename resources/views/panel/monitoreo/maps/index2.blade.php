@@ -139,7 +139,7 @@
             const data = await response.json();
             const data2 = await response2.json();
 
-            document.getElementById('statusCamera').innerHTML = data2;
+            document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;;
 
             var markers = [];
 

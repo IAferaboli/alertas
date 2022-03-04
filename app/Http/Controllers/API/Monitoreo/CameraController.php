@@ -20,7 +20,7 @@ class CameraController extends Controller
         if ($status != null) {
             $cameras = Camera::where('status', $status)
                             ->where('published', 1)
-                            ->count();
+                            ->get();
         } else {
             $cameras = Camera::where('published', 1)
                             ->get();
