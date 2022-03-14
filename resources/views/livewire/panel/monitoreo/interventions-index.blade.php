@@ -57,7 +57,8 @@
                                 <td>{{ $intervention->detail }} </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.interventions.edit')
-                                        <a class="btn btn-warning btn-sm @if (($intervention->user_id == auth()->user()->id && $intervention->created_at == $intervention->updated_at) || auth()->user()->roles->pluck('name')->contains('Supervisor de Monitoreo')) enabled @else disabled @endif"
+                                        <a class="btn btn-warning btn-sm @if (($intervention->user_id == auth()->user()->id && $intervention->created_at == $intervention->updated_at) ||
+    auth()->user()->roles->pluck('name')->contains('Supervisor de Monitoreo')) enabled @else disabled @endif"
                                             href="{{ route('panel.monitoreo.interventions.edit', $intervention) }}"><i
                                                 class="fas fa-pen"></i></a>
                                     @endcan
@@ -73,7 +74,6 @@
                                             <button class="btn btn-danger btn-sm" type="submit"><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
-
                                     @endcan
                                 </td>
                                 <td width="10px">
@@ -81,11 +81,9 @@
                                         {{-- Calcular dias entre dos fechas con Carbon --}}
                                         @if ($intervention->camera->published == 1)
                                             <a class="btn btn-secondary btn-sm"
-                                                href="http://192.168.100.{{ $intervention->camera->server }}:8601/Interface/Cameras/Playback/GetJPEGStream?Camera={{ $intervention->camera->name }}&StartDate={{ date('Y.m.d', strtotime($intervention->date)) }}&StartTime={{ date('H.i.s', strtotime($intervention->hour)) }}&EndDate={{ date('Y.m.d', strtotime($intervention->date)) }}&EndTime={{ date('H.i.s', strtotime($intervention->hour) + 60) }}&ResponseFormat=Text&AuthUser={{env('DIGIFORT_USER')}}&AuthPass={{env('DIGIFORT_PASSWORD')}}"
+                                                href="rtsp://192.168.100.1:554/Interface/Cameras/Playback?Camera=Domo%2014&StartDate=2022.03.04&StartTime=04.34.00&EndDate=2022.03.04&EndTime=04.35.00&Audio=TRUE"
                                                 target="_blank"><i class="fas fa-eye"></i></a>
                                         @endif
-
-
                                     @endcan
                                 </td>
                             </tr>
@@ -104,15 +102,5 @@
         @endif
 
     </div>
-
-    <x-adminlte-modal id="modalPurple" title="Theme Purple" theme="purple"
-    icon="fas fa-bolt" size='lg' disable-animations>
-    This is a purple theme modal without animations.
-</x-adminlte-modal>
-{{-- Example button to open modal --}}
-<x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalPurple" class="bg-purple"/>
-
-
-    
 
 </div>
