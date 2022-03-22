@@ -103,6 +103,7 @@
         </div>
 
         <div class="card-footer">
+            {{ $audits->links() }}
         </div>
     @else
         <div class="card-body">
