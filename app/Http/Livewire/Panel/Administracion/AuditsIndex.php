@@ -41,7 +41,7 @@ class AuditsIndex extends Component
             $audits = Audit::where('user_id', auth()->user()->id)
                 ->take(10)
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->paginate();
         } else {
             $audits = Audit::where('created_at', 'LIKE', '%' . $this->fecha . '%')
                 ->orderBy('created_at', 'desc')
