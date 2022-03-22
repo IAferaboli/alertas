@@ -30,6 +30,8 @@
             </div>
 
         </div>
+
+    @if ($audits->count())
         <div class="card-body">
 
 
@@ -99,5 +101,14 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="card-footer">
+            {{ $audits->links() }}
+        </div>
+    @else
+        <div class="card-body">
+            <strong>No hay registros.</strong>
+        </div>
+    @endif
     </div>
 </div>
