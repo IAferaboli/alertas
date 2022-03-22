@@ -44,6 +44,7 @@
                         <th>Modelo</th>
                         <th>ID de modelo</th>
                         <th>Fecha</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,7 @@
                             <td>{{ $audit->auditable_type }}</td>
                             <td>{{ $audit->auditable_id }}</td>
                             <td>{{ $audit->created_at }}</td>
+                            <td><a href="" class="btn btn-sm btn-secondary"><i class="fas fa-plus"></a></i></td>
                         </tr>
 
 

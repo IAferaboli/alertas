@@ -22,7 +22,8 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td width="10px">
-                                    <a class="btn btn-warning" href="{{ route('panel.administracion.users.edit', $user) }}">Editar</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('panel.administracion.users.edit', $user) }}"><i
+                                        class="fas fa-pen"></i></a>
                                 </td>
                             </tr>
                         @endforeach

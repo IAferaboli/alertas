@@ -34,6 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'password',
     ];
 
+
+    protected $auditExclude = [
+        'remember_token',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
