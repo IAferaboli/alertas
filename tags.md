@@ -2,6 +2,7 @@
 ## Versión 2
 ### 2.3.4
 > 1. El Administrador puede ver las auditorias de todos los usuarios.
+> 2. Traducciones.
 ### 2.3.3
 > 1. El supervisor de monitoreo puede editar intervenciones sin necesidad de ser el creador o si ya se hizo modificación.
 > 2. Se modifica API de status cámaras para poder consultar desde whatsapp.
