@@ -4,6 +4,7 @@
 > 1. El Administrador puede ver las auditorias de todos los usuarios.
 > 2. Traducciones.
 > 3. Exclude remember_token audits.
+> 4. Bug Fix
 ### 2.3.3
 > 1. El supervisor de monitoreo puede editar intervenciones sin necesidad de ser el creador o si ya se hizo modificación.
 > 2. Se modifica API de status cámaras para poder consultar desde whatsapp.
@@ -18,7 +19,7 @@
 > 2. Bug Fix
 > 3. Mapa para TV Smart con actualización automática.
 ### 2.3.0
-> 1. Se añade SNPM Sun Etherpower
+> 1. Se añade SNMP Sun Etherpower
 > 2. Se añade gráfico en Dashboard de temperatura de servidores.
 ### 2.2.3
 > 1. Se agregan traducciones al widget del clima.
