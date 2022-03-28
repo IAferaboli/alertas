@@ -258,7 +258,7 @@
             type: 'gauge',
             data: {
                 datasets: [{
-                    value: {{$tempServer}}/10,
+                    value: {{ $tempServer }} / 10,
                     minValue: 0,
                     data: [16, 26, 42],
                     backgroundColor: ['lightblue', 'green', 'red'],
