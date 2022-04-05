@@ -6,58 +6,42 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Monitoreo\FlawRequest;
 use App\Models\Camera;
 use App\Models\Flaw;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FlawController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($name = null)
     {
 
-            // return Flaw::where('datesolution', null)->get();
-            return Flaw::all();
-            // return Flaw::where('camera_id', ($camera->id))
-            //     ->where('datesolution', NULL)
-            //     ->count();
-   
+        return Flaw::latest()
+            ->take(50)
+            ->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(FlawRequest $request)
+    public function store(Request $request)
     {
-        $array = $request->getContent();
-        
-        // $jsonCamera = json_encode($bodyContent);
+        $request = parse_ini_string($request, true);
 
-        //parse request ini to json
-        // $jsonCamera = json_decode($array, true);
-        $contenido = parse_ini_string($array, true);
-        
-        // file_put_contents('filename.txt', print_r($jsonCamera, true));
-        // $file = 'clientes.json';
-        // file_put_contents($file, $input);
+        $fecha = new DateTime();
+        $fecha->modify('-2 minute');
+        $camera = Camera::where('name', $request['name'])->first();
+        unset($request['name']);
+        $request['dateflaw'] = $fecha->format('Y-m-d');
+        $request['timeflaw'] = $fecha->format('H:i:s');
+        $request['description'] = "Fuera de servicio";
+        $request['camera_id'] = $camera->id;
+        $request['datesolution'] = null;
+        $request['timesolution'] = null;
 
-        //Agrego variables a $contenido
-        $contenido['dateflaw'] = now()->format('Y-m-d');
-        $contenido['timeflaw'] = now()->format('H:i:s');
-        $contenido['description'] = "Fuera de servicio";
+        Flaw::create($request);
 
-        return $contenido;
-        // return response()->json([
-        //     'res' => true,
-        //     'msg' => 'JSON',
-            
-        // ]);
+        return response()->json([
+            'res' => $request,
+            'msg' => 'JSON',
+        ]);
     }
 
     /**

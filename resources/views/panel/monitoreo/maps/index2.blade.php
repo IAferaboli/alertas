@@ -50,7 +50,7 @@
         <!-- ./col -->
         <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
+            <div id="divStatusCamera"class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
                     <h3 id="statusCamera">{{ statusCameras('FUERA') }}</h3>
 
@@ -139,7 +139,15 @@
             const data = await response.json();
             const data2 = await response2.json();
 
-            document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;;
+            document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
+
+            if (Object.keys(data2).length == 0) {
+                document.getElementById('divStatusCamera').classList.add('bg-success');
+                document.getElementById('divStatusCamera').classList.remove('bg-danger');
+            } else {
+                document.getElementById('divStatusCamera').classList.add('bg-danger');
+                document.getElementById('divStatusCamera').classList.remove('bg-success');
+            }
 
             var markers = [];
 

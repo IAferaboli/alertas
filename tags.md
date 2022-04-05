@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.3.5
+> 1. Cambia clase según cantidad de cámaras fuera de servicio en mapa de TV.
+> 2. Se añade API para enviar request desde Digifort.
 ### 2.3.4
 > 1. El Administrador puede ver las auditorias de todos los usuarios.
 > 2. Traducciones.
