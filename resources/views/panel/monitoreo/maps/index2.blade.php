@@ -330,6 +330,9 @@
                     value = true;
                     getTemp();
                 }
+            } else {
+                getISS();
+                getTemp();
             }
         }, 60000);
     </script>
