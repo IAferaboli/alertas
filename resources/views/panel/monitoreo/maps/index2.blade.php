@@ -331,6 +331,9 @@
                     getTemp();
                 }
             } else {
+                domos.clearLayers();
+                fijas.clearLayers();
+                out.clearLayers();
                 getISS();
                 getTemp();
             }
