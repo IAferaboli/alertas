@@ -131,6 +131,7 @@
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
         var out = L.layerGroup();
+        var sinFuncionar = "";
 
 
         async function getISS() {
@@ -138,6 +139,8 @@
             const response2 = await fetch(api_url2)
             const data = await response.json();
             const data2 = await response2.json();
+
+            sinFuncionar = Object.keys(data2).length;
 
             document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
 
@@ -318,24 +321,25 @@
         var value = true;
 
         setInterval(function() {
-            if (Object.keys(data2).length != 0) {
+            if (sinFuncionar == 0) {
+                domos.clearLayers();
+                fijas.clearLayers();
+                out.clearLayers();
+                getISS();
+                getTemp();
+            } else {
                 if (value) {
                     domos.clearLayers();
                     fijas.clearLayers();
                     value = false;
                     getTemp();
+
                 } else {
                     out.clearLayers();
                     getISS();
                     value = true;
                     getTemp();
                 }
-            } else {
-                domos.clearLayers();
-                fijas.clearLayers();
-                out.clearLayers();
-                getISS();
-                getTemp();
             }
         }, 60000);
     </script>
