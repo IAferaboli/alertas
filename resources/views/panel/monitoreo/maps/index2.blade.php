@@ -232,7 +232,7 @@
             attribution: mbAttr
         });
         var map = L.map('issMap', {
-            center: [-33.2421833, -60.3250105],
+            center: [-33.2421833, -60.3440649],
             zoom: 14,
             layers: [grayscale, domos, fijas, out]
         });
@@ -312,7 +312,7 @@
                     if (flightNumber >= markers2.length) {
                         
                         flightNumber = 0;
-                        map.flyTo([-33.2421833, ,-60.3250105], 14)
+                        map.flyTo([-33.2421833, -60.3440649], 14)
                         out.clearLayers();
                         getISS();
                         value = true;
