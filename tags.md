@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.4.0
+> 1. El mapa de videowall, si tiene cámaras fuera de servicio se desplaza una a una para mostrarlas.
 ### 2.3.5
 > 1. Cambia clase según cantidad de cámaras fuera de servicio en mapa de TV.
 > 2. El mapa solo carga cámaras fuera de servicio si es que existen.

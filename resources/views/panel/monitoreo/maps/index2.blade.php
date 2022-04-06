@@ -132,18 +132,14 @@
         var fijas = L.layerGroup();
         var out = L.layerGroup();
         var sinFuncionar = "";
-
-
+        var markers2 = [];
         async function getISS() {
             const response = await fetch(api_url)
             const response2 = await fetch(api_url2)
             const data = await response.json();
             const data2 = await response2.json();
-
             sinFuncionar = Object.keys(data2).length;
-
             document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
-
             if (Object.keys(data2).length == 0) {
                 document.getElementById('divStatusCamera').classList.add('bg-success');
                 document.getElementById('divStatusCamera').classList.remove('bg-danger');
@@ -151,11 +147,15 @@
                 document.getElementById('divStatusCamera').classList.add('bg-danger');
                 document.getElementById('divStatusCamera').classList.remove('bg-success');
             }
-
             var markers = [];
-
+            markers2 = []
             for (const camera of data) {
                 markers.push([camera.name, camera.lat, camera.lng, camera.type, camera.status])
+            }
+            for (const camera of data2) {
+                if (camera.status == 0) {
+                    markers2.push([camera.lat, camera.lng])
+                }
             }
 
             const domeIcon = L.icon({
@@ -163,30 +163,23 @@
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
-
             const domeOutIcon = L.icon({
                 iconUrl: "{{ asset('img/domeOut.png') }}",
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
-
             const fixedIcon = L.icon({
                 iconUrl: "{{ asset('img/cctv.png') }}",
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
-
             const fixedOutIcon = L.icon({
                 iconUrl: "{{ asset('img/cctvOut.png') }}",
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
-
-
             for (var i = 0; i < markers.length; i++) {
-
                 let icon = ""
-
                 if (markers[i][4] === 1) {
                     if (markers[i][3] === 1) {
                         icon = fixedIcon
@@ -198,7 +191,6 @@
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
-
                     }
                 } else {
                     if (markers[i][3] === 1) {
@@ -219,20 +211,14 @@
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(out);
-
                     }
                 }
-
             }
-
         }
-
-
         var mbAttr =
             'Dirección de Tecnología y Sistemas - Municipio de Villa Constitución';
         var mbUrl =
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
         var grayscale = L.tileLayer(mbUrl, {
             id: 'mapbox/light-v9',
             tileSize: 512,
@@ -245,31 +231,23 @@
             zoomOffset: -1,
             attribution: mbAttr
         });
-
         var map = L.map('issMap', {
             center: [-33.233425, -60.324238],
             zoom: 14,
             layers: [grayscale, domos, fijas, out]
         });
-
-
         var baseLayers = {
             'Grises': grayscale,
             'Color': streets
         };
-
         var overlays = {
             'Domos': domos,
             'Fijas': fijas,
             'Sin Funcionar': out
         };
-
         var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
         getISS();
-
-
         //Gauge
-
         var ctx = document.getElementById("temperaturaServer").getContext("2d");
         var chart = new Chart(ctx, {
             type: 'gauge',
@@ -308,19 +286,15 @@
             chart.data.datasets[0].value = data / 10;
             chart.update();
         }
-
         async function getTemp() {
             const response = await fetch(api_url3)
             const data = await response.json();
             addData(data);
         }
-
         getTemp();
-
-
-        var value = true;
-
-        setInterval(function() {
+        myTimerInit();
+        function myTimerInit() {
+            var myTimer = setInterval(function() {
             if (sinFuncionar == 0) {
                 domos.clearLayers();
                 fijas.clearLayers();
@@ -328,20 +302,35 @@
                 getISS();
                 getTemp();
             } else {
-                if (value) {
-                    domos.clearLayers();
-                    fijas.clearLayers();
-                    value = false;
-                    getTemp();
+                domos.clearLayers();
+                fijas.clearLayers();
+                value = false;
+                getTemp();
+                clearInterval(myTimer);
+                var flightNumber = 0;
+                var myTimer2 = setInterval(function() {
+                    if (flightNumber >= markers2.length) {
+                        
+                        flightNumber = 0;
+                        map.flyTo([-33.233425, -60.324238], 14)
+                        out.clearLayers();
+                        getISS();
+                        value = true;
+                        getTemp();
+                        clearInterval(myTimer2);
+                        myTimerInit();
+                    } else {
+                        console.log("Flight number: " + flightNumber);
+                        map.flyTo([markers2[flightNumber][0], markers2[flightNumber][1]], 18);
+                    }
 
-                } else {
-                    out.clearLayers();
-                    getISS();
-                    value = true;
-                    getTemp();
-                }
+                    flightNumber++;
+                }, 8000);
+
             }
         }, 60000);
+        }
+        
     </script>
 
 @stop
