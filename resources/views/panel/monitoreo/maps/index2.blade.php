@@ -79,6 +79,14 @@
 
     </div>
 
+    <div class="row position-fixed fixed-bottom ml-3 mr-3">
+        <div class="col-lg-12 col-12">
+            <x-adminlte-progress id="progressBarTimer" theme="info" value=0 animated />
+        </div>
+
+
+    </div>
+
     <div id="issMap"></div>
 
 
@@ -293,44 +301,62 @@
         }
         getTemp();
         myTimerInit();
-        function myTimerInit() {
-            var myTimer = setInterval(function() {
-            if (sinFuncionar == 0) {
-                domos.clearLayers();
-                fijas.clearLayers();
-                out.clearLayers();
-                getISS();
-                getTemp();
-            } else {
-                domos.clearLayers();
-                fijas.clearLayers();
-                value = false;
-                getTemp();
-                clearInterval(myTimer);
-                var flightNumber = 0;
-                var myTimer2 = setInterval(function() {
-                    if (flightNumber >= markers2.length) {
-                        
-                        flightNumber = 0;
-                        map.flyTo([-33.2421833, -60.3440649], 14)
-                        out.clearLayers();
-                        getISS();
-                        value = true;
-                        getTemp();
-                        clearInterval(myTimer2);
-                        myTimerInit();
-                    } else {
-                        console.log("Flight number: " + flightNumber);
-                        map.flyTo([markers2[flightNumber][0], markers2[flightNumber][1]], 18);
-                    }
 
-                    flightNumber++;
-                }, 8000);
+        var myTimerProgress; 
 
-            }
-        }, 60000);
+
+        function progressBarTimer() {
+            let pBar = new _AdminLTE_Progress('progressBarTimer');
+
+            let inc = (val) => {
+                let v = pBar.getValue() + val;
+                return v > 100 ? 0 : v;
+            };
+            myTimerProgress = setInterval(() => pBar.setValue(inc(5/3)), 1000);
         }
-        
+
+
+        function myTimerInit() {
+            progressBarTimer();
+            var myTimer = setInterval(function() {
+                if (sinFuncionar == 0) {
+                    domos.clearLayers();
+                    fijas.clearLayers();
+                    out.clearLayers();
+                    getISS();
+                    getTemp();
+                } else {
+                    domos.clearLayers();
+                    fijas.clearLayers();
+                    value = false;
+                    getTemp();
+                    clearInterval(myTimer);
+                    var flightNumber = 0;
+                    clearInterval(myTimerProgress);
+
+                    var myTimer2 = setInterval(function() {
+                        if (flightNumber >= markers2.length) {
+
+                            flightNumber = 0;
+                            map.flyTo([-33.2421833, -60.3440649], 14)
+                            out.clearLayers();
+                            getISS();
+                            value = true;
+                            getTemp();
+                            clearInterval(myTimer2);
+                            myTimerInit();
+                        } else {
+
+                            console.log("Flight number: " + flightNumber);
+                            map.flyTo([markers2[flightNumber][0], markers2[flightNumber][1]], 18);
+                        }
+
+                        flightNumber++;
+                    }, 8000);
+
+                }
+            }, 60000);
+        }
     </script>
 
 @stop
