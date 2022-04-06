@@ -313,7 +313,7 @@
                 console.log(pBar.getValue())
                 return v > 100 ? 0 : v;
             };
-            myTimerProgress = setInterval(() => pBar.setValue(inc((5/3)/8)), 125);
+            myTimerProgress = setInterval(() => pBar.setValue(inc(0.1)), 100);
         }
 
 
@@ -356,7 +356,7 @@
                     }, 7000);
 
                 }
-            }, 60000);
+            }, 100000);
         }
     </script>
 
