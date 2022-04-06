@@ -79,9 +79,9 @@
 
     </div>
 
-    <div class="row position-fixed fixed-bottom ml-3 mr-3">
-        <div class="col-lg-12 col-12">
-            <x-adminlte-progress id="progressBarTimer" theme="info" value=0 animated />
+    <div class="row position-fixed fixed-bottom ml-3 mr-3 pb-2">
+        <div class="col-lg-12 col-12 ">
+            <x-adminlte-progress id="progressBarTimer" theme="info" value=0 size="xs" />
         </div>
 
 
