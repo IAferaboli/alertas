@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.4.1
+> 1. Bug Fix. (form crear intervención envia varias intervenciones.)
 ### 2.4.0
 > 1. El mapa de videowall, si tiene cámaras fuera de servicio se desplaza una a una para mostrarlas.
 > 2. Se añade progress bar para ver cuando actualiza el mapa.

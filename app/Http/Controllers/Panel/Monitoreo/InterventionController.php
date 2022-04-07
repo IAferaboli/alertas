@@ -60,7 +60,8 @@ class InterventionController extends Controller
 
         $intervention->notify(new TelegramPrueba);
 
-        return redirect()->route('panel.monitoreo.interventions.edit', $intervention);
+        return redirect()->route('panel.monitoreo.interventions.index')->with('info', 'La intervención se agregó exitosamente.');
+
     }
 
     public function edit(Intervention $intervention)
