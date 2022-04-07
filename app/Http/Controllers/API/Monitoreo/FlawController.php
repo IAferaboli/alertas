@@ -15,7 +15,6 @@ class FlawController extends Controller
 
     public function index($name = null)
     {
-
         return Flaw::latest()
             ->take(50)
             ->get();
@@ -36,43 +35,55 @@ class FlawController extends Controller
         $request['datesolution'] = null;
         $request['timesolution'] = null;
 
-        Flaw::create($request);
+        try {
+            Flaw::create($request);
 
-        return response()->json([
-            'res' => $request,
-            'msg' => 'JSON',
-        ]);
+            return response()->json([
+                'res' => $request,
+                'msg' => 'OK',
+            ]);
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg' => 'ERROR',
+            ]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Flaw $flaw)
     {
-        //
+        $request = parse_ini_string($request, true);
+
+        $fecha = new DateTime();
+        $camera = Camera::where('name', $request['name'])->first();
+        unset($request['name']);
+
+        $flaw = Flaw::where('camera_id', $camera->id)
+            ->where('timesolution', null)
+            ->first();
+
+        $request['datesolution'] = $fecha->format('Y-m-d');
+        $request['timesolution'] = $fecha->format('H:i:s');
+
+        try {
+            $flaw->update($request);
+            return response()->json([
+                'res' => $request,
+                'msg' => 'JSON',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'msg' => 'Error',
+            ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
