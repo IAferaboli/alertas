@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         // Gráfico de Intervenciones
         $interventions = Intervention::whereYear('date', '>=', date('Y'))
-
+            ->where('status', '=', 1)
             ->select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
             ->groupBy('mes')
             ->orderBy('mes', 'asc')
@@ -56,7 +56,7 @@ class HomeController extends Controller
         }
 
         $interventionsLast = Intervention::whereYear('date', '=', date('Y') - 1)
-
+            ->where('status', '=', 1)
             ->select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
             ->groupBy('mes')
             ->orderBy('mes', 'asc')

@@ -133,9 +133,9 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        const api_url = 'http://alertas.test/api/monitoreo/camaras';
-        const api_url2 = 'http://alertas.test/api/monitoreo/camaras/0';
-        const api_url3 = 'http://alertas.test/api/datacenter/temperatura';
+        const api_url = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/monitoreo/camaras';
+        const api_url2 = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/monitoreo/camaras/0';
+        const api_url3 = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/datacenter/temperatura';
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
         var out = L.layerGroup();
