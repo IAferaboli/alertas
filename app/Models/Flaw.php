@@ -9,11 +9,10 @@ use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
 
-class Flaw extends Model implements Auditable
+class Flaw extends Model 
 {
     use Notifiable;
     use HasFactory;
-    use AuditingAuditable;
 
     protected $guarded = ['id','created_at', 'updated_at'];
 
