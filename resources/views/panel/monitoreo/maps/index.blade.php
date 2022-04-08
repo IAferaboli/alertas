@@ -35,7 +35,7 @@
         crossorigin=""></script>
 
     <script>
-        const api_url = 'http://alertas.test/api/monitoreo/camaras';
+        const api_url = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/monitoreo/camaras';
 
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
