@@ -98,6 +98,12 @@ class FlawController extends Controller
             ->where('timesolution', null)
             ->first();
 
+        if (!$flaw) {
+            return response()->json([
+                'msg' => 'No hay registro en la base de datos',
+            ]);
+        }
+
         $request['datesolution'] = $fecha->format('Y-m-d');
         $request['timesolution'] = $fecha->format('H:i:s');
 
