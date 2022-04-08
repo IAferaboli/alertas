@@ -42,7 +42,7 @@ class FlawController extends Controller
             $flaw = Flaw::create($request);
 
             try {
-                Arr::add($flaw, 'to',  env('TELEGRAM_ROTNIC'));
+                Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
                 Arr::add($flaw, 'content',  "*_echa: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Estado: *" . $request['description']);
 
                 $flaw->notify(new TelegramNotification);
@@ -90,7 +90,7 @@ class FlawController extends Controller
             $flaw->update($request);
 
             try {
-                Arr::add($flaw, 'to',  env('TELEGRAM_ROTNIC'));
+                Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
                 Arr::add($flaw, 'content',  "*Fecha:* " . $request['datesolution'] . " \n*Hora:* " . $request['timesolution'] . " \n*Cámara: * " . $camera->name . "\n*Estado: * Cámara restablecida");
                 $flaw->notify(new TelegramNotification);
 
