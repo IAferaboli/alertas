@@ -44,7 +44,7 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <!-- small box -->
             <div id="divStatusCamera" class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
@@ -60,7 +60,7 @@
         <!-- ./col -->
 
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <div class="small-box @if (getLicenses() <= 5) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
@@ -72,24 +72,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Countdown --}}
-        <div class="col-lg-2 col-6">
-
-            <div class="small-box bg-info">
-                <div class="inner">
-
-                    <div id="timer"></div>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-clock text-white"></i>
-                </div>
-            </div>
-            <div id="timer"></div>
-
-        </div>
-
-        {{-- End Countdown --}}
 
     </div>
 
@@ -136,33 +118,7 @@
 
 @section('js')
 
-    {{-- Timer --}}
-    <script>
-        function updateTimer() {
-            future = Date.parse("apr 15, 2022 13:00:00");
-            now = new Date();
-            diff = future - now;
 
-            days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            hours = Math.floor(diff / (1000 * 60 * 60));
-            mins = Math.floor(diff / (1000 * 60));
-            secs = Math.floor(diff / 1000);
-
-            d = days;
-            h = hours - days * 24;
-            m = mins - hours * 60;
-            s = secs - mins * 60;
-
-            document.getElementById("timer")
-                .innerHTML =
-                '<div>' + d + '<span> Días</span></div>' +
-                '<div>' + h + '<span> Horas</span></div>' +
-                '<div>' + m + '<span> Minutos</span></div>' +
-                '<div>' + s + '<span> Segundos</span></div>';
-        }
-        setInterval('updateTimer()', 1000);
-    </script>
-    {{-- Timer --}}
 
     <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
     <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
