@@ -28,6 +28,9 @@ class FlawController extends Controller
         $fecha = new DateTime();
         $fecha->modify('-2 minute');
         $camera = Camera::where('name', $request['name'])->first();
+        $camera->status = 0;
+        $camera->update();
+
         unset($request['name']);
         $request['dateflaw'] = $fecha->format('Y-m-d');
         $request['timeflaw'] = $fecha->format('H:i:s');
@@ -39,11 +42,21 @@ class FlawController extends Controller
 
         try {
 
-            $flaw = Flaw::create($request);
+            $flaw = Flaw::where('camera_id', $camera->id)
+            ->where('timesolution', null)
+            ->first();
+
+            if (!$flaw) {
+                $flaw = Flaw::create($request);
+            } else {
+                return response()->json([
+                    'msg' => 'Ya existe falla en esta camara',
+                ]);
+            }
 
             try {
                 Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
-                Arr::add($flaw, 'content',  "*_echa: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Estado: *" . $request['description']);
+                Arr::add($flaw, 'content',  "*Fecha: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Estado: *" . $request['description']);
 
                 $flaw->notify(new TelegramNotification);
 
@@ -77,6 +90,8 @@ class FlawController extends Controller
 
         $fecha = new DateTime();
         $camera = Camera::where('name', $request['name'])->first();
+        $camera->status = 1;
+        $camera->update();
         unset($request['name']);
 
         $flaw = Flaw::where('camera_id', $camera->id)
