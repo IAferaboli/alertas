@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\API\Monitoreo;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Monitoreo\FlawRequest;
 use App\Models\Camera;
 use App\Models\Flaw;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\TelegramNotification;
 
 class FlawController extends Controller
 {
@@ -35,17 +36,32 @@ class FlawController extends Controller
         $request['datesolution'] = null;
         $request['timesolution'] = null;
 
-        try {
-            Flaw::create($request);
 
-            return response()->json([
-                'res' => $request,
-                'msg' => 'OK',
-            ]);
+        try {
+
+            $flaw = Flaw::create($request);
+
+            try {
+                Arr::add($flaw, 'to',  env('TELEGRAM_ROTNIC'));
+                Arr::add($flaw, 'content',  "*_echa: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Estado: *" . $request['description']);
+
+                $flaw->notify(new TelegramNotification);
+
+                return response()->json([
+                    'res' => $request,
+                    'msg' => 'OK',
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'res' => $request,
+                    'msg' => 'Falla añadida - Error Telegram',
+                ]);
+            }
+
             
         } catch (\Throwable $th) {
             return response()->json([
-                'msg' => 'ERROR',
+                'msg' => 'Error al añadir falla',
             ]);
         }
     }
@@ -72,13 +88,25 @@ class FlawController extends Controller
 
         try {
             $flaw->update($request);
-            return response()->json([
-                'res' => $request,
-                'msg' => 'JSON',
-            ]);
+
+            try {
+                Arr::add($flaw, 'to',  env('TELEGRAM_ROTNIC'));
+                Arr::add($flaw, 'content',  "*Fecha:* " . $request['datesolution'] . " \n*Hora:* " . $request['timesolution'] . " \n*Cámara: * " . $camera->name . "\n*Estado: * Cámara restablecida");
+                $flaw->notify(new TelegramNotification);
+
+                return response()->json([
+                    'res' => $request,
+                    'msg' => 'OK',
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'res' => $request,
+                    'msg' => 'Falla añadida - Error Telegram',
+                ]);
+            }
         } catch (\Throwable $th) {
             return response()->json([
-                'msg' => 'Error',
+                'msg' => 'Error al añadir falla',
             ]);
         }
     }
