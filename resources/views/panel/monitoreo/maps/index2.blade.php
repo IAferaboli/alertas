@@ -139,7 +139,7 @@
     {{-- Timer --}}
     <script>
         function updateTimer() {
-            future = Date.parse("apr 08, 2022 13:00:00");
+            future = Date.parse("apr 15, 2022 13:00:00");
             now = new Date();
             diff = future - now;
 
