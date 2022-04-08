@@ -78,7 +78,7 @@
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    
+
                     <div id="timer"></div>
                 </div>
                 <div class="icon">
@@ -102,11 +102,6 @@
     </div>
 
     <div id="issMap"></div>
-
-
-
-
-
 
 @stop
 
@@ -141,33 +136,33 @@
 
 @section('js')
 
-{{-- Timer --}}
-<script>
-    function updateTimer() {
-    future = Date.parse("apr 08, 2022 13:00:00");
- now = new Date();
- diff = future - now;
+    {{-- Timer --}}
+    <script>
+        function updateTimer() {
+            future = Date.parse("apr 08, 2022 13:00:00");
+            now = new Date();
+            diff = future - now;
 
- days = Math.floor(diff / (1000 * 60 * 60 * 24));
- hours = Math.floor(diff / (1000 * 60 * 60));
- mins = Math.floor(diff / (1000 * 60));
- secs = Math.floor(diff / 1000);
+            days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            hours = Math.floor(diff / (1000 * 60 * 60));
+            mins = Math.floor(diff / (1000 * 60));
+            secs = Math.floor(diff / 1000);
 
- d = days;
- h = hours - days * 24;
- m = mins - hours * 60;
- s = secs - mins * 60;
+            d = days;
+            h = hours - days * 24;
+            m = mins - hours * 60;
+            s = secs - mins * 60;
 
- document.getElementById("timer")
-  .innerHTML =
-  '<div>' + d + '<span> Días</span></div>' +
-  '<div>' + h + '<span> Horas</span></div>' +
-  '<div>' + m + '<span> Minutos</span></div>' +
-  '<div>' + s + '<span> Segundos</span></div>';
-}
-setInterval('updateTimer()', 1000);
-</script>
-{{-- Timer --}}
+            document.getElementById("timer")
+                .innerHTML =
+                '<div>' + d + '<span> Días</span></div>' +
+                '<div>' + h + '<span> Horas</span></div>' +
+                '<div>' + m + '<span> Minutos</span></div>' +
+                '<div>' + s + '<span> Segundos</span></div>';
+        }
+        setInterval('updateTimer()', 1000);
+    </script>
+    {{-- Timer --}}
 
     <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
     <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
@@ -282,7 +277,7 @@ setInterval('updateTimer()', 1000);
             attribution: mbAttr
         });
         var map = L.map('issMap', {
-            center: [-33.2421833, -60.3440649],
+            center: [-33.2421833, -60.3220064],
             zoom: 14,
             layers: [grayscale, domos, fijas, out]
         });
@@ -381,7 +376,7 @@ setInterval('updateTimer()', 1000);
                         if (flightNumber >= markers2.length) {
 
                             flightNumber = 0;
-                            map.flyTo([-33.2421833, -60.3440649], 14)
+                            map.flyTo([-33.2421833, -60.3220064], 14)
                             out.clearLayers();
                             getISS();
                             value = true;
