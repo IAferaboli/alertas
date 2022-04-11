@@ -33,7 +33,7 @@
                             <td>{{$role->name}}</td>
                             <td width="10px">
                                 @can('panel.roles.edit')
-                                    <a href="{{route('panel.administracion.roles.edit', $role)}}" class="btn btn-sm btn-warning">Editar</a>
+                                    <a href="{{route('panel.administracion.roles.edit', $role)}}" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></a>
                                 @endcan
                             </td>
                             <td width="10px">
@@ -41,7 +41,7 @@
                                     <form action="{{route('panel.administracion.roles.destroy', $role)}}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                     </form>
                                 @endcan
                             </td>

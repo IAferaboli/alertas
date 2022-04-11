@@ -31,12 +31,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'password'=>'required',
-            'roles'=>'required',
+            'name' => 'required',
+            'username'=>'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
         ]);
 
+        $request['password'] = bcrypt($request->password);
+        
         $user = User::create($request->all());
 
         $user->roles()->sync($request->roles);
@@ -52,8 +54,21 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required',
+            'username'=>"required|unique:users,username,$user->id",
+            'email' => "required|unique:users,email,$user->id",
+        ]);
+
+        if ($request->password == null){
+            $user->update($request->except('password'));
+        } else {
+            $request['password'] = bcrypt($request->password);
+            $user->update($request->all());
+        }
+
         $user->roles()->sync($request->roles);
-        return redirect()->route('panel.administracion.users.edit', $user)->with('info', 'Se asignaron los roles correctamente');
+        return redirect()->route('panel.administracion.users.index', $user)->with('info', 'Se actualizó el usuario correctamente');
     }
 
 }

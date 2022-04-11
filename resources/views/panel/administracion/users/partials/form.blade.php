@@ -1,14 +1,22 @@
 <div class="form-row">
-    <div class="form-group col-md-6">
-        {!! Form::label('name', 'Nombre') !!}
+    <div class="form-group col-12 col-md-3">
+        {!! Form::label('name', 'Nombre y Apellido') !!}
         {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del usuario']) !!}
 
         @error('name')
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
+    <div class="form-group col-12 col-md-3">
+        {!! Form::label('username', 'Usuario') !!}
+        {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de usuario']) !!}
 
-    <div class="form-group  col-md-6">
+        @error('username')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="form-group  col-12 col-md-3">
         {!! Form::label('email', 'E-Mail') !!}
         {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el email del usuario']) !!}
 
@@ -17,10 +25,7 @@
         @enderror
     </div>
 
-</div>
-
-<div class="form-row">
-    <div class="form-group col-md-12">
+    <div class="form-group col-12 col-md-3">
         {!! Form::label('password', 'Contraseña') !!}
         {!! Form::password('password', ['class' => 'form-control']) !!}
 
@@ -32,6 +37,8 @@
 
 </div>
 
+
+
 <h2 class="h5">Lista de roles</h2>
 
 @foreach ($roles as $role)
@@ -42,12 +49,3 @@
         </label>
     </div>
 @endforeach
-
-{{-- @foreach ($permissions as $permission)
-    <div>
-        <label>
-            {!! Form::checkbox('permissions[]', $permission->id, null, ['class'=>'mr-1']) !!}
-            {{$permission->description}}
-        </label>
-    </div>
-@endforeach --}}

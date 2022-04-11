@@ -1,7 +1,10 @@
 # Versionado 📌
 ## Versión 2
 ### 2.4.2
-> 1. Se agrega usuario al listado de email-intervenciones
+> 1. Se agrega usuario al listado de email-intervenciones.
+> 2. Se modifican vistas (lista de roles y crear usuario).
+> 3. El sistema permite crear usuarios.
+> 4. Se deshabilita registro por web.
 ### 2.4.1
 > 1. Bug Fix. (form crear intervención envia varias intervenciones.)
 > 2. Se actualizan rutas por la del DNS.

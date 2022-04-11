@@ -13,7 +13,7 @@
 
                 @include('panel.administracion.users.partials.form')
 
-                {!! Form::submit('Agregar expediente', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Crear usuario', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>
