@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.4.2
+> 1. Se agrega usuario al listado de email-intervenciones
 ### 2.4.1
 > 1. Bug Fix. (form crear intervención envia varias intervenciones.)
 > 2. Se actualizan rutas por la del DNS.
