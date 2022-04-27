@@ -5,6 +5,7 @@
 > 2. Los datos del listado de cámaras pasan a ser dispositivos y se toman desde la DB con descripción e IP.
 > 3. Se elimina datatable de listado de dispositivos y se genera con livewire.
 > 4. Se agregan columnas a entidad Cameras.
+> 5. Se agrega botón de mantenimiento para no recibir request desde Digifort en caso que se esté trabajando en algun dispositivo en particular.
 ### 2.4.2
 > 1. Se agrega usuario al listado de email-intervenciones.
 > 2. Se modifican vistas (lista de roles y crear usuario).
