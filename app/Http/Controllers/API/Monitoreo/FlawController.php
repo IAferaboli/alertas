@@ -56,7 +56,7 @@ class FlawController extends Controller
 
             try {
                 Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
-                Arr::add($flaw, 'content',  "*Fecha: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Estado: *" . $request['description']);
+                Arr::add($flaw, 'content',  "*Fecha: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Descripción: *". $camera->description ."\n*Estado: *" . $request['description']);
 
                 $flaw->notify(new TelegramNotification);
 
