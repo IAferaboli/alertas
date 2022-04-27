@@ -116,7 +116,7 @@ function getCameras()
 
     for ($i = 1; $i <= 3; $i++) {
         try {
-            $responses = Http::get("http://192.168.100.$i:8601/Interface/Cameras/GetCameras?Fields=Name,%20Latitude,%20Longitude&ResponseFormat=JSON&AuthUser=admin&AuthPass=gda.adm")->json();
+            $responses = Http::get("http://192.168.100.$i:8601/Interface/Cameras/GetCameras?Fields=Name,%20Latitude,%20Longitude,%20ConnectionAddress,%20Description&ResponseFormat=JSON&AuthUser=admin&AuthPass=gda.adm")->json();
 
             foreach ($responses['Response']['Data']['Cameras'] as $response) {
 
@@ -132,12 +132,14 @@ function getCameras()
 
                 foreach ($responses2['Response']['Data']['Cameras'] as $response2) {
                     if ($camera) {
-                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working']) {
+                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working'] || $camera->address != $response['ConnectionAddress'] || $camera->description != $response['Description']) {
                             $camera->update([
                                 'lat' => $response['Latitude'],
                                 'lng' => $response['Longitude'],
                                 'status' => $response2['Working'],
                                 'server' => $i,
+                                'addressip' => $response['ConnectionAddress'],
+                                'description' => $response['Description'],
                             ]);
                         }
                     } else {
@@ -147,8 +149,9 @@ function getCameras()
                             'lng' => $response['Longitude'],
                             'status' => $response2['Working'],
                             'server' => $i,
-                            'type' => $type
-
+                            'type' => $type,
+                            'addressip' => $response['ConnectionAddress'],
+                            'description' => $response['Description'],
                         ]);
                     }
                 }

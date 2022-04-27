@@ -7,7 +7,6 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
-
 class FilesIndex extends Component
 {
 
@@ -30,7 +29,7 @@ class FilesIndex extends Component
                         ->orWhere('filenumber', 'LIKE' , '%' . $this->search . '%')
                         ->orderByDesc('datein')
                         ->paginate();
-
+        
         return view('livewire.panel.monitoreo.files-index', compact('files'));
     }
 }

@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'Municipio VC',
-    'title_prefix' => '',
+    'title_prefix' => 'Smart VC |',
     'title_postfix' => '',
 
     /*

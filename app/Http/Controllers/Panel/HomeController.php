@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Camera;
 use App\Models\Intervention;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
@@ -16,7 +17,12 @@ class HomeController extends Controller
         //Tiempo actividad servidores
         list($serv1, $serv2, $serv3) = timeServer();
 
-
+        //Cantidad de cámaras en el sistema Monitoreo
+        $cantCamaras = Camera::where('type', 0)->orWhere('type',1)->count();
+        $fueraDeServicio = Camera::where('status', 0)
+                            ->where('published', 1)
+                            ->count();
+                        
         //API CLIMA
         try {
             $weather = Http::get("https://api.openweathermap.org/data/2.5/weather?id=3832778&appid=".env('OPENWEATHER_API')."")->json();
@@ -70,7 +76,7 @@ class HomeController extends Controller
         //SNMP Temperatura Servers
         $tempServer = getTemperatureDC();
 
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer'));
+        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio'));
 
     }
 }

@@ -12,7 +12,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ cantCameras() }}</h3>
+                    <h3>{{ $cantCamaras }}</h3>
 
                     <p>Cámaras Totales</p>
                 </div>
@@ -26,9 +26,9 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
+            <div class="small-box @if ($fueraDeServicio == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
-                    <h3>{{ statusCameras('FUERA') }}</h3>
+                    <h3>{{ $fueraDeServicio }}</h3>
 
                     <p>Fuera de Servicio</p>
                 </div>
