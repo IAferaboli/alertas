@@ -62,7 +62,7 @@
                             <tr>
                                 <td>{{ $camera->name }}</td>
                                 <td class="text-center">
-                                   
+
                                     @if ($camera->maintenance == 1)
                                         <span class="badge badge-warning">Mantenimiento</span>
                                     @elseif ($camera->status == 1)
@@ -71,7 +71,7 @@
                                         <span class="badge badge-danger">Inactiva</span>
                                     @endif
                                 </td>
-                                <td>{{$camera->description}}</td>
+                                <td>{{ $camera->description }}</td>
                                 <td>Serv. {{ $camera->server }}</td>
                                 <td><i class="fas fa-clock"></i> {{ $camera->updated_at->diffForHumans() }}</td>
 
@@ -85,25 +85,29 @@
                                         @endif
                                     </td>
                                 @endcan
-                                <td width="5px">
-                                    
-                                        <a href="http://{{$camera->addressip}}"
-                                            target="_blank"
+                                @can('panel.monitoreo.cameras.navigator')
+                                    <td width="5px">
+
+                                        <a href="http://{{ $camera->addressip }}" target="_blank"
                                             class="btn btn-secondary btn-xs">
                                             <i class="fab fa-chrome"></i></a>
-                                    
-                                </td>
-                                <td width="5px">
-                                    @if ($camera->status != 0) 
-                                    <form action="" method="POST">
-                                        @csrf
-                                        
-                                        <button class="btn @if ($camera->maintenance == 0) btn-warning @else btn-success @endif  btn-xs" type="submit"><i
-                                                class="fas fa-wrench"></i></button>
-                                    </form>
-                                    @endif
-                                    
-                                </td>
+
+                                    </td>
+                                @endcan
+                                @can('panel.monitoreo.cameras.maintenance')
+                                    <td width="5px">
+                                        @if ($camera->status != 0)
+                                            <form action="" method="POST">
+                                                @csrf
+
+                                                <button
+                                                    class="btn @if ($camera->maintenance == 0) btn-warning @else btn-success @endif  btn-xs"
+                                                    type="submit"><i class="fas fa-wrench"></i></button>
+                                            </form>
+                                        @endif
+
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>
