@@ -132,7 +132,7 @@ function getCameras()
 
                 foreach ($responses2['Response']['Data']['Cameras'] as $response2) {
                     if ($camera) {
-                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working'] || $camera->address != $response['ConnectionAddress'] || $camera->description != $response['Description']) {
+                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working'] || $camera->addressip != $response['ConnectionAddress'] || $camera->description != $response['Description']) {
                             $camera->update([
                                 'lat' => $response['Latitude'],
                                 'lng' => $response['Longitude'],
