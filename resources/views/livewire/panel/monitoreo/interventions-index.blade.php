@@ -6,26 +6,23 @@
     @endif
     <div class="card">
         <div class="card-header">
-            {{-- <input wire:model="search" placeholder="Buscar por fecha, hora o detalle" class="form-control"> --}}
             <div class="form-row">
 
                 <div class="form-group col-md-3">
 
-                    {{-- Generar un campo de fecha --}}
                     <label for="fecha">Filtrar por Fecha</label>
-                    <input wire:model="fecha" type="date" class="form-control" id="fecha">
+                    <input wire:model="fecha" type="date" class="form-control form-control-sm" id="fecha">
 
                 </div>
 
                 <div class="form-group col-md-5">
-                    <label for="hora">Filtrar por intervención</label>
-                    <input wire:model="search" placeholder="Buscar por detalle" class="form-control">
+                    <label for="intervencion">Filtrar por intervención</label>
+                    <input wire:model="search" id="intervencion" placeholder="Buscar por detalle" class="form-control form-control-sm">
                 </div>
 
                 <div class="form-group col-md-4">
-                    {{-- Filtrar por cámara select --}}
                     <label for="camara">Filtrar por cámara</label>
-                    <select wire:model="camara" class="form-control">
+                    <select wire:model="camara" id="camara" class="form-control form-control-sm">
                         <option value="">Todas</option>
                         @foreach ($cameras as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
@@ -52,8 +49,8 @@
                         @foreach ($interventions as $intervention)
                             <tr class="disabled">
                                 <td>{{ $intervention->id }}</td>
-                                <td>{{ $intervention->date }}</td>
-                                <td>{{ $intervention->hour }}</td>
+                                <td>{{ \Carbon\Carbon::parse($intervention->date)->format('d/m/Y')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($intervention->hour)->format('H:i') }}</td>
                                 <td>{{ $intervention->detail }} </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.interventions.edit')

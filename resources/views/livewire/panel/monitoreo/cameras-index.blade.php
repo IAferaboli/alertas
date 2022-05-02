@@ -25,6 +25,7 @@
                         <option value="">Seleccione estado</option>
                         <option value="1">Activas</option>
                         <option value="0">Inactivas</option>
+                        <option value="-1">Mantenimiento</option>
                     </select>
                 </div>
 
@@ -42,7 +43,6 @@
             </div>
 
         </div>
-
         @if ($cameras->count())
             <div class="card-body">
 
@@ -63,7 +63,7 @@
                                 <td>{{ $camera->name }}</td>
                                 <td class="text-center">
 
-                                    @if ($camera->maintenance == 1)
+                                    @if ($camera->status == -1)
                                         <span class="badge badge-warning">Mantenimiento</span>
                                     @elseif ($camera->status == 1)
                                         <span class="badge badge-success">Activa</span>
@@ -97,13 +97,9 @@
                                 @can('panel.monitoreo.cameras.maintenance')
                                     <td width="5px">
                                         @if ($camera->status != 0)
-                                            <form action="" method="POST">
-                                                @csrf
-
-                                                <button
-                                                    class="btn @if ($camera->maintenance == 0) btn-warning @else btn-success @endif  btn-xs"
-                                                    type="submit"><i class="fas fa-wrench"></i></button>
-                                            </form>
+                                            <button wire:click="update({{$camera}})"
+                                                class="btn @if ($camera->status == -1) btn-warning @else btn-success @endif  btn-xs"
+                                                type="submit"><i class="fas fa-wrench"></i></button>
                                         @endif
 
                                     </td>

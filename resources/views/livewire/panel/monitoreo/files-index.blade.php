@@ -31,14 +31,15 @@
                         @foreach ($files as $file)
                             <tr>
                                 <td>{{ $file->id }}</td>
-                                <td>{{ $file->datein }}</td>
+                                <td>{{ \Carbon\Carbon::parse($file->datein)->format('d/m/Y') }}</td>
                                 <td>{{ $file->filenumber }}</td>
                                 <td>{{ $file->init }}</td>
                                 <td>{{ $file->notenumber }}</td>
-                                <td>{{ $file->datefilm }}</td>
+                                <td>{{ \Carbon\Carbon::parse($file->datefilm)->format('d/m/Y') }}</td>
                                 <td>{{ $file->time }}</td>
                                 <td>{{ $file->attach }}</td>
-                                <td>{{ $file->dateout }}</td>
+                                <td>{{ \Carbon\Carbon::parse($file->dateout)->format('d/m/Y') }}</td>
+
                                 <td width="10px">
                                     <a class="btn btn-warning btn-sm"
                                         href="{{ route('panel.monitoreo.files.edit', $file) }}"><i

@@ -14,14 +14,14 @@
 
                     {{-- Generar un campo de fecha --}}
                     <label for="fecha">Filtrar por Fecha</label>
-                    <input wire:model="fecha" type="date" class="form-control" id="fecha">
+                    <input wire:model="fecha" type="date" class="form-control form-control-sm" id="fecha">
 
                 </div>
 
                 <div class="form-group col-md-6">
                     {{-- Filtrar por cámara select --}}
                     <label for="camara">Filtrar por cámara</label>
-                    <select wire:model="camara" class="form-control">
+                    <select wire:model="camara" class="form-control form-control-sm" id="camara">
                         <option value="">Todas</option>
                         @foreach ($cameras as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
@@ -51,15 +51,18 @@
                         @foreach ($flaws as $flaw)
                             <tr>
                                 <td>{{ $flaw->id }}</td>
-                                <td>{{ $flaw->dateflaw }}</td>
-                                <td>{{ $flaw->timeflaw }}</td>
+                                <td>{{ \Carbon\Carbon::parse($flaw->dateflaw)->format('d/m/Y')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($flaw->timeflaw)->format('H:i') }}</td>
                                 <td>{{ $flaw->description }}</td>
-
                                 <td>{{ $flaw->Camera->name }}
+                                <td>@if ($flaw->datesolution)
+                                    {{ \Carbon\Carbon::parse($flaw->datesolution)->format('d/m/Y')}}
+                                @endif</td>
+                                <td>@if ($flaw->timesolution)
+                                    {{ \Carbon\Carbon::parse($flaw->timesolution)->format('H:i') }}
+                                    
+                                @endif</td>
 
-
-                                <td>{{ $flaw->datesolution }}</td>
-                                <td>{{ $flaw->timesolution }}</td>
 
                                 <td width="10px">
                                     @can('panel.monitoreo.flaws.edit')

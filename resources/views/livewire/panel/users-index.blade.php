@@ -16,6 +16,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
+                            <th>Usuario</th>
                             <th>Email</th>
                             <th></th>
                         </tr>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
+                                <td>{{$user->username}}</td>
                                 <td>{{$user->email}}</td>
                                 <td width="10px">
                                     <a class="btn btn-warning btn-sm" href="{{ route('panel.administracion.users.edit', $user) }}"><i

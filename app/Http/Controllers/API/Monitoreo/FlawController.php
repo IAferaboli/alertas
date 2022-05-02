@@ -28,8 +28,15 @@ class FlawController extends Controller
         $fecha = new DateTime();
         $fecha->modify('-2 minute');
         $camera = Camera::where('name', $request['name'])->first();
-        $camera->status = 0;
-        $camera->update();
+        if ($camera->status == -1) {
+            return response()->json([
+                'msg' => 'Dipositivo con mantenimiento activo.',
+            ]);
+        } else {
+            $camera->status = 1;
+            $camera->update();
+        }
+       
 
         unset($request['name']);
         $request['dateflaw'] = $fecha->format('Y-m-d');
@@ -43,12 +50,14 @@ class FlawController extends Controller
         try {
 
             $flaw = Flaw::where('camera_id', $camera->id)
-            ->where('timesolution', null)
-            ->first();
+                ->where('timesolution', null)
+                ->first();
+
 
             if (!$flaw) {
                 $flaw = Flaw::create($request);
             } else {
+
                 return response()->json([
                     'msg' => 'Ya existe falla en esta camara',
                 ]);
@@ -56,7 +65,7 @@ class FlawController extends Controller
 
             try {
                 Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
-                Arr::add($flaw, 'content',  "*Fecha: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Descripción: *". $camera->description ."\n*Estado: *" . $request['description']);
+                Arr::add($flaw, 'content',  "*Fecha: *" . $request['dateflaw'] . "\n*Hora: *" . $request['timeflaw'] . " \n*Cámara: * " . $camera->name . "\n*Descripción: *" . $camera->description . "\n*Estado: *" . $request['description']);
 
                 $flaw->notify(new TelegramNotification);
 
@@ -70,8 +79,6 @@ class FlawController extends Controller
                     'msg' => 'Falla añadida - Error Telegram',
                 ]);
             }
-
-            
         } catch (\Throwable $th) {
             return response()->json([
                 'msg' => 'Error al añadir falla',
@@ -90,9 +97,17 @@ class FlawController extends Controller
 
         $fecha = new DateTime();
         $camera = Camera::where('name', $request['name'])->first();
-        $camera->status = 1;
-        $camera->update();
-        unset($request['name']);
+
+
+        if ($camera->status == -1) {
+            return response()->json([
+                'msg' => 'Dipositivo con mantenimiento activo.',
+            ]);
+        } else {
+            $camera->status = 1;
+            $camera->update();
+        }
+ 
 
         $flaw = Flaw::where('camera_id', $camera->id)
             ->where('timesolution', null)

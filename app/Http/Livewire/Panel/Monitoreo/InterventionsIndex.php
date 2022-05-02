@@ -36,6 +36,7 @@ class InterventionsIndex extends Component
     public function render()
     {
 
+
         if ($this->camara != null) {
             $interventions = Intervention::where('camera_id' , '=', $this->camara)
             ->where('date', 'LIKE' , '%' . $this->fecha . '%')
