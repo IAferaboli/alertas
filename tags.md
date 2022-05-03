@@ -2,6 +2,7 @@
 ## Versión 2
 ### 2.5.1
 > 1. Se agrega a Mapa TV las cámaras en mantenimiento.
+> 2. Bug Fix.
 ### 2.5.0
 > 1. Se agrega botón de mantenimiento para no recibir request desde Digifort en caso que se esté trabajando en algun dispositivo en particular.
 > 2. Se modifican formatos de fechas en tablas.

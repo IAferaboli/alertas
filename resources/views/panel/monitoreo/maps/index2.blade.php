@@ -53,7 +53,7 @@
                     <p>Fuera de Servicio</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-exclamation-triangle text-white"></i>
+                    <i id="iconStatus" class="fas fa-check text-white"></i>
                 </div>
             </div>
         </div>
@@ -161,9 +161,13 @@
             document.getElementById('statusMantCamera').innerHTML = Object.keys(data4).length;
             if (Object.keys(data2).length == 0) {
                 document.getElementById('divStatusCamera').classList.add('bg-success');
+                document.getElementById('iconStatus').classList.add('fa-check');
+                document.getElementById('iconStatus').classList.remove('fa-exclamation-triangle');
                 document.getElementById('divStatusCamera').classList.remove('bg-danger');
             } else {
                 document.getElementById('divStatusCamera').classList.add('bg-danger');
+                document.getElementById('iconStatus').classList.add('fa-exclamation-triangle');
+                document.getElementById('iconStatus').classList.remove('fa-check');
                 document.getElementById('divStatusCamera').classList.remove('bg-success');
             }
 
@@ -380,13 +384,7 @@
         function myTimerInit() {
             progressBarTimer();
             var myTimer = setInterval(function() {
-                if (sinFuncionar == 0) {
-                    domos.clearLayers();
-                    fijas.clearLayers();
-                    out.clearLayers();
-                    getISS();
-                    getTemp();
-                } else {
+                if (markers2.length != 0) {
                     domos.clearLayers();
                     fijas.clearLayers();
                     value = false;
@@ -407,13 +405,17 @@
                             clearInterval(myTimer2);
                             myTimerInit();
                         } else {
-
-                            console.log("Flight number: " + flightNumber);
                             map.flyTo([markers2[flightNumber][0], markers2[flightNumber][1]], 18);
                         }
 
                         flightNumber++;
                     }, 6000);
+                } else {
+                    domos.clearLayers();
+                    fijas.clearLayers();
+                    out.clearLayers();
+                    getISS();
+                    getTemp();
 
                 }
             }, 100000);
