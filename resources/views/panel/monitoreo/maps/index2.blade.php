@@ -28,7 +28,7 @@
 
 
     <div class="row position-fixed fixed-bottom ml-3 mr-3">
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <!-- small box -->
             <div id="divStatusCamera" class="small-box @if (statusCameras('FUERA') == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
@@ -59,8 +59,22 @@
         </div>
         <!-- ./col -->
 
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div id="divMantCamera" class="small-box bg-success">
+                <div class="inner">
+                    <h3 id="statusMantCamera">0</h3>
+
+                    <p>Mantenimiento</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-wrench text-white"></i>
+                </div>
+            </div>
+        </div>
+
         <!-- ./col -->
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-3 col-6">
             <div class="small-box @if (getLicenses() <= 5) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
@@ -126,9 +140,10 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        const api_url = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/monitoreo/camaras';
-        const api_url2 = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/monitoreo/camaras/0';
-        const api_url3 = 'http://smartvc.intranet.villaconstitucion.gob.ar/api/datacenter/temperatura';
+        const api_url = "{{env('APP_URL')}}/api/monitoreo/camaras";
+        const api_url2 = "{{env('APP_URL')}}/api/monitoreo/camaras/0";
+        const api_url3 = "{{env('APP_URL')}}/api/datacenter/temperatura";
+        const api_url4 = "{{env('APP_URL')}}/api/monitoreo/camaras/-1";
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
         var out = L.layerGroup();
@@ -137,10 +152,13 @@
         async function getISS() {
             const response = await fetch(api_url)
             const response2 = await fetch(api_url2)
+            const response4 = await fetch(api_url4)
+            const data4= await response4.json();
             const data = await response.json();
             const data2 = await response2.json();
             sinFuncionar = Object.keys(data2).length;
             document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
+            document.getElementById('statusMantCamera').innerHTML = Object.keys(data4).length;
             if (Object.keys(data2).length == 0) {
                 document.getElementById('divStatusCamera').classList.add('bg-success');
                 document.getElementById('divStatusCamera').classList.remove('bg-danger');
@@ -148,8 +166,18 @@
                 document.getElementById('divStatusCamera').classList.add('bg-danger');
                 document.getElementById('divStatusCamera').classList.remove('bg-success');
             }
+
+            if (Object.keys(data4).length == 0) {
+                document.getElementById('divMantCamera').classList.add('bg-success');
+                document.getElementById('divMantCamera').classList.remove('bg-warning');
+            } else {
+                document.getElementById('divMantCamera').classList.add('bg-warning');
+                document.getElementById('divMantCamera').classList.remove('bg-success');
+            }
+
             var markers = [];
             markers2 = []
+
             for (const camera of data) {
                 markers.push([camera.name, camera.lat, camera.lng, camera.type, camera.status])
             }
@@ -158,6 +186,12 @@
                     markers2.push([camera.lat, camera.lng])
                 }
             }
+            for (const camera of data4) {
+                if (camera.status == -1) {
+                    markers2.push([camera.lat, camera.lng])
+                }
+            }
+            
 
             const domeIcon = L.icon({
                 iconUrl: "{{ asset('img/dome.png') }}",
@@ -169,6 +203,13 @@
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
+
+            const domeMantIcon = L.icon({
+                iconUrl: "{{ asset('img/domeMant.png') }}",
+                iconSize: [32, 32],
+                iconAnchor: [25, 25]
+            });
+
             const fixedIcon = L.icon({
                 iconUrl: "{{ asset('img/cctv.png') }}",
                 iconSize: [32, 32],
@@ -179,6 +220,13 @@
                 iconSize: [32, 32],
                 iconAnchor: [25, 25]
             });
+
+            const fixedMantIcon = L.icon({
+                iconUrl: "{{ asset('img/cctvMant.png') }}",
+                iconSize: [32, 32],
+                iconAnchor: [25, 25]
+            });
+
             for (var i = 0; i < markers.length; i++) {
                 let icon = ""
                 if (markers[i][4] === 1) {
@@ -193,7 +241,7 @@
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
                     }
-                } else {
+                } else if (markers[i][4] === 0) {
                     if (markers[i][3] === 1) {
                         icon = fixedOutIcon
                         var marker = L.marker([markers[i][1], markers[i][2]], {
@@ -206,6 +254,26 @@
                             .bindPopup("Nombre: " + markers[i][0]).addTo(out);
                     } else {
                         icon = domeOutIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                            icon: icon
+                        }).bindPopup("Nombre: " + markers[i][0]).addTo(out);
+                    }
+                } else {
+                    if (markers[i][3] === 1) {
+                        icon = fixedMantIcon
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                                icon: icon
+                            })
+                            .bindPopup("Nombre: " + markers[i][0]).addTo(fijas);
+                        var marker = L.marker([markers[i][1], markers[i][2]], {
+                                icon: icon
+                            })
+                            .bindPopup("Nombre: " + markers[i][0]).addTo(out);
+                    } else {
+                        icon = domeMantIcon
                         var marker = L.marker([markers[i][1], markers[i][2]], {
                             icon: icon
                         }).bindPopup("Nombre: " + markers[i][0]).addTo(domos);
@@ -303,7 +371,6 @@
 
             let inc = (val) => {
                 let v = pBar.getValue() + val;
-                console.log(pBar.getValue())
                 return v >= 100 ? 0 : v;
             };
             myTimerProgress = setInterval(() => pBar.setValue(inc((1))), 1000);
