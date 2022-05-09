@@ -93,7 +93,7 @@ class CamerasIndex extends Component
             $this->cameraEdit->save();
 
             Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
-            Arr::add($flaw, 'content',  "*Fecha: *" . $flaw['dateflaw'] . "\n*Hora: *" . $flaw['timeflaw'] . " \n*Cámara: * " . $this->cameraEdit->name . "\n*Descripción: *" . $this->cameraEdit->description . "\n*Estado: * Mantenimiento finalizado");
+            Arr::add($flaw, 'content',  "*Fecha: *" . $flaw['datesolution'] . "\n*Hora: *" . $flaw['timesolution'] . " \n*Cámara: * " . $this->cameraEdit->name . "\n*Descripción: *" . $this->cameraEdit->description . "\n*Estado: * Mantenimiento finalizado");
 
             $flaw->notify(new TelegramNotification);
         }
