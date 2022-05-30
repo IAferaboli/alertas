@@ -18,10 +18,13 @@
         @enderror
     </div>
 
+    
     <div class="form-group col-md-3">
+        {{-- {!! Form::label('init', 'Iniciador') !!}
+        {!! Form::text('init', null, ['class' => 'form-control', 'placeholder' => 'MPA/CRIA 1/AIC']) !!} --}}
         {!! Form::label('init', 'Iniciador') !!}
-        {!! Form::text('init', null, ['class' => 'form-control', 'placeholder' => 'MPA/CRIA 1/AIC']) !!}
 
+        {!! Form::select('init', ['AIC'=>'AIC', 'CRIA 1'=>'CRIA 1', 'CRIA 13'=>'CRIA 13','MPA' => 'MPA', 'Otros' => 'Otros'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione opción...']) !!}
         @error('init')
             <span class="text-danger">{{$message}}</span>
         @enderror

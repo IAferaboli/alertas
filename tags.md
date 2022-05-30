@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.5.2
+> 1. Se agrega media anual al gráfico de intervenciones.
+> 2. Se añade select al form de intervenciones.
 ### 2.5.1
 > 1. Se agrega a Mapa TV las cámaras en mantenimiento.
 > 2. Bug Fix.

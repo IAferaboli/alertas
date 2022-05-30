@@ -18,14 +18,14 @@ class HomeController extends Controller
         list($serv1, $serv2, $serv3) = timeServer();
 
         //Cantidad de cámaras en el sistema Monitoreo
-        $cantCamaras = Camera::where('type', 0)->orWhere('type',1)->count();
+        $cantCamaras = Camera::where('type', 0)->orWhere('type', 1)->count();
         $fueraDeServicio = Camera::where('status', 0)
-                            ->where('published', 1)
-                            ->count();
-                        
+            ->where('published', 1)
+            ->count();
+
         //API CLIMA
         try {
-            $weather = Http::get("https://api.openweathermap.org/data/2.5/weather?id=3832778&appid=".env('OPENWEATHER_API')."")->json();
+            $weather = Http::get("https://api.openweathermap.org/data/2.5/weather?id=3832778&appid=" . env('OPENWEATHER_API') . "")->json();
             if ($weather) {
                 foreach ($weather['weather'] as $key => $value) {
                     $weather['icono'] = $value['icon'];
@@ -73,10 +73,32 @@ class HomeController extends Controller
             $monthCountLast[] = $count->total;
         }
 
+      
+        $interventionsProm = Intervention::select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
+        ->where('status', '=', 1)
+        ->groupBy('mes')
+        ->orderBy('mes', 'asc')
+        ->get();
+    
+        // Calcular cantidad de años almacenados
+        $years = Intervention::select(DB::raw('YEAR(date) AS year'))
+            ->groupBy('year')
+            ->orderBy('year', 'asc')
+            ->get();
+    
+        //Contar registros de years
+        $yearsCount = count($years);
+    
+        $monthCountProm = [];
+        foreach ($interventionsProm as $count) {
+            $monthCountProm[] = ($count->total)/$yearsCount;
+        }
+    
+
+
         //SNMP Temperatura Servers
         $tempServer = getTemperatureDC();
 
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio'));
-
+        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm'));
     }
 }

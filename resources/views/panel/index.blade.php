@@ -219,6 +219,8 @@
     <script>
         var _ydata = JSON.parse('{!! json_encode($monthCount) !!}');
         var _ydataLast = JSON.parse('{!! json_encode($monthCountLast) !!}');
+        var _ydataProm = JSON.parse('{!! json_encode($monthCountProm) !!}');
+        console.log(_ydataProm);
         let month = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
             'Noviembre', 'Diciembre'
         ]
@@ -239,6 +241,11 @@
                         label: year - 1,
                         data: _ydataLast,
                         borderColor: "green",
+                        fill: false
+                    },{
+                        label: "Media anual",
+                        data: _ydataProm,
+                        borderColor: "blue",
                         fill: false
                     }]
                 },
