@@ -4,7 +4,13 @@
 
 @section('content_header')
     <a href="{{ route('panel.monitoreo.cameras.index') }}" class="btn btn-secondary float-right">VOLVER</a>
-    <h1>Información detallada de cámara: <strong class="ml-2"> {{ $camera->name }}</strong></h1>
+    <h1>Información detallada de cámara: <strong class="ml-2"> {{ $camera->name }} - @if ($camera->status == -1)
+        <span class="badge badge-warning">Mantenimiento</span>
+    @elseif ($camera->status == 1)
+        <span class="badge badge-success">Activa</span>
+    @else
+        <span class="badge badge-danger">Inactiva</span>
+    @endif</strong></h1>
 @stop
 
 @section('css')
