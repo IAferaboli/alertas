@@ -76,7 +76,7 @@
                                 <td><i class="fas fa-clock"></i> {{ $camera->updated_at->diffForHumans() }}</td>
                                 @can('panel.monitoreo.cameras.info')
                                     <td width="5px">
-                                        <a href="{{route('panel.monitoreo.cameras.show', $camera)}}" class="btn btn-info btn-xs"><i class="fas fa-plus"></i></a>
+                                        <a href="{{route('panel.monitoreo.cameras.show', $camera)}}" class="btn btn-info btn-xs"><i class="mx-1 fas fa-info"></i></a>
                                     </td>
                                 @endcan
 
