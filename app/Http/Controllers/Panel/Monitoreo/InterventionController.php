@@ -40,7 +40,7 @@ class InterventionController extends Controller
 
         $request->validate([
             'detail' => 'required|max:750',
-            'date' => 'required',
+            'date' => 'required|before_or_equal:today',
             'hour' => 'required',
             'camera_id' => 'required'
         ]);
@@ -72,7 +72,7 @@ class InterventionController extends Controller
     {
         $request->validate([
             'detail' => 'required|max:750',
-            'date' => 'required',
+            'date' => 'required|before_or_equal:today',
             'hour' => 'required',
             'camera_id' => 'required'
         ]);

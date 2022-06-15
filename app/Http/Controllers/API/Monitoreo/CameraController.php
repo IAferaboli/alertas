@@ -19,12 +19,19 @@ class CameraController extends Controller
     {
         if ($status != null) {
             $cameras = Camera::where('status', $status)
-                            ->where('published', 1)
+                            ->where(function ($q) {
+                                $q->where('type', '0')
+                                    ->orWhere('type', '1');
+                            })
                             ->orderBy('lat')
                             ->orderBy('lng')
                             ->get();
         } else {
             $cameras = Camera::where('published', 1)
+                            ->where(function ($q) {
+                                $q->where('type', '0')
+                                    ->orWhere('type', '1');
+                            })
                             ->get();
         }
         return $cameras;

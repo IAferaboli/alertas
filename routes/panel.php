@@ -27,6 +27,7 @@ Route::post('reports/monitoreo/files/pdf', [ReportController::class, 'pdfFiles']
 Route::post('reports/monitoreo/concejo/pdf', [ReportController::class, 'pdfConcejo'])->name('panel.reports.monitoreo.concejo.pdf');
 
 Route::get('monitoreo/cameras', [CameraController::class, 'index'])->name('panel.monitoreo.cameras.index');
+Route::get('monitoreo/cameras/{camera}', [CameraController::class, 'show'])->name('panel.monitoreo.cameras.show');
 
 Route::resource('monitoreo/interventions', InterventionController::class)->except('show')->names('panel.monitoreo.interventions');
 Route::resource('monitoreo/files', FileController::class)->except('show')->names('panel.monitoreo.files');

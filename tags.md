@@ -1,5 +1,10 @@
 # Versionado 📌
 ## Versión 2
+### 2.6.3
+> 1. Se añade botón "+" en el listado de dispositivos para ampliar información.
+### 2.5.3
+> 1. Se añade validación (campo date < today) del form intervenciones.
+> 2. Se modifica api.
 ### 2.5.2
 > 1. Se agrega media anual al gráfico de intervenciones.
 > 2. Se añade select al form de intervenciones.

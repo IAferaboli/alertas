@@ -19,4 +19,12 @@ class CameraController extends Controller
     {
         return view('panel.monitoreo.cameras');
     }
+
+    public function show(Camera $camera)
+    {
+
+        $camera = Camera::find($camera->id);
+        return view('panel.monitoreo.cameras.show', compact('camera'));
+    }
+
 }

@@ -54,7 +54,7 @@
                             <th>Desc.</th>
                             <th>Serv.</th>
                             <th>Últ. Act.</th>
-                            <th colspan="3" class="text-center">Acciones</th>
+                            <th colspan="4" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,6 +74,11 @@
                                 <td>{{ $camera->description }}</td>
                                 <td>Serv. {{ $camera->server }}</td>
                                 <td><i class="fas fa-clock"></i> {{ $camera->updated_at->diffForHumans() }}</td>
+                                @can('panel.monitoreo.cameras.info')
+                                    <td width="5px">
+                                        <a href="{{route('panel.monitoreo.cameras.show', $camera)}}" class="btn btn-info btn-xs"><i class="fas fa-plus"></i></a>
+                                    </td>
+                                @endcan
 
                                 @can('panel.monitoreo.cameras.viewcamera')
                                     <td width="5px">

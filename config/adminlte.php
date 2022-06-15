@@ -260,7 +260,7 @@ return [
                     'text' => 'Listado de cámaras',
                     'icon'  => 'fas fa-fw fa-video',
                     'route'  => 'panel.monitoreo.cameras.index',
-                    'active' => ['panel.monitoreo.cameras*'],
+                    'active' => ['panel/monitoreo/cameras*'],
                     'can'   =>  'panel.monitoreo.cameras.index',
                 ],
                 //Intervenciones
@@ -351,8 +351,8 @@ return [
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
             'text' => 'Perfil',
-            'route'  => 'panel.myaccount',
-            'active' => ['panel.myaccount'],
+            'url'  => 'user/profile',
+            'active' => ['user/profile'],
             'icon' => 'fas fa-fw fa-user',
         ],
 
