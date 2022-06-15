@@ -32,7 +32,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ cantCameras() }}</h3>
+                    <h3 id="cantCamaras">0</h3>
 
                     <p>Cámaras Totales</p>
                 </div>
@@ -156,7 +156,9 @@
             const data4= await response4.json();
             const data = await response.json();
             const data2 = await response2.json();
+           
             sinFuncionar = Object.keys(data2).length;
+            document.getElementById('cantCamaras').innerHTML = Object.keys(data).length;
             document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
             document.getElementById('statusMantCamera').innerHTML = Object.keys(data4).length;
             if (Object.keys(data2).length == 0) {

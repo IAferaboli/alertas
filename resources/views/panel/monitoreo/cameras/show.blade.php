@@ -3,14 +3,16 @@
 @section('title', 'Municipio VC')
 
 @section('content_header')
-    <a href="{{ route('panel.monitoreo.cameras.index') }}" class="btn btn-secondary float-right">VOLVER</a>
+    <a href="{{ route('panel.monitoreo.cameras.index') }}" class="btn btn-secondary float-right">
+        VOLVER</a>
     <h1>Información detallada de cámara: <strong class="ml-2"> {{ $camera->name }} - @if ($camera->status == -1)
-        <span class="badge badge-warning">Mantenimiento</span>
-    @elseif ($camera->status == 1)
-        <span class="badge badge-success">Activa</span>
-    @else
-        <span class="badge badge-danger">Inactiva</span>
-    @endif</strong></h1>
+                <span class="badge badge-warning">Mantenimiento</span>
+            @elseif ($camera->status == 1)
+                <span class="badge badge-success">Activa</span>
+            @else
+                <span class="badge badge-danger">Inactiva</span>
+            @endif
+        </strong></h1>
 @stop
 
 @section('css')
@@ -75,8 +77,9 @@
                                     icon-theme="info" />
                             </div>
                             <div class="col col-12 col-lg-12">
-                                <x-adminlte-info-box title="Cantidad de intervenciones" text="{{ $camera->interventions->count() }}"
-                                    icon="fas fa-sm fa-eye" icon-theme="info" />
+                                <x-adminlte-info-box title="Cantidad de intervenciones"
+                                    text="{{ $camera->interventions->count() }}" icon="fas fa-sm fa-eye"
+                                    icon-theme="info" />
                             </div>
                             <div class="col col-12 col-lg-12">
                                 <x-adminlte-info-box title="Última intervención"
@@ -86,12 +89,15 @@
                         </div>
                     </div>
 
-                    <div class="col col-12 col-lg-6 text-center">
-                        <div class="card"><div class="card-body">
-                            <img class="img-fluid" src="http://192.168.100.{{ $camera->server }}:8601/Interface/Cameras/GetSnapshot?Camera={{ $camera->name }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"
-                            alt="Captura Cámara">
-                            </div></div>
-                       
+                    <div class="col col-12 col-lg-6 ">
+                        <div class="card">
+                            <div class="card-body  text-center">
+                                <img class="img-fluid"
+                                    src="http://192.168.100.{{ $camera->server }}:8601/Interface/Cameras/GetSnapshot?Camera={{ $camera->name }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"
+                                    alt="Captura Cámara">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

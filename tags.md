@@ -1,7 +1,7 @@
 # Versionado 📌
 ## Versión 2
-### 2.6.3
-> 1. Se añade botón "+" en el listado de dispositivos para ampliar información.
+### 2.6.0
+> 1. Se añade botón "i" en el listado de dispositivos para ampliar información.
 ### 2.5.3
 > 1. Se añade validación (campo date < today) del form intervenciones.
 > 2. Se modifica api.
