@@ -71,7 +71,7 @@
                 <div class="row mt-2">
                     <div class="col col-12 col-lg-6">
                         <div class="row">
-                            <div class="col col-12 col-lg-12">
+                             <div class="col col-12 col-lg-12">
                                 <x-adminlte-info-box title="Última modificación"
                                     text="{{ $camera->updated_at->diffForHumans() }}" icon="fas fa-sm fa-clock"
                                     icon-theme="info" />
@@ -82,9 +82,17 @@
                                     icon-theme="info" />
                             </div>
                             <div class="col col-12 col-lg-12">
-                                <x-adminlte-info-box title="Última intervención"
-                                    text="{{ $camera->interventions->last()->created_at->diffForHumans() }}"
-                                    icon="fas fa-sm fa-eye" icon-theme="info" />
+                                @if ($camera->interventions->count() > 0)
+                                    <x-adminlte-info-box title="Última intervención"
+                                        text="{{ $camera->interventions->last()->created_at->diffForHumans() }}"
+                                        icon="fas fa-sm fa-calendar" icon-theme="info" />
+                                @else
+                                    <x-adminlte-info-box title="Última intervención"
+                                        text="No hay intervenciones" icon="fas fa-sm fa-calendar"
+                                        icon-theme="info" />
+                                    
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -100,8 +108,6 @@
 
                     </div>
                 </div>
-
-
 
             </div>
 
