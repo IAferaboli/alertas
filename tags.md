@@ -4,6 +4,8 @@
 > 1. Fix Bug (show cameras).
 > 2. Se añade gráfico de porcentaje de funcionamiento para cada cámara.
 > 3. Se agregan últimas 3 fallas en la vista de cámara.
+> 4. Se modifica logo del mail.
+> 5. Se eliminan archivos txt.
 ### 2.6.0
 > 1. Se añade botón "i" en el listado de dispositivos para ampliar información.
 ### 2.5.3

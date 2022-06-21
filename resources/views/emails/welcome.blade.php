@@ -56,7 +56,7 @@
 	</tr> --}}
     <tr>
         <td colspan="3" width="auto" style="text-align: center">
-            <a href="www.villaconstitucion.gob.ar"><img width="10%" src="http://villaconstitucion.gob.ar/wp-content/themes/wp-mvc/img/mvc-logo.png" alt=""></a>
+            <a href="www.villaconstitucion.gob.ar"><img width="10%" src="http://villaconstitucion.gob.ar/wp-content/themes/wp-mvc-2/assets/images/logo.png" alt=""></a>
         </td>
     </tr>
 
