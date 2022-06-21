@@ -108,7 +108,32 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col col-12 col-md-12">
+                    <div class="col col-12 col-md-6 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Últimas 3 fallas</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha - Hora (Falla)</th>
+                                            <th scope="col">Solución</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($camera->flaws->sortByDesc('id')->take(3) as $flaw)
+                                            <tr>
+                                                <td>{{ $flaw->created_at->subMinutes(2)->format('d/m/y - h:m') }}</td>
+                                                <td>{{ ($flaw->updated_at)->diffForHumans($flaw->created_at->subMinutes(2))}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <canvas id="porcentajeChart" width="800" height="450"></canvas>
@@ -156,13 +181,13 @@
                 labels: ["Funcionamiento", "Sin funcionar"],
                 datasets: [{
                     backgroundColor: ["#3e95cd", "#8e5ea2"],
-                    data: [{{$porcentaje}}, {{100-$porcentaje}}]
+                    data: [{{ $porcentaje }}, {{ 100 - $porcentaje }}]
                 }]
             },
             options: {
                 title: {
                     display: true,
-                    text: 'Porcentaje de funcionamiento desde {{$camera->created_at->format('d/m/Y')}}'
+                    text: 'Porcentaje de funcionamiento desde {{ $camera->created_at->format('d/m/Y') }}'
                 }
             }
         });

@@ -44,6 +44,9 @@ class CameraController extends Controller
         //Solo dos decimales a porcentaje
         $porcentaje = number_format($porcentaje, 2);
 
+        //Restar 2 minutos a fecha created_at
+        $fecha_inicial = $camera->created_at->subMinutes(2);
+
         return view('panel.monitoreo.cameras.show', compact('camera', 'porcentaje'));
     }
 
