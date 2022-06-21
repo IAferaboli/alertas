@@ -124,10 +124,9 @@
                                     <tbody>
                                         @foreach ($camera->flaws->sortByDesc('id')->take(3) as $flaw)
                                             <tr>
-                                                <td>{{ $flaw->created_at->subMinutes(2)->format('d/m/y - H:m') }}</td>
+                                                <td>{{(\Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw))->format('d/m/y - H:m')}}</td>
                                                 @if ($flaw->datesolution != null)
-                                                    <td>{{ $flaw->updated_at->diffForHumans($flaw->created_at->subMinutes(2)) }}
-                                                    </td>
+                                                    <td>{{ (\Carbon\Carbon::parse($flaw->datesolution . ' ' . $flaw->timesolution))->diffForHumans((\Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw))) }}</td>
                                                 @else
                                                     <td>Sin solución</td>
                                                 @endif
