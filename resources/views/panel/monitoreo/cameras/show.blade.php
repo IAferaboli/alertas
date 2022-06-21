@@ -71,7 +71,7 @@
                 <div class="row mt-2">
                     <div class="col col-12 col-lg-6">
                         <div class="row">
-                             <div class="col col-12 col-lg-12">
+                            <div class="col col-12 col-lg-12">
                                 <x-adminlte-info-box title="Última modificación"
                                     text="{{ $camera->updated_at->diffForHumans() }}" icon="fas fa-sm fa-clock"
                                     icon-theme="info" />
@@ -87,10 +87,8 @@
                                         text="{{ $camera->interventions->last()->created_at->diffForHumans() }}"
                                         icon="fas fa-sm fa-calendar" icon-theme="info" />
                                 @else
-                                    <x-adminlte-info-box title="Última intervención"
-                                        text="No hay intervenciones" icon="fas fa-sm fa-calendar"
-                                        icon-theme="info" />
-                                    
+                                    <x-adminlte-info-box title="Última intervención" text="No hay intervenciones"
+                                        icon="fas fa-sm fa-calendar" icon-theme="info" />
                                 @endif
 
                             </div>
@@ -109,15 +107,28 @@
                     </div>
                 </div>
 
+                <div class="row mt-2">
+                    <div class="col col-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="porcentajeChart" width="800" height="450"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </div>
 
+
+
 @stop
 
 @section('js')
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
 
 
     <script>
@@ -133,5 +144,27 @@
             attribution: 'Dirección de Tecnología y Sistemas - <a href="http://villaconstitucion.gob.ar" target="_blank">Municipio de Villa Constitución</a>',
             maxZoom: 18
         }).addTo(map);
+
+
+
+
+        //Gráfico de estado
+
+        new Chart(document.getElementById("porcentajeChart"), {
+            type: 'pie',
+            data: {
+                labels: ["Funcionamiento", "Sin funcionar"],
+                datasets: [{
+                    backgroundColor: ["#3e95cd", "#8e5ea2"],
+                    data: [{{$porcentaje}}, {{100-$porcentaje}}]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Porcentaje de funcionamiento desde {{$camera->created_at->format('d/m/Y')}}'
+                }
+            }
+        });
     </script>
 @stop
