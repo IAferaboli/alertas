@@ -124,7 +124,7 @@
                                     <tbody>
                                         @foreach ($camera->flaws->sortByDesc('id')->take(3) as $flaw)
                                             <tr>
-                                                <td>{{ $flaw->created_at->subMinutes(2)->format('d/m/y - h:m') }}</td>
+                                                <td>{{ $flaw->created_at->subMinutes(2)->format('d/m/y - H:m') }}</td>
                                                 @if ($flaw->datesolution != null)
                                                     <td>{{ $flaw->updated_at->diffForHumans($flaw->created_at->subMinutes(2)) }}
                                                     </td>
