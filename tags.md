@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.6.2
+> 1. Se añade porcentaje en etiqueta al gráfico de funcionamiento de cámaras.
 ### 2.6.1
 > 1. Fix Bug (show cameras).
 > 2. Se añade gráfico de porcentaje de funcionamiento para cada cámara.

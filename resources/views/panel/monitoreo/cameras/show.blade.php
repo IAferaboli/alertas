@@ -124,9 +124,11 @@
                                     <tbody>
                                         @foreach ($camera->flaws->sortByDesc('id')->take(3) as $flaw)
                                             <tr>
-                                                <td>{{(\Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw))->format('d/m/y - H:m')}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw)->format('d/m/y - H:m') }}
+                                                </td>
                                                 @if ($flaw->datesolution != null)
-                                                    <td>{{ (\Carbon\Carbon::parse($flaw->datesolution . ' ' . $flaw->timesolution))->diffForHumans((\Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw))) }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($flaw->datesolution . ' ' . $flaw->timesolution)->diffForHumans(\Carbon\Carbon::parse($flaw->dateflaw . ' ' . $flaw->timeflaw)) }}
+                                                    </td>
                                                 @else
                                                     <td>Sin solución</td>
                                                 @endif
@@ -158,6 +160,8 @@
 @section('js')
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 
     <script>
@@ -173,12 +177,8 @@
             attribution: 'Dirección de Tecnología y Sistemas - <a href="http://villaconstitucion.gob.ar" target="_blank">Municipio de Villa Constitución</a>',
             maxZoom: 18
         }).addTo(map);
-
-
-
-
+        
         //Gráfico de estado
-
         new Chart(document.getElementById("porcentajeChart"), {
             type: 'pie',
             data: {
@@ -192,8 +192,26 @@
                 title: {
                     display: true,
                     text: 'Porcentaje de funcionamiento desde {{ $camera->created_at->format('d/m/Y') }}'
+                },
+                tooltips: {
+                    enabled: false
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let sum = 0;
+                            let dataArr = ctx.chart.data.datasets[0].data;
+                            dataArr.map(data => {
+                                sum += data;
+                            });
+                            let percentage = (value * 100 / sum).toFixed(2) + "%";
+                            return percentage;
+                        },
+                        color: '#fff',
+                    }
                 }
             }
         });
+
     </script>
 @stop
