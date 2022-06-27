@@ -54,7 +54,7 @@
                                 <td>{{ $intervention->detail }} </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.interventions.edit')
-                                        <a class="btn btn-warning btn-sm @if (($intervention->user_id == auth()->user()->id && $intervention->created_at == $intervention->updated_at) ||
+                                        <a class="btn btn-warning btn-xs @if (($intervention->user_id == auth()->user()->id && $intervention->created_at == $intervention->updated_at) ||
     auth()->user()->roles->pluck('name')->contains('Supervisor de Monitoreo')) enabled @else disabled @endif"
                                             href="{{ route('panel.monitoreo.interventions.edit', $intervention) }}"><i
                                                 class="fas fa-pen"></i></a>
@@ -68,7 +68,7 @@
                                             method="POST" class="form-delete">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger btn-sm" type="submit"><i
+                                            <button class="btn btn-danger btn-xs" type="submit"><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
                                     @endcan
@@ -76,8 +76,8 @@
                                 <td width="10px">
                                     
                                     @can('panel.monitoreo.interventions.viewrecord')
-                                        @if ($intervention->camera->published == 1)
-                                            <a class="btn btn-secondary btn-sm"
+                                        @if ($intervention->camera->published == 1 && ((\Carbon\Carbon::parse($intervention->date))->diffInDays(now())) < 29)
+                                            <a class="btn btn-secondary btn-xs"
                                                 href="http://192.168.100.{{ $intervention->camera->server }}:8601/Interface/Cameras/Playback/GetJPEGStream?Camera={{ $intervention->camera->name }}&StartDate={{ date('Y.m.d', strtotime($intervention->date)) }}&StartTime={{ date('H.i.s', strtotime($intervention->hour)) }}&EndDate={{ date('Y.m.d', strtotime($intervention->date)) }}&EndTime={{ date('H.i.s', strtotime($intervention->hour) + 60) }}&ResponseFormat=Text&AuthUser={{env('DIGIFORT_USER')}}&AuthPass={{env('DIGIFORT_PASSWORD')}}"
                                                 target="_blank"><i class="fas fa-eye"></i></a>
                                         @endif

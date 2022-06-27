@@ -15,7 +15,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Fec. Ing.</th>
                             <th>Nº Exp</th>
                             <th>Inicia</th>
@@ -30,7 +29,6 @@
                     <tbody>
                         @foreach ($files as $file)
                             <tr>
-                                <td>{{ $file->id }}</td>
                                 <td>{{ \Carbon\Carbon::parse($file->datein)->format('d/m/Y') }}</td>
                                 <td>{{ $file->filenumber }}</td>
                                 <td>{{ $file->init }}</td>
@@ -41,7 +39,7 @@
                                 <td>{{ \Carbon\Carbon::parse($file->dateout)->format('d/m/Y') }}</td>
 
                                 <td width="10px">
-                                    <a class="btn btn-warning btn-sm"
+                                    <a class="btn btn-warning btn-xs"
                                         href="{{ route('panel.monitoreo.files.edit', $file) }}"><i
                                             class="fas fa-pen"></i></a>
                                 </td>
@@ -49,7 +47,7 @@
                                     <form action="{{ route('panel.monitoreo.files.destroy', $file) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger btn-sm" type="submit"><i
+                                        <button class="btn btn-danger btn-xs" type="submit"><i
                                                 class="fas fa-trash"></i></button>
                                     </form>
                                 </td>

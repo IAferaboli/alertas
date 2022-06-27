@@ -19,7 +19,8 @@ class FileController extends Controller
 
     public function index()
     {
-        return view('panel.monitoreo.files.index');
+        $files = File::all()->count();
+        return view('panel.monitoreo.files.index', compact('files'));
     }
 
     public function create()

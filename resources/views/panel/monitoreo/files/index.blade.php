@@ -7,7 +7,7 @@
 
         <a href="{{ route('panel.monitoreo.files.create') }}" class="btn btn-secondary float-right">Agregar expediente</a>
     @endcan
-    <h1>Lista de expedientes</h1>
+    <h1>Lista de expedientes ({{$files}})</h1>
 @stop
 
 @section('content')

@@ -177,3 +177,24 @@ function sendMessageToMonitoreo($message){
     return $responses;
 
 }
+
+
+function comprueboEstadoCamaras($time){
+
+    for ($i=1; $i <= 3; $i++) { 
+        try {
+            $responses = Http::get("http://192.168.100.$i:8601/Interface/Cameras/GetStatus?&ResponseFormat=json&AuthUser=".env('DIGIFORT_USER')."&AuthPass=".env('DIGIFORT_PASSWORD'))->json();
+
+            if ($responses) {
+                
+                foreach ($responses['Response']['Data']['Cameras'] as $camera) {
+                    # code...
+                }
+                
+            }
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+}

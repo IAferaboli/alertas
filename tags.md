@@ -1,5 +1,9 @@
 # Versionado 📌
 ## Versión 2
+### 2.6.3
+> 1. Se arregla error en fecha de falla de cámaras (show camera).
+> 2. Se achican botones en diferentes vistas.
+> 3. Se añade comprobación de tiempos para no mostrar boton de visualización con mayor días de grabación.
 ### 2.6.2
 > 1. Se añade porcentaje en etiqueta al gráfico de funcionamiento de cámaras.
 ### 2.6.1

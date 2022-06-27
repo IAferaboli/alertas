@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [HomeController::class,'index'])->name('dashboard');
 
+//Envio email con intervenciones - CRON todos los días 23:59hs.
 Route::get('/email-monitoreo-intervencion', function()
 {
 	$date = new Carbon('now');
@@ -32,6 +33,7 @@ Route::get('/email-monitoreo-intervencion', function()
 
 Route::get('reporte', [ReportController::class, 'pdfInterventions'])->name('reporte');
 
+//Envio alerta (telegram y monitoreo) por temperatura alta de datacenter
 Route::get('telegram-dc-temperatura', function () {
 	
 	$tempServer = getTemperatureDC();
@@ -45,5 +47,10 @@ Route::get('telegram-dc-temperatura', function () {
 		$notification->notify(new TelegramPrueba);
 		sendMessageToMonitoreo($message);
 	}
+	
+});
+
+//Recorro cámaras por si alguna no reportó
+Route::get('recorro-camaras-digifort', function () {
 	
 });

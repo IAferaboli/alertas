@@ -66,7 +66,7 @@
 
                                 <td width="10px">
                                     @can('panel.monitoreo.flaws.edit')
-                                        <a class="btn btn-warning btn-sm"
+                                        <a class="btn btn-warning btn-xs"
                                             href="{{ route('panel.monitoreo.flaws.edit', $flaw) }}"><i
                                                 class="fas fa-pen"></i></a>
                                     @endcan
@@ -76,7 +76,7 @@
                                         <form action="{{ route('panel.monitoreo.flaws.destroy', $flaw) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger btn-sm" type="submit"><i
+                                            <button class="btn btn-danger btn-xs" type="submit"><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
                                     @endcan
