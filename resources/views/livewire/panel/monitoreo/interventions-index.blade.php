@@ -38,7 +38,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Detalle</th>
@@ -48,7 +47,6 @@
                     <tbody>
                         @foreach ($interventions as $intervention)
                             <tr class="disabled">
-                                <td>{{ $intervention->id }}</td>
                                 <td>{{ \Carbon\Carbon::parse($intervention->date)->format('d/m/Y')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($intervention->hour)->format('H:i') }}</td>
                                 <td>{{ $intervention->detail }} </td>

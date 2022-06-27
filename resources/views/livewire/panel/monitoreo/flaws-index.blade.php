@@ -37,7 +37,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Día Falla</th>
                             <th>Hora Falla</th>
                             <th>Desc.</th>
@@ -50,7 +49,6 @@
                     <tbody>
                         @foreach ($flaws as $flaw)
                             <tr>
-                                <td>{{ $flaw->id }}</td>
                                 <td>{{ \Carbon\Carbon::parse($flaw->dateflaw)->format('d/m/Y')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($flaw->timeflaw)->format('H:i') }}</td>
                                 <td>{{ $flaw->description }}</td>
