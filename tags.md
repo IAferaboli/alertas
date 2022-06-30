@@ -1,5 +1,9 @@
 # Versionado 📌
 ## Versión 2
+### 2.6.4
+> 1. Se modifica vista partials/form de expedientes.
+> 2. Se modifica vista index de expedientes. 
+> 3. Se añaden campos (starttime - endtime) a entidad files.
 ### 2.6.3
 > 1. Se arregla error en fecha de falla de cámaras (show camera).
 > 2. Se achican botones y se elimina id en diferentes vistas.

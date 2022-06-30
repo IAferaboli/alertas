@@ -19,8 +19,8 @@
                             <th>Nº Exp</th>
                             <th>Inicia</th>
                             <th>Nº Nota</th>
-                            <th>Fec. Reg.</th>
-                            <th>Hora</th>
+                            <th>Desde</th>
+                            <th>Hasta</th>
                             <th>Adj</th>
                             <th>Fec. Sal.</th>
                             <th colspan="2" class="text-center">Acciones</th>
@@ -33,8 +33,8 @@
                                 <td>{{ $file->filenumber }}</td>
                                 <td>{{ $file->init }}</td>
                                 <td>{{ $file->notenumber }}</td>
-                                <td>{{ \Carbon\Carbon::parse($file->datefilm)->format('d/m/Y') }}</td>
-                                <td>{{ $file->time }}</td>
+                                <td>{{ \Carbon\Carbon::parse($file->starttime)->format('d/m/y H:i')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($file->endtime)->format('d/m/y H:i')}}</td>
                                 <td>{{ $file->attach }}</td>
                                 <td>{{ \Carbon\Carbon::parse($file->dateout)->format('d/m/Y') }}</td>
 

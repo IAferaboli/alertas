@@ -43,19 +43,19 @@
 <div class="form-row">
 
     <div class="form-group col-md-3">
-        {!! Form::label('datefilm', 'Fecha de registro fílmico') !!}
-        {!! Form::date('datefilm', null, ['class' => 'form-control']) !!}
+        {!! Form::label('starttime', 'Desde') !!}
+        {!! Form::datetimeLocal('starttime', null, ['class' => 'form-control']) !!}
 
-        @error('datefilm')
+        @error('starttime')
             <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
 
     <div class="form-group col-md-3">
-        {!! Form::label('time', 'Rango horario') !!}
-        {!! Form::text('time', null, ['class' => 'form-control', 'placeholder' => 'hh:mm - hh:mm']) !!}
+        {!! Form::label('endtime', 'Hasta') !!}
+        {!! Form::datetimeLocal('endtime', null, ['class' => 'form-control']) !!}
 
-        @error('time')
+        @error('endtime')
             <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
@@ -77,4 +77,6 @@
             <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
+
+
 </div>

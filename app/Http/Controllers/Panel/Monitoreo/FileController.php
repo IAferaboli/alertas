@@ -35,8 +35,8 @@ class FileController extends Controller
             'filenumber' => 'required',
             'init' => 'required',
             'notenumber' => 'required|unique:files',
-            'datefilm' => 'required',
-            'time' => 'required',
+            'starttime' => 'required',
+            'endtime' => 'required',
             'attach' => 'required',
             'dateout' => 'required',
         ]);
