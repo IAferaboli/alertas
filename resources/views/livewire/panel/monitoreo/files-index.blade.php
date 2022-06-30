@@ -33,8 +33,18 @@
                                 <td>{{ $file->filenumber }}</td>
                                 <td>{{ $file->init }}</td>
                                 <td>{{ $file->notenumber }}</td>
-                                <td>{{ \Carbon\Carbon::parse($file->starttime)->format('d/m/y H:i')}}</td>
-                                <td>{{ \Carbon\Carbon::parse($file->endtime)->format('d/m/y H:i')}}</td>
+                            
+                                <td>@if ($file->starttime)
+                                    {{ \Carbon\Carbon::parse($file->starttime)->format('d/m/y H:i')}}
+                                    @else
+                                    Sin datos
+                                    @endif
+                                </td>
+                                <td>@if ($file->endtime)
+                                    {{ \Carbon\Carbon::parse($file->endtime)->format('d/m/y H:i')}}
+                                @else
+                                    Sin datos
+                                @endif</td>
                                 <td>{{ $file->attach }}</td>
                                 <td>{{ \Carbon\Carbon::parse($file->dateout)->format('d/m/Y') }}</td>
 
