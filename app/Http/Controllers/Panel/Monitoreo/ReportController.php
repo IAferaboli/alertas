@@ -143,8 +143,8 @@ class ReportController extends Controller
         $pdf->Cell(2, 5, "", 0, 0, 'C', 0);
         $pdf->Cell(30, 5, utf8_decode("Ingreso"), 0, 0, 'C', true);
         $pdf->Cell(30, 5, "Solicitante", 0, 0, 'C', true);
-        $pdf->Cell(30, 5, utf8_decode("Fecha grab."), 0, 0, 'C', true);
-        $pdf->Cell(30, 5, utf8_decode("Rango horario"), 0, 0, 'C', true);
+        $pdf->Cell(30, 5, utf8_decode("Desde"), 0, 0, 'C', true);
+        $pdf->Cell(30, 5, utf8_decode("Hasta"), 0, 0, 'C', true);
         $pdf->Cell(40, 5, utf8_decode("Adjunto"), 0, 0, 'C', true);
         $pdf->Cell(30, 5, utf8_decode("Respondido"), 0, 0, 'C', true);
         //$pdf->Cell(140,5,utf8_decode("Intervención"),0,0,'C', true);
@@ -156,8 +156,8 @@ class ReportController extends Controller
             $pdf->Cell(2, 4, "", 0, 0, 'C', 0);
             $pdf->Cell(30, 4, $file->datein, 'T', 0, 'C', 0);
             $pdf->Cell(30, 4, $file->init, 'T', 0, 'C', 0);
-            $pdf->Cell(30, 4, $file->datefilm, 'T', 0, 'C', 0);
-            $pdf->Cell(30, 4, $file->time, 'T', 0, 'C', 0);
+            $pdf->Cell(30, 4, Carbon::parse($file->starttime)->format('d/m/y H:i'), 'T', 0, 'C', 0);
+            $pdf->Cell(30, 4, Carbon::parse($file->endtime)->format('d/m/y H:i'), 'T', 0, 'C', 0);
             $pdf->Cell(40, 4, utf8_decode($file->attach), 'T', 0, 'C', 0);
             $pdf->Cell(30, 4, $file->dateout, 'T', 0, 'C', 0);
             $pdf->Ln(4);
