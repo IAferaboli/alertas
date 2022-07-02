@@ -165,10 +165,16 @@ function getCameras()
 function getTemperatureDC(){
 
     $snmp = new Snmp();
-    $snmp->newClient(env('IP_TEMP_SERVER'), 2, 'mvc');
-    $tempServer = $snmp->getValue(env('OID_TEMP_SERVER'));
 
+    try {
+        $snmp->newClient(env('IP_TEMP_SERVER'), 2, 'mvc');
+        $tempServer = $snmp->getValue(env('OID_TEMP_SERVER'));
+    } catch (\Throwable $th) {
+        $tempServer = 0;
+    }
+    
     return $tempServer;
+
 }
 
 function sendMessageToMonitoreo($message){
