@@ -87,7 +87,7 @@
                                     </td>
                                 @endcan
 
-                                @can('panel.monitoreo.cameras.info')
+                                @can('panel.monitoreo.cameras.edit')
                                 <td width="10px">
                                     <a class="btn btn-warning btn-xs"
                                         href="{{ route('panel.monitoreo.cameras.edit', $camera) }}"><i
