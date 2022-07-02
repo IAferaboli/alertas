@@ -15,9 +15,14 @@ class CamerasIndex extends Component
 
     use WithPagination;
 
-    public $name, $status, $type, $cant, $cameraEdit;
+    public $name, $description,  $status, $type, $cant, $cameraEdit;
     
     public function updatingStatus()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingDescription()
     {
         $this->resetPage();
     }
@@ -47,6 +52,7 @@ class CamerasIndex extends Component
                 ['type', '<=', '2']
             ])
             ->where('name', 'like', '%' . $this->name . '%')
+            ->where('description', 'like', '%'. $this->description . '%')
             ->where('type', 'like', '%' . $this->type . '%')
             ->where('status', 'like', '%' . $this->status . '%')
             ->orderBy('status', 'asc')

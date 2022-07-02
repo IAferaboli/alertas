@@ -3,13 +3,19 @@
         <div class="card-header">
             <div class="form-row">
 
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-3">
                     <label for="name">Filtrar por Nombre</label>
                     <input wire:model="name" placeholder="Buscar por nombre" class="form-control form-control-sm"
                         type="text" id="name">
                 </div>
 
                 <div class="col-12 col-md-3">
+                    <label for="description">Filtrar por Descripción</label>
+                    <input wire:model="description" placeholder="Buscar por descripción" class="form-control form-control-sm"
+                        type="text" id="description">
+                </div>
+
+                <div class="col-12 col-md-2">
                     <label for="type">Filtrar por Tipo</label>
                     <select wire:model="type" class="form-control form-control-sm" id="type">
                         <option value="">Seleccione opción</option>
@@ -19,7 +25,7 @@
                     </select>
                 </div>
 
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-2">
                     <label for="status">Filtrar por Estado</label>
                     <select wire:model="status" class="form-control form-control-sm" id="status">
                         <option value="">Seleccione estado</option>
