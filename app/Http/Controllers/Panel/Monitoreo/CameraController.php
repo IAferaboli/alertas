@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Livewire\Panel\Monitoreo\CamerasIndex;
 use App\Models\Camera;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CameraController extends Controller
 {
@@ -45,6 +46,31 @@ class CameraController extends Controller
         $porcentaje = number_format($porcentaje, 2);
 
         return view('panel.monitoreo.cameras.show', compact('camera', 'porcentaje'));
+    }
+
+    public function create()
+    {
+        # code...
+    }
+
+    public function store()
+    {
+        # code...
+    }
+
+    public function edit(Camera $camera)
+    {
+        # code...
+    }
+
+    public function update(Request $request, Camera $camera)
+    {
+        # code...
+    }
+
+    public function destroy(Camera $camera)
+    {
+        # code...
     }
 
 }

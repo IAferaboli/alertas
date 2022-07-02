@@ -11,8 +11,8 @@
 
                 <div class="col-12 col-md-3">
                     <label for="description">Filtrar por Descripción</label>
-                    <input wire:model="description" placeholder="Buscar por descripción" class="form-control form-control-sm"
-                        type="text" id="description">
+                    <input wire:model="description" placeholder="Buscar por descripción"
+                        class="form-control form-control-sm" type="text" id="description">
                 </div>
 
                 <div class="col-12 col-md-2">
@@ -60,7 +60,7 @@
                             <th>Desc.</th>
                             <th>Serv.</th>
                             <th>Últ. Act.</th>
-                            <th colspan="4" class="text-center">Acciones</th>
+                            <th colspan="5" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,13 +81,22 @@
                                 <td>Serv. {{ $camera->server }}</td>
                                 <td><i class="fas fa-clock"></i> {{ $camera->updated_at->diffForHumans() }}</td>
                                 @can('panel.monitoreo.cameras.info')
-                                    <td width="5px">
-                                        <a href="{{route('panel.monitoreo.cameras.show', $camera)}}" class="btn btn-info btn-xs"><i class="mx-1 fas fa-info"></i></a>
+                                    <td width="10px">
+                                        <a href="{{ route('panel.monitoreo.cameras.show', $camera) }}"
+                                            class="btn btn-info btn-xs"><i class="mx-1 fas fa-info"></i></a>
                                     </td>
                                 @endcan
 
+                                @can('panel.monitoreo.cameras.info')
+                                <td width="10px">
+                                    <a class="btn btn-warning btn-xs"
+                                        href="{{ route('panel.monitoreo.cameras.edit', $camera) }}"><i
+                                            class="fas fa-pen"></i></a>
+                                </td>
+                                @endcan
+
                                 @can('panel.monitoreo.cameras.viewcamera')
-                                    <td width="5px">
+                                    <td width="10px">
                                         @if ($camera->type == 0 || $camera->type == 1)
                                             <a href="http://192.168.100.{{ $camera->server }}:8601/Interface/Cameras/GetJPEGStream?Camera={{ $camera->name }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"
                                                 target="_blank"
@@ -97,7 +106,7 @@
                                     </td>
                                 @endcan
                                 @can('panel.monitoreo.cameras.navigator')
-                                    <td width="5px">
+                                    <td width="10px">
 
                                         <a href="http://{{ $camera->addressip }}" target="_blank"
                                             class="btn btn-secondary btn-xs">
@@ -106,9 +115,9 @@
                                     </td>
                                 @endcan
                                 @can('panel.monitoreo.cameras.maintenance')
-                                    <td width="5px">
+                                    <td width="10px">
                                         @if ($camera->status != 0)
-                                            <button wire:click="update({{$camera}})"
+                                            <button wire:click="update({{ $camera }})"
                                                 class="btn @if ($camera->status == -1) btn-warning @else btn-success @endif  btn-xs"
                                                 type="submit"><i class="fas fa-wrench"></i></button>
                                         @endif

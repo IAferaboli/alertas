@@ -14,6 +14,8 @@ class HomeController extends Controller
     public function index()
     {
 
+        getCameras();
+
         //Tiempo actividad servidores
         list($serv1, $serv2, $serv3) = timeServer();
 
