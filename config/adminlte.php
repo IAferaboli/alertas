@@ -333,7 +333,7 @@ return [
         ],
         [
             'text'    => 'SAyMA',
-            'icon'    => 'fas fa-fw fa-faucet',
+            'icon'    => 'fas fa-fw fa-print',
             'url'     =>  '#',
             'can'   =>  'panel.reports.sayma',
         ],
