@@ -42,7 +42,7 @@ class FlawController extends Controller
         unset($request['name']);
         $request['dateflaw'] = $fecha->format('Y-m-d');
         $request['timeflaw'] = $fecha->format('H:i:s');
-        $request['description'] = "Fuera de servicio";
+        $request['description'] = "Sin clasificar";
         $request['camera_id'] = $camera->id;
         $request['datesolution'] = null;
         $request['timesolution'] = null;
