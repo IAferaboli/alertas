@@ -98,8 +98,12 @@
                     <div class="col col-12 col-lg-6 ">
                         <div class="card">
                             <div class="card-body  text-center">
-                                <img class="img-fluid"
-                                    src="http://192.168.100.{{ $camera->server }}:8601/Interface/Cameras/GetSnapshot?Camera={{ $camera->name }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"
+                                <img class="img-fluid w-50"
+                                    @if ($camera->status != 0)
+                                    src="http://192.168.100.{{ $camera->server }}:8601/Interface/Cameras/GetSnapshot?Camera={{ $camera->name }}&AuthUser={{ env('DIGIFORT_USER') }}&AuthPass={{ env('DIGIFORT_PASSWORD') }}"    
+                                    @else
+                                    src="{{asset('img/noimage.jpg')}}"
+                                    @endif
                                     alt="Captura Cámara">
                             </div>
                         </div>
