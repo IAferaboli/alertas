@@ -33,9 +33,20 @@
     </div>
     
     <div class="form-group col-md-6">
-        {!! Form::label('description', 'Descripción') !!}
+        {!! Form::label('description', 'Motivo') !!}
 
-        {!! Form::text('description',null,  ['class'=>'form-control','placeholder'=>'Descripción']) !!}
+        {!! Form::select('description', [
+            'Corte de energía eléctrica'=>'Corte de energía eléctrica', 
+            'Corte de FO'=>'Corte de FO',
+            'Equipo quemado'=>'Equipo quemado',
+            'Mantenimiento programado'=>'Mantenimiento programado',
+            'Otros' => 'Otros',
+            'Problema de tercero' => 'Problema de tercero', 
+            'Sin clasificar'=>'Sin clasificar', 
+            'Sin identificar'=>'Sin identificar'
+                    ], null, ['class' => 'form-control', 'placeholder' => 'Seleccione opción...']) !!}
+
+
 
         @error('description')
             <span class="text-danger">{{$message}}</span>
