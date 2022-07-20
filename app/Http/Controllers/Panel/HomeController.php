@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Camera;
+use App\Models\Flaw;
 use App\Models\Intervention;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
@@ -97,10 +98,18 @@ class HomeController extends Controller
         }
     
 
-
         //SNMP Temperatura Servers
         $tempServer = getTemperatureDC();
 
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm'));
+        $flaws = Flaw::select(DB::raw('DayName(dateflaw) AS day'), DB::raw('count(*) AS total'))
+                        ->groupBy('day')
+                        ->get();
+
+        $fallasPorDia = [];
+        foreach ($flaws as $count) {
+            $fallasPorDia[] = $count->total;
+        }
+        
+        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia'));
     }
 }

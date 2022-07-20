@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.6.5
+> 1. Se añade gráfico de fallas por día en dashboard.
+> 2. Se modifican títulos.
 ### 2.6.4
 > 1. Se modifica vista partials/form de expedientes.
 > 2. Se modifica vista index de expedientes. 

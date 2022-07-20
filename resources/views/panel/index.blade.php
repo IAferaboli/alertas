@@ -157,51 +157,71 @@
 
     </div>
 
-    <div class="col-lg-12 col-12">
-        @isset($weather)
-            <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                    <h3 class="widget-user-username">Villa Constitución</h3>
-                    <h5 class="widget-user-desc">{{ $weather['clima'] }}</h5>
+    <div class="row">
+        <div class="col-lg-6 col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i>
+                        Fallas acumuladas por día
+                    </h3>
                 </div>
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2"
-                        src="https://openweathermap.org/img/wn/{{ $weather['icono'] }}@2x.png" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-sm-4 border-right">
-                            <div class="description-block">
-                                <h5 class="description-header">{{ $weather['main']['temp'] - 273.1 }}ºC</h5>
-                                <span class="description-text">Temperatura</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-4 border-right">
-                            <div class="description-block">
-                                <h5 class="description-header">{{ $weather['main']['humidity'] }}%</h5>
-                                <span class="description-text">Humedad</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-4">
-                            <div class="description-block">
-                                <h5 class="description-header">{{ $weather['main']['temp_min'] - 273.1 }}ºC -
-                                    {{ $weather['main']['temp_max'] - 273.1 }}ºC</h5>
-                                <span class="description-text">Mín. - Máx.</span>
-                            </div>
-                            <!-- /.description-block -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-            </div>
-        @endisset
 
+                <div class="card-body">
+                    <canvas id="fallasPorDia" style="width:100%;max-width:700px"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6 col-12">
+            @isset($weather)
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header bg-info">
+                        <h3 class="widget-user-username">Villa Constitución</h3>
+                        <h5 class="widget-user-desc">{{ $weather['clima'] }}</h5>
+                    </div>
+                    <div class="widget-user-image">
+                        <img class="img-circle elevation-2"
+                            src="https://openweathermap.org/img/wn/{{ $weather['icono'] }}@2x.png" alt="User Avatar">
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['temp'] - 273.1 }}ºC</h5>
+                                    <span class="description-text">Temperatura</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['humidity'] }}%</h5>
+                                    <span class="description-text">Humedad</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4">
+                                <div class="description-block">
+                                    <h5 class="description-header">{{ $weather['main']['temp_min'] - 273.1 }}ºC -
+                                        {{ $weather['main']['temp_max'] - 273.1 }}ºC</h5>
+                                    <span class="description-text">Mín. - Máx.</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            @endisset
+
+        </div>
     </div>
 
 @stop
@@ -242,8 +262,8 @@
                         data: _ydataLast,
                         borderColor: "green",
                         fill: false
-                    },{
-                        label: "Media anual",
+                    }, {
+                        label: "Media anual acumulada",
                         data: _ydataProm,
                         borderColor: "blue",
                         fill: false
@@ -252,6 +272,51 @@
                 options: {
                     legend: {
                         display: true
+                    }
+                }
+            });
+        }
+
+        //Barra Fallas por día
+
+        var _ydataFalla = JSON.parse('{!! json_encode($fallasPorDia) !!}');
+        let day = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        if (document.getElementById("fallasPorDia")) {
+            var myChart = new Chart("fallasPorDia", {
+                type: "bar",
+                data: {
+                    labels: day,
+                    datasets: [{
+                        data: _ydataFalla,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(153, 102, 255)',
+                            'rgb(201, 203, 207)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
             });
