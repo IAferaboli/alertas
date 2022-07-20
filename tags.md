@@ -4,6 +4,7 @@
 > 1. Se añade gráfico de fallas por día en dashboard.
 > 2. Se modifican títulos.
 > 3. Se añade select a la carga de fallas con motivo del desperfecto.
+> 4. Se añade SAyMA al menu de oficinas y reportes.
 ### 2.6.4
 > 1. Se modifica vista partials/form de expedientes.
 > 2. Se modifica vista index de expedientes. 

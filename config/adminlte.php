@@ -308,15 +308,20 @@ return [
                             'active' => ['panel.monitoreo.maps.index2'],
                             'can'   =>  'panel.monitoreo.maps.TV',
                         ],
-                        // [
-                        //     'text'    => 'Mapa de calor',
-                        //     'url'     => '#',
-                        // ],
+                       
                         
                     ],
                 ],
             ],
         ],
+
+        [
+            'text'    => 'SAyMA',
+            'icon'    => 'fas fa-fw fa-faucet',
+            'url'     =>  '#',
+            'can'   =>  'panel.sayma.menu',
+        ],
+
         ['header' => 'REPORTES',
             'can'   =>  'panel.reports.menu',],
         [
@@ -325,6 +330,12 @@ return [
             'route'  => 'panel.reports.monitoreo',
             'active' => ['panel.reports.monitoreo'],
             'can'  => 'panel.reports.monitoreo',
+        ],
+        [
+            'text'    => 'SAyMA',
+            'icon'    => 'fas fa-fw fa-faucet',
+            'url'     =>  '#',
+            'can'   =>  'panel.reports.sayma',
         ],
         ['header' => 'ADMINISTRACIÓN'],
         [
