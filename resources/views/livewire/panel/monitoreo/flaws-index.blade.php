@@ -32,7 +32,7 @@
                     {{-- Filtrar por cámara select --}}
                     <label for="descriptionFiltro">Filtrar por cámara</label>
                     <select wire:model="descriptionFiltro" class="form-control form-control-sm" id="descriptionFiltro">
-                        <option value="" hidden selected>Seleccione opción...</option>
+                        <option value="" selected>Todas</option>
                         <option value="Corte de energía eléctrica">Corte de energía eléctrica</option>
                         <option value="Corte de FO">Corte de FO</option>
                         <option value="Equipo quemado">Equipo quemado</option>
