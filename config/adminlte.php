@@ -321,12 +321,7 @@ return [
             'url'     =>  '#',
             'can'   =>  'panel.sayma.menu',
         ],
-        [
-            'text'    => 'Cloacas',
-            'icon'    => 'fas fa-fw fa-poop',
-            'url'     =>  '#',
-            'can'   =>  'panel.sayma.menu',
-        ],
+     
 
         ['header' => 'REPORTES',
             'can'   =>  'panel.reports.menu',],
