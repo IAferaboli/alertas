@@ -13,16 +13,27 @@ class FlawsIndex extends Component
 
     public $fecha;
     public $camara;
+    public $description;
+    public $selectflaw = [];
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-    
     protected $paginationTheme = "bootstrap";
+
+    public function actualizaDescripcion()
+    {
+        foreach ($this->selectflaw as $selected) {
+            $flaw = Flaw::find($selected);
+
+            $flaw->description = $this->description;
+            $flaw->update();
+        }
+
+        return redirect()->route('panel.monitoreo.flaws.index')->with('info', 'Fallas actualizadas exitosamente.');
+
+    }
 
     public function render()
     {
+
 
         if ($this->camara != null) {
             $flaws = Flaw::where('dateflaw', 'LIKE' , '%' . $this->fecha . '%')

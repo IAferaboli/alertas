@@ -9,7 +9,6 @@
 
         <div class="card-header">
             <div class="form-row">
-
                 <div class="form-group col-md-6">
 
                     {{-- Generar un campo de fecha --}}
@@ -29,6 +28,28 @@
                     </select>
                 </div>
             </div>
+            @can('panel.monitoreo.flaws.updatemultiple')
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        {{-- Filtrar por cámara select --}}
+                        <select wire:model="description" class="form-control form-control-sm" id="camara">
+                            <option value="" hidden selected>Seleccione opción...</option>
+                            <option value="Corte de energía eléctrica">Corte de energía eléctrica</option>
+                            <option value="Corte de FO">Corte de FO</option>
+                            <option value="Equipo quemado">Equipo quemado</option>
+                            <option value="Mantenimiento programado">Mantenimiento programado</option>
+                            <option value="Otros">Otros</option>
+                            <option value="Problema de tercero">Problema de tercero</option>
+                            <option value="Sin clasificar">Sin clasificar</option>
+                            <option value="Sin identificar">Sin identificar</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button wire:click="actualizaDescripcion" class="btn btn-secondary btn-block btn-sm"><i
+                                class="fas fa-fw fa-sync-alt"></i></button>
+                    </div>
+                </div>
+            @endcan
 
         </div>
 
@@ -43,23 +64,35 @@
                             <th>Cám.</th>
                             <th>Día Sol.</th>
                             <th>Hora Sol.</th>
-                            <th colspan="2"></th>
+                            <th colspan="3"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($flaws as $flaw)
                             <tr>
-                                <td>{{ \Carbon\Carbon::parse($flaw->dateflaw)->format('d/m/Y')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($flaw->dateflaw)->format('d/m/Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($flaw->timeflaw)->format('H:i') }}</td>
                                 <td>{{ $flaw->description }}</td>
                                 <td>{{ $flaw->Camera->name }}
-                                <td>@if ($flaw->datesolution)
-                                    {{ \Carbon\Carbon::parse($flaw->datesolution)->format('d/m/Y')}}
-                                @endif</td>
-                                <td>@if ($flaw->timesolution)
-                                    {{ \Carbon\Carbon::parse($flaw->timesolution)->format('H:i') }}
-                                    
-                                @endif</td>
+                                <td>
+                                    @if ($flaw->datesolution)
+                                        {{ \Carbon\Carbon::parse($flaw->datesolution)->format('d/m/Y') }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($flaw->timesolution)
+                                        {{ \Carbon\Carbon::parse($flaw->timesolution)->format('H:i') }}
+                                    @endif
+                                </td>
+
+                                <td width="10px">
+                                    @can('panel.monitoreo.flaws.updatemultiple')
+                                        <input wire:model="selectflaw.{{ $flaw->id }}" class="form-control selectflaw"
+                                            type="checkbox" value="{{ $flaw->id }}">
+                                    @endcan
+
+                                </td>
+
 
 
                                 <td width="10px">
@@ -71,7 +104,8 @@
                                 </td>
                                 <td width="10px">
                                     @can('panel.monitoreo.flaws.destroy')
-                                        <form action="{{ route('panel.monitoreo.flaws.destroy', $flaw) }}" method="POST">
+                                        <form action="{{ route('panel.monitoreo.flaws.destroy', $flaw) }}"
+                                            method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-xs" type="submit"><i
@@ -80,6 +114,8 @@
                                     @endcan
 
                                 </td>
+
+
                             </tr>
                         @endforeach
                     </tbody>
