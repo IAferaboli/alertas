@@ -316,8 +316,14 @@ return [
         ],
 
         [
-            'text'    => 'SAyMA',
+            'text'    => 'Agua',
             'icon'    => 'fas fa-fw fa-faucet',
+            'url'     =>  '#',
+            'can'   =>  'panel.sayma.menu',
+        ],
+        [
+            'text'    => 'Cloacas',
+            'icon'    => 'fas fa-fw fa-poop',
             'url'     =>  '#',
             'can'   =>  'panel.sayma.menu',
         ],
@@ -332,7 +338,7 @@ return [
             'can'  => 'panel.reports.monitoreo',
         ],
         [
-            'text'    => 'SAyMA',
+            'text'    => 'Agua',
             'icon'    => 'fas fa-fw fa-print',
             'url'     =>  '#',
             'can'   =>  'panel.reports.sayma',
