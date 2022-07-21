@@ -14,6 +14,7 @@ class FlawsIndex extends Component
     public $fecha;
     public $camara;
     public $description;
+    public $descriptionFiltro;
     public $selectflaw = [];
 
     protected $paginationTheme = "bootstrap";
@@ -38,11 +39,13 @@ class FlawsIndex extends Component
         if ($this->camara != null) {
             $flaws = Flaw::where('dateflaw', 'LIKE' , '%' . $this->fecha . '%')
             ->where('camera_id', '=',  $this->camara)
+            ->where('description', 'LIKE' , '%' . $this->descriptionFiltro . '%')
             ->orderByDesc('dateflaw')
             ->orderByDesc('timeflaw')
             ->paginate();
         }else {
             $flaws = Flaw::where('dateflaw', 'LIKE' , '%' . $this->fecha . '%')
+            ->where('description', 'LIKE' , '%' . $this->descriptionFiltro . '%')
             ->orderByDesc('dateflaw')
             ->orderByDesc('timeflaw')
             ->paginate();

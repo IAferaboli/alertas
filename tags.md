@@ -7,6 +7,7 @@
 > 4. Se añade SAyMA al menu de oficinas y reportes.
 > 5. En el show de cámara muestra imagen si la cámara no está activa.
 > 6. Se añade actualización en lote para las descripción de falla de cámaras.
+> 7. Se añade filtro description en fallas de cámaras.
 ### 2.6.4
 > 1. Se modifica vista partials/form de expedientes.
 > 2. Se modifica vista index de expedientes. 

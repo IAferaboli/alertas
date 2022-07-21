@@ -9,7 +9,7 @@
 
         <div class="card-header">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
 
                     {{-- Generar un campo de fecha --}}
                     <label for="fecha">Filtrar por Fecha</label>
@@ -17,7 +17,7 @@
 
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     {{-- Filtrar por cámara select --}}
                     <label for="camara">Filtrar por cámara</label>
                     <select wire:model="camara" class="form-control form-control-sm" id="camara">
@@ -27,7 +27,25 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group col-md-4">
+                    {{-- Filtrar por cámara select --}}
+                    <label for="descriptionFiltro">Filtrar por cámara</label>
+                    <select wire:model="descriptionFiltro" class="form-control form-control-sm" id="descriptionFiltro">
+                        <option value="" hidden selected>Seleccione opción...</option>
+                        <option value="Corte de energía eléctrica">Corte de energía eléctrica</option>
+                        <option value="Corte de FO">Corte de FO</option>
+                        <option value="Equipo quemado">Equipo quemado</option>
+                        <option value="Mantenimiento programado">Mantenimiento programado</option>
+                        <option value="Otros">Otros</option>
+                        <option value="Problema de tercero">Problema de tercero</option>
+                        <option value="Sin clasificar">Sin clasificar</option>
+                        <option value="Sin identificar">Sin identificar</option>
+                    </select>
+                </div>
+
             </div>
+            
             @can('panel.monitoreo.flaws.updatemultiple')
                 <div class="form-row">
                     <div class="form-group col-md-10">
