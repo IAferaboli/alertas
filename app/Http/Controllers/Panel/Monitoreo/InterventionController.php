@@ -56,7 +56,7 @@ class InterventionController extends Controller
 
         $intervention->notify(new TelegramPrueba);
 
-        return redirect()->route('panel.monitoreo.interventions.index')->with('info', 'La intervención se agregó exitosamente.');
+        return redirect()->route('panel.monitoreo.interventions.index')->with('success', 'La intervención se agregó exitosamente.');
     }
 
     public function edit(Intervention $intervention)
@@ -79,7 +79,7 @@ class InterventionController extends Controller
 
         $intervention->update($request->all());
 
-        return redirect()->route('panel.monitoreo.interventions.index', $intervention)->with('info', 'La intervención se actualizó exitosamente.');
+        return redirect()->route('panel.monitoreo.interventions.index', $intervention)->with('success', 'La intervención se actualizó exitosamente.');
     }
 
     public function destroy(Intervention $intervention)
@@ -89,6 +89,6 @@ class InterventionController extends Controller
         $intervention->update([
             'status' => 0,
         ]);
-        return redirect()->route('panel.monitoreo.interventions.index')->with('info', 'La intervención se eliminó exitosamente.');
+        return redirect()->route('panel.monitoreo.interventions.index')->with('success', 'La intervención se anuló exitosamente.');
     }
 }

@@ -1,5 +1,9 @@
 # Versionado 📌
 ## Versión 2
+### 2.7.0
+> 1. Implementación de toastr.
+> 2. Se elimina Beautymail
+> 3. Envio de emails pasa a controlador.
 ### 2.6.5
 > 1. Se añade gráfico de fallas por día en dashboard.
 > 2. Se modifican títulos.

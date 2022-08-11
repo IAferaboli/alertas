@@ -2,6 +2,7 @@
 
 namespace App\Mail\Panel\Monitoreo;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -28,6 +29,8 @@ class InterventionsMailable extends Mailable
      */
     public function build()
     {
-        return $this->subject('Prueba')->view('emails.monitoreo.interventions');
+        $date = new Carbon('now');
+	    $date = $date->format('d/m/Y');
+        return $this->subject("Parte diario del día $date - Monitoreo")->view('emails.monitoreo.interventions', compact('date'));
     }
 }

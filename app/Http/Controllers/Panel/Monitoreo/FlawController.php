@@ -48,7 +48,7 @@ class FlawController extends Controller
 
         $flaw = Flaw::create($request->all());
 
-        return redirect()->route('panel.monitoreo.flaws.index')->with('info', 'Falla agregada exitosamente');
+        return redirect()->route('panel.monitoreo.flaws.index')->with('success', 'Falla agregada exitosamente');
     }
 
     public function edit(Flaw $flaw)
@@ -74,13 +74,13 @@ class FlawController extends Controller
 
         $flaw->update($request->all());
 
-        return redirect()->route('panel.monitoreo.flaws.index', $flaw)->with('info', 'La falla se actualizó exitosamente.');
+        return redirect()->route('panel.monitoreo.flaws.index', $flaw)->with('success', 'La falla se actualizó exitosamente.');
     }
 
 
     public function destroy(Flaw $flaw)
     {
         $flaw->delete();
-        return redirect()->route('panel.monitoreo.flaws.index')->with('info', 'Falla eliminada correctamente');
+        return redirect()->route('panel.monitoreo.flaws.index')->with('success', 'Falla eliminada correctamente');
     }
 }

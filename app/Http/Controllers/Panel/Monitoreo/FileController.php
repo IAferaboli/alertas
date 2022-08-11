@@ -43,7 +43,7 @@ class FileController extends Controller
 
         $file = File::create($request->all());
 
-        return redirect()->route('panel.monitoreo.files.index')->with('info', 'Expdte. agregado exitosamente');
+        return redirect()->route('panel.monitoreo.files.index')->with('success', 'Expdte. agregado exitosamente');
     }
 
     public function edit(File $file)
@@ -59,20 +59,22 @@ class FileController extends Controller
             'filenumber' => 'required',
             'init' => 'required',
             'notenumber' => "required|unique:files,notenumber,$file->id",
-            'datefilm' => 'required',
-            'time' => 'required',
+            'starttime' => 'required',
+            'endtime' => 'required',
             'attach' => 'required',
             'dateout' => 'required',
         ]);
-
+            
         $file->update($request->all());
 
-        return redirect()->route('panel.monitoreo.files.edit', $file)->with('info', 'Expdte. actualizado exitosamente.');
+        
+        return redirect()->route('panel.monitoreo.files.index', $file)->with('success', 'Expdte. actualizado');
+
     }
 
     public function destroy(File $file)
     {
         $file->delete();
-        return redirect()->route('panel.monitoreo.files.index')->with('info', 'Expdte. eliminado exitosamente');
+        return redirect()->route('panel.monitoreo.files.index')->with('success', 'Expdte. eliminado exitosamente');
     }
 }

@@ -24,7 +24,7 @@
         "ndum/laravel-snmp": "^1.7",
         "nesbot/carbon": "^2.52",
         "owen-it/laravel-auditing": "^12.0",
-        "snowfire/beautymail": "^1.1",
+        "php-flasher/flasher-toastr-laravel": "^1.7",
         "spatie/laravel-permission": "^4.1"
     },
     "require-dev": {
