@@ -382,18 +382,18 @@
 
                                         <thead>
                                             <tr>
-                                                <td><strong>Día</strong></td>
-                                                <td><strong>Hora</strong></td>
-                                                <td><strong>Detalle</strong></td>
+                                                <td width="20%"><strong>Día</strong></td>
+                                                <td width="20%"><strong>Hora</strong></td>
+                                                <td width="80%"><strong>Detalle</strong></td>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             @foreach ($interventions as $intervention)
                                                 <tr>
-                                                    <td>{{ \Carbon\Carbon::parse($intervention->date)->format('d/m/Y') }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($intervention->hour)->format('H:i') }}</td>
-                                                    <td>{{ $intervention->detail }}</td>
+                                                    <td width="20%">{{ \Carbon\Carbon::parse($intervention->date)->format('d/m/Y') }}</td>
+                                                    <td width="20%">{{ \Carbon\Carbon::parse($intervention->hour)->format('H:i') }}</td>
+                                                    <td width="80%">{{ $intervention->detail }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

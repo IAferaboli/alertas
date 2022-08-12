@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.7.1
+> 1. Se modifica template email-monitoreo-intervenciones.
 ### 2.7.0
 > 1. Implementación de toastr.
 > 2. Se elimina Beautymail
