@@ -56,6 +56,7 @@ class CamerasIndex extends Component
             ->where('type', 'like', '%' . $this->type . '%')
             ->where('status', 'like', '%' . $this->status . '%')
             ->orderBy('status', 'asc')
+            ->orderBy('recording', 'asc')
             ->orderBy('name', 'asc')
             ->paginate($this->cant);
 
@@ -66,8 +67,8 @@ class CamerasIndex extends Component
     {
         $this->cameraEdit = $camera;
         
-        if ($this->cameraEdit->status != -1) {
-            $this->cameraEdit->status = -1;
+        if ($this->cameraEdit->maintenance == 0) {
+            $this->cameraEdit->maintenance = 1;
             $this->cameraEdit->save();
 
             $flaw = Flaw::create([
@@ -95,7 +96,7 @@ class CamerasIndex extends Component
             $flaw->timesolution = $fecha->format('H:i:s');
             $flaw->update();
 
-            $this->cameraEdit->status = 1;
+            $this->cameraEdit->maintenance = 0;
             $this->cameraEdit->save();
 
             Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));

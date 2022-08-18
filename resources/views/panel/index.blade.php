@@ -7,8 +7,9 @@
 @stop
 
 @section('content')
+
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
@@ -24,7 +25,7 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-12">
             <!-- small box -->
             <div class="small-box @if ($fueraDeServicio == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
@@ -35,27 +36,75 @@
                 <div class="icon">
                     <i class="ion ion-minus-circled"></i>
                 </div>
-                <a href="{{ route('panel.monitoreo.cameras.index') }}" class="small-box-footer">Más info <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                @if ($fueraDeServicio != 0)
+                    <a href="{{ route('panel.monitoreo.cameras.index') }}" class="small-box-footer">Más info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+                @endif
+      
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-4 col-12">
             <!-- small box -->
-            <div class="small-box @if (statusCameras('ACTIVE') == 0) bg-success @else bg-danger @endif">
+            <div class="small-box @if ($desactivadas == 0) bg-success @else bg-danger @endif">
                 <div class="inner">
-                    <h3>{{ statusCameras('ACTIVE') }}</h3>
+                    <h3>{{ $desactivadas }}</h3>
 
                     <p>Cámaras Desactivadas</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-minus-circled"></i>
                 </div>
-                <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                @if ($desactivadas != 0)
+                    <a href="{{ route('panel.monitoreo.cameras.index') }}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                @endif
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+
+        <!-- ./col -->
+    </div>
+
+    <div class="row">
+        <div class="col col-12 col-md-4">
+            <!-- small box -->
+            <div class="small-box @if ($sinGrabar != 0) bg-warning @else bg-success @endif">
+                <div class="inner">
+                    <h3>{{ $sinGrabar }}</h3>
+
+                    <p>Cámaras sin grabar</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                @if ($sinGrabar != 0 )
+                <a href="{{ route('panel.monitoreo.cameras.index') }}" class="small-box-footer">Más info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+                @endif
+                
+
+            </div>
+        </div>
+        <div class="col col-12 col-md-4">
+            <!-- small box -->
+            <div class="small-box @if ($mantenimiento != 0) bg-warning @else bg-success @endif">
+                <div class="inner">
+                    <h3>{{ $mantenimiento }}</h3>
+
+                    <p>Cámaras en mantenimiento</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                @if ($mantenimiento != 0)
+                <a href="{{ route('panel.monitoreo.cameras.index') }}" class="small-box-footer">Más info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+                @endif
+              
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-12">
             <!-- small box -->
             <div class="small-box @if (getLicenses() <= 5) bg-danger @else bg-info @endif">
                 <div class="inner">
@@ -66,9 +115,9 @@
                 <div class="icon">
                     <i class="ion ion-ios-information-outline"></i>
                 </div>
+
             </div>
         </div>
-        <!-- ./col -->
     </div>
 
     <div class="row">
@@ -77,7 +126,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $serv1 }}</h3>
+                    <h3>{{ timeServer(1) }}</h3>
 
                     <p>TIEMPO ACTIVO - SERVER 1</p>
                 </div>
@@ -91,7 +140,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $serv2 }}</h3>
+                    <h3>{{ timeServer(2) }}</h3>
 
                     <p>TIEMPO ACTIVO - SERVER 2</p>
                 </div>
@@ -105,7 +154,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $serv3 }}</h3>
+                    <h3>{{ timeServer(3) }}</h3>
 
                     <p>TIEMPO ACTIVO - SERVER 3</p>
                 </div>

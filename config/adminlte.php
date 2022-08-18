@@ -274,7 +274,7 @@ return [
                 ],
                 //Fallas
                 [
-                    'text' => 'Fallas',
+                    'text' => 'Desperfectos',
                     'icon'  => 'fas fa-fw fa-exclamation-triangle',
                     'route'  => 'panel.monitoreo.flaws.index',
                     'active' => ['panel/monitoreo/flaws*'],
@@ -294,7 +294,6 @@ return [
                 [
                     'text'    => 'Mapas',
                     'icon'  => 'fas fa-fw fa-map-marker-alt',
-                    'url'     => '#',
                     'submenu' => [
                         [
                             'text' => 'Ubicaciones cámaras',

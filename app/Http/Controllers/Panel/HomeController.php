@@ -17,13 +17,34 @@ class HomeController extends Controller
 
         getCameras();
 
-        //Tiempo actividad servidores
-        list($serv1, $serv2, $serv3) = timeServer();
-
         //Cantidad de cámaras en el sistema Monitoreo
-        $cantCamaras = Camera::where('type', 0)->orWhere('type', 1)->count();
+        $cantCamaras = Camera::where(function ($q) {
+            $q->where('type', '0')
+                ->orWhere('type', '1');
+        })->count();
         $fueraDeServicio = Camera::where('status', 0)
-            ->where('published', 1)
+            ->where(function ($q) {
+                $q->where('type', '0')
+                    ->orWhere('type', '1');
+            })
+            ->count();
+        $mantenimiento = Camera::where(function ($q) {
+            $q->where('type', '0')
+                ->orWhere('type', '1');
+        })
+            ->where('maintenance', 1)
+            ->count();
+        $sinGrabar = Camera::where(function ($q) {
+            $q->where('type', '0')
+                ->orWhere('type', '1');
+        })
+            ->where('recording', 0)
+            ->count();
+        $desactivadas = Camera::where(function ($q) {
+            $q->where('type', '0')
+                ->orWhere('type', '1');
+        })
+            ->where('active', 0)
             ->count();
 
         //API CLIMA
@@ -76,40 +97,40 @@ class HomeController extends Controller
             $monthCountLast[] = $count->total;
         }
 
-      
+
         $interventionsProm = Intervention::select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
-        ->where('status', '=', 1)
-        ->groupBy('mes')
-        ->orderBy('mes', 'asc')
-        ->get();
-    
+            ->where('status', '=', 1)
+            ->groupBy('mes')
+            ->orderBy('mes', 'asc')
+            ->get();
+
         // Calcular cantidad de años almacenados
         $years = Intervention::select(DB::raw('YEAR(date) AS year'))
             ->groupBy('year')
             ->orderBy('year', 'asc')
             ->get();
-    
+
         //Contar registros de years
         $yearsCount = count($years);
-    
+
         $monthCountProm = [];
         foreach ($interventionsProm as $count) {
-            $monthCountProm[] = ($count->total)/$yearsCount;
+            $monthCountProm[] = ($count->total) / $yearsCount;
         }
-    
+
 
         //SNMP Temperatura Servers
         $tempServer = getTemperatureDC();
 
         $flaws = Flaw::select(DB::raw('DayName(dateflaw) AS day'), DB::raw('count(*) AS total'))
-                        ->groupBy('day')
-                        ->get();
+            ->groupBy('day')
+            ->get();
 
         $fallasPorDia = [];
         foreach ($flaws as $count) {
             $fallasPorDia[] = $count->total;
         }
-        
-        return view('panel.index', compact('serv1', 'serv2', 'serv3', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia'));
+
+        return view('panel.index', compact('desactivadas', 'mantenimiento', 'sinGrabar', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia'));
     }
 }

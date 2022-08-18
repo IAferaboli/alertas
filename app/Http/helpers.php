@@ -72,21 +72,17 @@ function statusCameras($type)
 }
 
 
-function timeServer()
+function timeServer($server = null)
 {
     try {
-        $xmlServer1 = simplexml_load_file("http://192.168.100.1:8601/Interface/Server/GetInfo?ResponseFormat=XML&AuthUser=admin&AuthPass=gda.adm");
-        $xmlServer2 = simplexml_load_file("http://192.168.100.2:8601/Interface/Server/GetInfo?ResponseFormat=XML&AuthUser=admin&AuthPass=gda.adm");
-        $xmlServer3 = simplexml_load_file("http://192.168.100.3:8601/Interface/Server/GetInfo?ResponseFormat=XML&AuthUser=admin&AuthPass=gda.adm");
+        $xmlServer = simplexml_load_file("http://192.168.100.$server:8601/Interface/Server/GetInfo?ResponseFormat=XML&AuthUser=admin&AuthPass=gda.adm");
 
-        $time1 = $xmlServer1->Data->Info->UpTime;
-        $time2 = $xmlServer2->Data->Info->UpTime;
-        $time3 = $xmlServer3->Data->Info->UpTime;
+        $time = $xmlServer->Data->Info->UpTime;
 
-        return array(secondsToTime($time1), secondsToTime($time2), secondsToTime($time3));
+        return secondsToTime($time);
     } catch (\Throwable $th) {
         //throw $th;
-        return array("No hay datos", "No hay datos", "No hay datos");
+        return "No hay datos";
     }
 
 }
@@ -132,11 +128,13 @@ function getCameras()
 
                 foreach ($responses2['Response']['Data']['Cameras'] as $response2) {
                     if ($camera) {
-                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working'] || $camera->addressip != $response['ConnectionAddress'] || $camera->description != $response['Description']) {
+                        if ($camera->lat != $response['Latitude'] || $camera->lng != $response['Longitude']  || $camera->status != $response2['Working'] || $camera->addressip != $response['ConnectionAddress'] || $camera->description != $response['Description'] || $camera->active != $response2['Active'] || $camera->recording != $response2['WrittingToDisk']) {
                             $camera->update([
                                 'lat' => $response['Latitude'],
                                 'lng' => $response['Longitude'],
                                 'status' => $response2['Working'],
+                                'active' => $response2['Active'],
+                                'recording' => $response2['WrittingToDisk'],
                                 'server' => $i,
                                 'addressip' => $response['ConnectionAddress'],
                                 'description' => $response['Description'],
@@ -148,6 +146,8 @@ function getCameras()
                             'lat' => $response['Latitude'],
                             'lng' => $response['Longitude'],
                             'status' => $response2['Working'],
+                            'active' => $response2['Active'],
+                            'recording' => $response2['WrittingToDisk'],
                             'server' => $i,
                             'type' => $type,
                             'addressip' => $response['ConnectionAddress'],

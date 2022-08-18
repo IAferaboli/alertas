@@ -5,23 +5,23 @@ namespace App\Http\Controllers\API\Monitoreo;
 use App\Http\Controllers\Controller;
 use App\Models\Camera;
 use App\Models\Flaw;
+use App\Notifications\TelegramNotification;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Notifications\Notifiable;
-use App\Notifications\TelegramNotification;
 
-class FlawController extends Controller
+class RecordController extends Controller
 {
-
-    public function index($name = null)
+    
+    public function index()
     {
         return Flaw::latest()
-            ->where('description', '!=', 'Falla de grabación')
+            ->where('description', 'Falla de grabación')
             ->take(50)
             ->get();
     }
 
+   
     public function store(Request $request)
     {
         $request = parse_ini_string($request, true);
@@ -35,7 +35,6 @@ class FlawController extends Controller
                 'msg' => 'Dipositivo con mantenimiento activo.',
             ]);
         } else {
-            $camera->status = 0;
             $camera->recording = 0;
             $camera->update();
         }
@@ -44,7 +43,7 @@ class FlawController extends Controller
         unset($request['name']);
         $request['dateflaw'] = $fecha->format('Y-m-d');
         $request['timeflaw'] = $fecha->format('H:i:s');
-        $request['description'] = "Sin clasificar";
+        $request['description'] = "Falla de grabación";
         $request['camera_id'] = $camera->id;
         $request['datesolution'] = null;
         $request['timesolution'] = null;
@@ -54,7 +53,7 @@ class FlawController extends Controller
 
             $flaw = Flaw::where('camera_id', $camera->id)
                 ->where('timesolution', null)
-                ->where('description', '!=', 'Falla de grabación')
+                ->where('description', 'Falla de grabación')
                 ->first();
 
 
@@ -63,7 +62,7 @@ class FlawController extends Controller
             } else {
 
                 return response()->json([
-                    'msg' => 'Ya existe falla en esta camara',
+                    'msg' => 'Ya existe falla de grabación en esta camara',
                 ]);
             }
 
@@ -80,7 +79,7 @@ class FlawController extends Controller
             } catch (\Throwable $th) {
                 return response()->json([
                     'res' => $request,
-                    'msg' => 'Falla añadida - Error Telegram',
+                    'msg' => 'Falla de grabación añadida - Error Telegram',
                 ]);
             }
         } catch (\Throwable $th) {
@@ -90,11 +89,12 @@ class FlawController extends Controller
         }
     }
 
-
     public function show($id)
     {
+        //
     }
 
+ 
     public function update(Request $request, Flaw $flaw)
     {
         $request = parse_ini_string($request, true);
@@ -102,13 +102,11 @@ class FlawController extends Controller
         $fecha = new DateTime();
         $camera = Camera::where('name', $request['name'])->first();
 
-
         if ($camera->status == -1) {
             return response()->json([
-                'msg' => 'Dipositivo con mantenimiento activo.',
+                'msg' => 'Dispositivo con mantenimiento activo.',
             ]);
         } else {
-            $camera->status = 1;
             $camera->recording = 1;
             $camera->update();
         }
@@ -116,7 +114,7 @@ class FlawController extends Controller
 
         $flaw = Flaw::where('camera_id', $camera->id)
             ->where('timesolution', null)
-            ->where('description', '!=', 'Falla de grabación')
+            ->where('description', 'Falla de grabación')
             ->first();
 
         if (!$flaw) {
@@ -133,7 +131,7 @@ class FlawController extends Controller
 
             try {
                 Arr::add($flaw, 'to',  env('TELEGRAM_MONITOREO_FALLAS'));
-                Arr::add($flaw, 'content',  "*Fecha:* " . $request['datesolution'] . " \n*Hora:* " . $request['timesolution'] . " \n*Cámara: * " . $camera->name . "\n*Estado: * Cámara restablecida");
+                Arr::add($flaw, 'content',  "*Fecha:* " . $request['datesolution'] . " \n*Hora:* " . $request['timesolution'] . " \n*Cámara: * " . $camera->name . "\n*Estado: * Grabación restablecida");
                 $flaw->notify(new TelegramNotification);
 
                 return response()->json([
@@ -153,7 +151,7 @@ class FlawController extends Controller
         }
     }
 
-
+ 
     public function destroy($id)
     {
         //

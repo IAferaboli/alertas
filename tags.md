@@ -2,6 +2,10 @@
 ## Versión 2
 ### 2.7.1
 > 1. Se modifica template email-monitoreo-intervenciones.
+> 2. Se agregan indicadores a Dashboard.
+> 3. Se modifica api de fallas de comunicacíon.
+> 4. Se implementa api de fallas de grabación.
+> 5. Se agregan columnas a tabla Cameras.
 ### 2.7.0
 > 1. Implementación de toastr.
 > 2. Se elimina Beautymail

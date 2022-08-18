@@ -32,6 +32,7 @@
                         <option value="1">Activas</option>
                         <option value="0">Inactivas</option>
                         <option value="-1">Mantenimiento</option>
+                        <option value="-2">Sin grabar</option>
                     </select>
                 </div>
 
@@ -69,12 +70,16 @@
                                 <td>{{ $camera->name }}</td>
                                 <td class="text-center">
 
-                                    @if ($camera->status == -1)
+                                    @if ($camera->maintenance == 1)
                                         <span class="badge badge-warning">Mantenimiento</span>
-                                    @elseif ($camera->status == 1)
-                                        <span class="badge badge-success">Activa</span>
-                                    @else
+                                    @elseif ($camera->active == 0)
+                                        <span class="badge badge-warning">Desactivada</span>
+                                    @elseif ($camera->status == 0)
                                         <span class="badge badge-danger">Inactiva</span>
+                                    @elseif ($camera->recording == 0)
+                                        <span class="badge badge-danger">Sin grabar</span>
+                                    @else
+                                        <span class="badge badge-success">Activa</span>
                                     @endif
                                 </td>
                                 <td>{{ $camera->description }}</td>
@@ -88,11 +93,11 @@
                                 @endcan
 
                                 @can('panel.monitoreo.cameras.edit')
-                                <td width="10px">
-                                    <a class="btn btn-warning btn-xs"
-                                        href="{{ route('panel.monitoreo.cameras.edit', $camera) }}"><i
-                                            class="fas fa-pen"></i></a>
-                                </td>
+                                    <td width="10px">
+                                        <a class="btn btn-warning btn-xs"
+                                            href="{{ route('panel.monitoreo.cameras.edit', $camera) }}"><i
+                                                class="fas fa-pen"></i></a>
+                                    </td>
                                 @endcan
 
                                 @can('panel.monitoreo.cameras.viewcamera')
@@ -116,9 +121,9 @@
                                 @endcan
                                 @can('panel.monitoreo.cameras.maintenance')
                                     <td width="10px">
-                                        @if ($camera->status != 0)
+                                        @if ($camera->status == 1)
                                             <button wire:click="update({{ $camera }})"
-                                                class="btn @if ($camera->status == -1) btn-warning @else btn-success @endif  btn-xs"
+                                                class="btn @if ($camera->maintenance == 1) btn-warning @else btn-success @endif  btn-xs"
                                                 type="submit"><i class="fas fa-wrench"></i></button>
                                         @endif
 

@@ -36,6 +36,7 @@
                         <option value="Corte de energía eléctrica">Corte de energía eléctrica</option>
                         <option value="Corte de FO">Corte de FO</option>
                         <option value="Equipo quemado">Equipo quemado</option>
+                        <option value="Falla de grabación">Falla de grabación</option>
                         <option value="Mantenimiento programado">Mantenimiento programado</option>
                         <option value="Otros">Otros</option>
                         <option value="Problema de tercero">Problema de tercero</option>
