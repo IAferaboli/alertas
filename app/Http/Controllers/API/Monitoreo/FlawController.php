@@ -30,7 +30,7 @@ class FlawController extends Controller
         $fecha->modify('-2 minute');
         $camera = Camera::where('name', $request['name'])->first();
 
-        if ($camera->status == -1) {
+        if ($camera->maintenance == 1) {
             return response()->json([
                 'msg' => 'Dipositivo con mantenimiento activo.',
             ]);
