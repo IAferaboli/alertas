@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Camera;
 use App\Models\Flaw;
 use App\Models\Intervention;
+use App\Models\MqttData;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
@@ -131,6 +132,11 @@ class HomeController extends Controller
             $fallasPorDia[] = $count->total;
         }
 
-        return view('panel.index', compact('desactivadas', 'mantenimiento', 'sinGrabar', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia'));
+        $pm01sr01 = MqttData::where('topic_id', 'like', '%pm01sr01%')
+                            ->orderBy('id', 'desc')
+                            ->first();
+        $pm01sr01 = json_decode($pm01sr01->message, true);
+
+        return view('panel.index', compact('desactivadas', 'mantenimiento', 'sinGrabar', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia', 'pm01sr01'));
     }
 }
