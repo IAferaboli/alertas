@@ -4,6 +4,8 @@ use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Monitoreo\ReportController;
 use App\Models\Intervention;
+use App\Models\MqttData;
+use App\Models\MqttDevice;
 use App\Models\Notification;
 use App\Notifications\TelegramPrueba;
 use Carbon\Carbon;
@@ -39,3 +41,17 @@ Route::get('recorro-camaras-digifort', function () {
 	
 });
 
+Route::get('telegram-agua-presion', function () {
+
+	$notification = new Notification;
+	$mqttDevices = MqttDevice::all();
+	foreach ($mqttDevices as $mqttDevice) {
+		$pressure = getPressureWater($mqttDevice->topic);
+		if($pressure['values']['Presion'] <= 0.6 || $pressure['values']['Presion'] >= 2.5){
+			$notification->setContent("⚠ *ALERTA DE PRESIÓN* ⚠ \n\n*Sensor:* $mqttDevice->nombre \n*Presión:* ".$pressure['values']['Presion']);
+			$notification->setTo(env('TELEGRAM_AGUA_PRESION'));
+			$notification->notify(new TelegramPrueba);
+		}
+	}
+	
+});

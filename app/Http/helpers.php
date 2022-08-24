@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Camera;
+use App\Models\MqttData;
 use Illuminate\Support\Facades\Http;
 use Ndum\Laravel\Snmp;
 
@@ -177,11 +178,19 @@ function getTemperatureDC(){
 
 }
 
-function sendMessageToMonitoreo($message){
+function getPressureWater($topic_id){
+    $pressure = MqttData::where('topic_id', 'like', '%'.$topic_id.'%')
+                            ->orderBy('id', 'desc')
+                            ->first();
+    $pressure = json_decode($pressure->message, true);
+    $pressure['values']['Presion'] = round($pressure['values']['Presion']/10, 2);
 
+    return $pressure;
+}
+
+function sendMessageToMonitoreo($message){
     $responses = Http::get("http://192.168.100.1:8601/Interface/GlobalEvents/TriggerGlobalEvent?Event=Smart%20VC&OverrideOperatorMessage=$message&ResponseFormat=JSON&AuthUser=".env('DIGIFORT_USER')."&AuthPass=".env('DIGIFORT_PASSWORD'))->json();
     return $responses;
-
 }
 
 
