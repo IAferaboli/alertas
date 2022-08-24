@@ -4,6 +4,7 @@
 > 1. Se añaden modelos (2) para mqtt.
 > 2. Se añade gráfico de presión de agua (pm01sr01).
 > 3. Se añaden reglas de permiso a dashboard.
+> 4. Se incorpora gráfico de presión de agua (pm01sr01) al mapa de tv.
 ### 2.7.1
 > 1. Se modifica template email-monitoreo-intervenciones.
 > 2. Se agregan indicadores a Dashboard.

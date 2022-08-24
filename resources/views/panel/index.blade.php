@@ -447,7 +447,7 @@
                 type: 'gauge',
                 data: {
                     datasets: [{
-                        value: {{ round($pm01sr01['values']['Presion'], 1) }} / 10,
+                        value: {{ $pm01sr01['values']['Presion'] }},
                         minValue: 0,
                         data: [0.6, 2.5, 3.1],
                         backgroundColor: ['lightblue', 'green', 'red'],

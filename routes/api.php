@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\DataCenter\EtherflowerController;
+use App\Http\Controllers\API\DataCenter\MqttController;
 use App\Http\Controllers\API\Monitoreo\CameraController;
 use App\Http\Controllers\API\Monitoreo\FlawController;
-use App\Http\Controllers\API\Monitoreo\DownCameraController;
 use App\Http\Controllers\API\Monitoreo\RecordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +39,4 @@ Route::get('monitoreo/camaras', [CameraController::class,'index']);
 Route::get('monitoreo/camaras/{status}', [CameraController::class,'index']);
 
 Route::get('datacenter/temperatura', [EtherflowerController::class,'index']);
+Route::get('datacenter/mqttdata/{topic}',[MqttController::class, 'presion']);

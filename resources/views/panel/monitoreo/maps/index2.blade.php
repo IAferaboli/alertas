@@ -10,11 +10,10 @@
 
 
     <div class="row position-fixed fixed-top pt-3 pl-3 pr-3">
-
         <div class="col-lg-4 col-6 ml-auto">
             <!-- small box -->
             <div class="small-box bg-info ">
-                <div id="canvas-holder" class="pt-3 pl-2" style="width:15vw">
+                <div id="canvas-holder" class="pt-2" style="width:15vw">
                     <canvas id="temperaturaServer"></canvas>
                 </div>
                 <div class="inner text-center">
@@ -27,7 +26,22 @@
     </div>
 
 
-    <div class="row position-fixed fixed-bottom ml-3 mr-3">
+
+    <!-- ./col -->
+    <div class="col-lg-3 col-6 footer presion">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div id="canvas-holder" class="canvas pt-2" style="width:15vw">
+                <canvas id="pm01sr01"></canvas>
+            </div>
+            <div class="inner text-center">
+                <p>Presión de Agua - Municipio</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row footer">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -78,7 +92,6 @@
             <div class="small-box @if (getLicenses() <= 5) bg-danger @else bg-info @endif">
                 <div class="inner">
                     <h3>{{ getLicenses() }}</h3>
-
                     <p>Licencias Disponibles</p>
                 </div>
                 <div class="icon">
@@ -86,15 +99,11 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <div class="row position-fixed fixed-bottom ml-3 mr-3 pb-2">
-        <div class="col-lg-12 col-12 ">
+    <div class="row footer">
+        <div class="col-lg-12 col-12">
             <x-adminlte-progress id="progressBarTimer" theme="info" value=0 size="xs" />
         </div>
-
-
     </div>
 
     <div id="issMap"></div>
@@ -125,6 +134,26 @@
             font-size: 5px;
         }
 
+        .footer {
+            position: fixed;
+            width: 99%;
+            z-index: 10;
+            bottom: 2px;
+        }
+
+        .presion {
+            bottom: 120px;
+            right: 5px;
+        }
+
+        .canvas {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 800px;
+        }
     </style>
 
 
@@ -132,18 +161,17 @@
 
 @section('js')
 
-
-
     <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
     <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <script>
-        const api_url = "{{env('APP_URL')}}/api/monitoreo/camaras";
-        const api_url2 = "{{env('APP_URL')}}/api/monitoreo/camaras/0";
-        const api_url3 = "{{env('APP_URL')}}/api/datacenter/temperatura";
-        const api_url4 = "{{env('APP_URL')}}/api/monitoreo/camaras/-1";
+        const api_url = "{{ env('APP_URL') }}/api/monitoreo/camaras";
+        const api_url2 = "{{ env('APP_URL') }}/api/monitoreo/camaras/0";
+        const api_url3 = "{{ env('APP_URL') }}/api/datacenter/temperatura";
+        const api_url4 = "{{ env('APP_URL') }}/api/monitoreo/camaras/-1";
+        const api_url5 = "{{ env('APP_URL') }}/api/datacenter/mqttdata/pm01sr01";
         var domos = L.layerGroup();
         var fijas = L.layerGroup();
         var out = L.layerGroup();
@@ -153,10 +181,10 @@
             const response = await fetch(api_url)
             const response2 = await fetch(api_url2)
             const response4 = await fetch(api_url4)
-            const data4= await response4.json();
+            const data4 = await response4.json();
             const data = await response.json();
             const data2 = await response2.json();
-           
+
             sinFuncionar = Object.keys(data2).length;
             document.getElementById('cantCamaras').innerHTML = Object.keys(data).length;
             document.getElementById('statusCamera').innerHTML = Object.keys(data2).length;
@@ -197,7 +225,7 @@
                     markers2.push([camera.lat, camera.lng])
                 }
             }
-            
+
 
             const domeIcon = L.icon({
                 iconUrl: "{{ asset('img/dome.png') }}",
@@ -322,6 +350,7 @@
         };
         var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
         getISS();
+
         //Gauge
         var ctx = document.getElementById("temperaturaServer").getContext("2d");
         var chart = new Chart(ctx, {
@@ -357,14 +386,53 @@
             }
         });
 
-        function addData(data) {
+
+        var ctx2 = document.getElementById("pm01sr01").getContext("2d");
+        var chart2 = new Chart(ctx2, {
+            type: 'gauge',
+            data: {
+                datasets: [{
+                    value: 10 / 10,
+                    minValue: 0,
+                    data: [0.6, 2.5, 3.1],
+                    backgroundColor: ['blue', 'green', 'red'],
+                }]
+            },
+            options: {
+                needle: {
+                    radiusPercentage: 2,
+                    widthPercentage: 3.2,
+                    lengthPercentage: 80,
+                    color: 'rgba(0, 0, 0, 1)'
+                },
+                valueLabel: {
+                    display: true,
+                    formatter: (value) => {
+                        return value + "kg";
+                    },
+                    color: 'rgba(255, 255, 255, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 1)',
+                    borderRadius: 5,
+                    padding: {
+                        top: 10,
+                        bottom: 10
+                    }
+                }
+            }
+        });
+
+        function addData(data, data2) {
             chart.data.datasets[0].value = data / 10;
             chart.update();
+            chart2.data.datasets[0].value = data2.values.Presion;
+            chart2.update();
         }
         async function getTemp() {
             const response = await fetch(api_url3)
+            const response2 = await fetch(api_url5)
             const data = await response.json();
-            addData(data);
+            const data2 = await response2.json();
+            addData(data, data2);
         }
         getTemp();
         myTimerInit();

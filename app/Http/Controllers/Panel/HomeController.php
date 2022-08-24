@@ -136,7 +136,7 @@ class HomeController extends Controller
                             ->orderBy('id', 'desc')
                             ->first();
         $pm01sr01 = json_decode($pm01sr01->message, true);
-
+        $pm01sr01['values']['Presion'] = round($pm01sr01['values']['Presion']/10, 2);
         return view('panel.index', compact('desactivadas', 'mantenimiento', 'sinGrabar', 'monthCount', 'monthCountLast', 'weather', 'tempServer', 'cantCamaras', 'fueraDeServicio', 'monthCountProm', 'fallasPorDia', 'pm01sr01'));
     }
 }

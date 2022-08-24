@@ -17,6 +17,7 @@ class EtherflowerController extends Controller
         return getTemperatureDC();
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
