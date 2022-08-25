@@ -39,7 +39,7 @@ class InterventionController extends Controller
     {
 
         $request->validate([
-            'detail' => 'required|max:750',
+            'detail' => 'required|max:1000',
             'date' => 'required|before_or_equal:today',
             'hour' => 'required',
             'camera_id' => 'required'
@@ -71,7 +71,7 @@ class InterventionController extends Controller
     public function update(Request $request, Intervention $intervention)
     {
         $request->validate([
-            'detail' => 'required|max:750',
+            'detail' => 'required|max:1000',
             'date' => 'required|before_or_equal:today',
             'hour' => 'required',
             'camera_id' => 'required'
