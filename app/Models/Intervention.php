@@ -25,4 +25,9 @@ class Intervention extends Model implements Auditable
     {
         return $this->belongsTo(Camera::class);
     }
+
+    public function archive_camera()
+    {
+        return $this->belongsTo(Camera::class);
+    }
 }

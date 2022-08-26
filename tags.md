@@ -1,5 +1,10 @@
 # Versionado 📌
 ## Versión 2
+### 2.8.1
+> 1. Se modifica API falla de grabación.
+> 2. Se elimina código sin uso de controlador intervenciones.
+> 3. Se modifica vista de intervenciones, se muestran las intervenciones anuladas (tachadas), y se añade botón para ver registros anexados.
+> 4. Se agregan columnas al modelo de intervenciones.
 ### 2.8.0
 > 1. Se añaden modelos (2) para mqtt.
 > 2. Se añade gráfico de presión de agua (pm01sr01).

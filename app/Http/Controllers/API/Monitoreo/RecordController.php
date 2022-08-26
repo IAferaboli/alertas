@@ -27,19 +27,18 @@ class RecordController extends Controller
         $request = parse_ini_string($request, true);
 
         $fecha = new DateTime();
-        $fecha->modify('-2 minute');
+        $fecha->modify('-5 minute');
         $camera = Camera::where('name', $request['name'])->first();
 
         if ($camera->maintenance == 1) {
             return response()->json([
-                'msg' => 'Dipositivo con mantenimiento activo.',
+                'msg' => 'Dispositivo con mantenimiento activo.',
             ]);
         } else {
             $camera->recording = 0;
             $camera->update();
         }
        
-
         unset($request['name']);
         $request['dateflaw'] = $fecha->format('Y-m-d');
         $request['timeflaw'] = $fecha->format('H:i:s');
@@ -50,12 +49,10 @@ class RecordController extends Controller
 
 
         try {
-
             $flaw = Flaw::where('camera_id', $camera->id)
                 ->where('timesolution', null)
                 ->where('description', 'Falla de grabación')
                 ->first();
-
 
             if (!$flaw) {
                 $flaw = Flaw::create($request);

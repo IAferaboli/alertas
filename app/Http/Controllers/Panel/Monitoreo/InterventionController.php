@@ -22,10 +22,7 @@ class InterventionController extends Controller
 
     public function index()
     {
-        $interventions = Intervention::all();
-     
-        $cameras = Camera::orderBy('name', 'asc')->pluck('name', 'id');
-        return view('panel.monitoreo.interventions.index', compact('interventions', 'cameras'));
+        return view('panel.monitoreo.interventions.index');
     }
 
     public function create()
@@ -85,10 +82,17 @@ class InterventionController extends Controller
     public function destroy(Intervention $intervention)
     {
 
-        // $intervention->delete();
-        $intervention->update([
-            'status' => 0,
-        ]);
-        return redirect()->route('panel.monitoreo.interventions.index')->with('success', 'La intervención se anuló exitosamente.');
+        if ($intervention->status == 1) {
+            $intervention->update([
+                'status' => 0,
+            ]);
+            return redirect()->route('panel.monitoreo.interventions.index')->with('success', 'La intervención se anuló exitosamente.');
+        } else {
+            $intervention->update([
+                'status' => 1,
+            ]);
+            return redirect()->route('panel.monitoreo.interventions.index')->with('success', 'La intervención se restableció exitosamente.');
+        }
+
     }
 }

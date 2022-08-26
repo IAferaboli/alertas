@@ -15,7 +15,6 @@ class InterventionsIndex extends Component
     public $search;
     public $camara;
 
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -41,14 +40,12 @@ class InterventionsIndex extends Component
             $interventions = Intervention::where('camera_id' , '=', $this->camara)
             ->where('date', 'LIKE' , '%' . $this->fecha . '%')
             ->where('detail', 'LIKE' , '%' . $this->search . '%')
-            ->where('status', '=' , 1)
             ->orderByDesc('date')
             ->orderByDesc('hour')
             ->paginate();
         } else{
             $interventions = Intervention::where('date', 'LIKE' , '%' . $this->fecha . '%')
             ->where('detail', 'LIKE' , '%' . $this->search . '%')
-            ->where('status', '=' , 1)
             ->orderByDesc('date')
             ->orderByDesc('hour')
             ->paginate();
