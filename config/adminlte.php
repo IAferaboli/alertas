@@ -317,8 +317,19 @@ return [
         [
             'text'    => 'Agua',
             'icon'    => 'fas fa-fw fa-faucet',
-            'url'     =>  '#',
+            'active'    => ['panel/agua*'],
             'can'   =>  'panel.sayma.menu',
+            'submenu' => [
+                //Listado de cámaras
+                [
+                    'text' => 'Sensores',
+                    'icon'  => 'fas fa-fw fa-water',
+                    'route'  => 'panel.agua.sensors.index',
+                    'active' => ['panel/agua/sensors*'],
+                    'can'   =>  'panel.agua.sensors.index',
+                ],
+                
+            ],
         ],
      
 

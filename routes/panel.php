@@ -4,6 +4,7 @@ use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Panel\Administracion\AuditingController;
 use App\Http\Controllers\Panel\Administracion\RoleController;
 use App\Http\Controllers\Panel\Administracion\UserController;
+use App\Http\Controllers\Panel\Agua\SensorController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\Monitoreo\CameraController;
 use App\Http\Controllers\Panel\Monitoreo\FileController;
@@ -36,6 +37,9 @@ Route::get('monitor', function () {
     return view('panel.monitoreo.maps.index2');
 })->name('panel.monitoreo.maps.index2');
 
+
+//      --- AGUA ---
+Route::resource('agua/sensors', SensorController::class)->names('panel.agua.sensors');
 
 //      --- ADMINISTRACIÓN ---
 
