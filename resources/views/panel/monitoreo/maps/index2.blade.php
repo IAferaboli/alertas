@@ -445,9 +445,9 @@
 
             let inc = (val) => {
                 let v = pBar.getValue() + val;
-                return v >= 99.8 ? 0 : v;
+                return v >= 100 ? 0 : v;
             };
-            myTimerProgress = setInterval(() => pBar.setValue(inc((0.1))), 100);
+            myTimerProgress = setInterval(() => pBar.setValue(inc((0.2))), 200);
         }
 
 
