@@ -3,6 +3,7 @@
 ### 2.8.2
 > 1. Se añade sección Agua>Sensores con gráfico de últimas 24hs.
 > 2. Se bloquea botón de mantenimiento al hacer click.
+> 3. Se modifica progressBar en mapa Tv.
 ### 2.8.1
 > 1. Se modifica API falla de grabación.
 > 2. Se elimina código sin uso de controlador intervenciones.
