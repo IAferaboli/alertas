@@ -122,7 +122,7 @@
                                 @can('panel.monitoreo.cameras.maintenance')
                                     <td width="10px">
                                         @if ($camera->status == 1)
-                                            <button wire:click="update({{ $camera }})"
+                                            <button wire:loading.attr="disabled" wire:click="update({{ $camera }})"
                                                 class="btn @if ($camera->maintenance == 1) btn-warning @else btn-success @endif  btn-xs"
                                                 type="submit"><i class="fas fa-wrench"></i></button>
                                         @endif

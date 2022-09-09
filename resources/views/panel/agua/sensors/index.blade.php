@@ -31,7 +31,7 @@
                 <div class="col col-12">
                     <x-adminlte-card title="Último registro - PM01SR01">
                         <div class="card-body">
-                            <strong class="">{{$dataSensor->created_at->format('d-m-Y - H:i')}}</strong>
+                            <strong class="text-xl">{{$dataSensor->created_at->format('d/m/Y - H:i')}}</strong>
                         </div>
                     </x-adminlte-card>
                 </div>
