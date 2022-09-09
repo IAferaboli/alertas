@@ -445,7 +445,12 @@
 
             let inc = (val) => {
                 let v = pBar.getValue() + val;
-                return v >= 100 ? 0 : v;
+                if (v>= 100) {
+                    clearInterval(myTimerProgress);
+                    return 0;
+                }else{
+                    return v;
+                }
             };
             myTimerProgress = setInterval(() => pBar.setValue(inc((0.2))), 200);
         }
@@ -461,7 +466,6 @@
                     getTemp();
                     clearInterval(myTimer);
                     var flightNumber = 0;
-                    clearInterval(myTimerProgress);
 
                     var myTimer2 = setInterval(function() {
                         if (flightNumber >= markers2.length) {
