@@ -73,6 +73,11 @@
                     y: {
                         beginAtZero: true
                     }
+                },
+                elements: {
+                    point:{
+                        radius: 0
+                    }
                 }
             }
         });
