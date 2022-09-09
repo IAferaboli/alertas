@@ -3,21 +3,43 @@
 @section('title', 'Municipio VC')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Sensores de Presión de Agua</h1>
 @stop
 
 @section('content')
 
-       
-
-                    <div class="card-body">
-                        <canvas id="sensor" style="width:100%;max-width:700px"></canvas>
-                    </div>
-
-
-
-
-
+    <div class="row">
+        <div class="col col-12 col-md-8">
+            <x-adminlte-card title="Presión de sensor - PM01SR01" maximizable>
+                <div class="card-body">
+                    <canvas id="sensor" style="max-width:100%"></canvas>
+                </div>
+            </x-adminlte-card>
+        </div>
+        <div class="col col-12 col-md-4">
+            <div class="row">
+                <div class="col col-12">
+                    <x-adminlte-card title="Presión actual - PM01SR01">
+                        <div class="card-body">
+                            <canvas id="pm01sr01" style="max-width:100%"></canvas>
+                        </div>
+                    </x-adminlte-card>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col col-12">
+                    <x-adminlte-card title="Último registro - PM01SR01">
+                        <div class="card-body">
+                            <strong class="">{{$dataSensor->created_at->format('d-m-Y - H:i')}}</strong>
+                        </div>
+                    </x-adminlte-card>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
 
 @stop
 
@@ -26,54 +48,69 @@
 @stop
 
 @section('js')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-
-    <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script> --}}
-
+<script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+<script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
     <script>
+        var labels = JSON.parse('{!! json_encode($label) !!}');
+        var presion = JSON.parse('{!! json_encode($presion) !!}');
 
-       
         new Chart(document.getElementById("sensor"), {
-  type: 'line',
-  data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-    datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
-        borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
-        borderColor: "#8e5ea2",
-        fill: false
-      }, { 
-        data: [168,170,178,190,203,276,408,547,675,734],
-        label: "Europe",
-        borderColor: "#3cba9f",
-        fill: false
-      }, { 
-        data: [40,20,10,16,24,38,74,167,508,784],
-        label: "Latin America",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, { 
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "North America",
-        borderColor: "#c45850",
-        fill: false
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'World population per region (in millions)'
-    }
-  }
-});
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: presion,
+                    label: "PM01SR01",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
-
-     
+        if (document.getElementById("pm01sr01")) {
+            var ctx = document.getElementById("pm01sr01").getContext("2d");
+            var chart = new Chart(ctx, {
+                type: 'gauge',
+                data: {
+                    datasets: [{
+                        value: {{ $pm01sr01['values']['Presion'] }},
+                        minValue: 0,
+                        data: [0.6, 2.5, 3.1],
+                        backgroundColor: ['lightblue', 'green', 'red'],
+                    }]
+                },
+                options: {
+                    needle: {
+                        radiusPercentage: 2,
+                        widthPercentage: 3.2,
+                        lengthPercentage: 80,
+                        color: 'rgba(0, 0, 0, 1)'
+                    },
+                    valueLabel: {
+                        display: true,
+                        formatter: (value) => {
+                            return value + " kg";
+                        },
+                        color: 'rgba(255, 255, 255, 1)',
+                        backgroundColor: 'rgba(0, 0, 0, 1)',
+                        borderRadius: 5,
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+            })
+        };
     </script>
 @stop

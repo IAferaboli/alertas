@@ -18,19 +18,23 @@ class SensorController extends Controller
      */
     public function index()
     {
-        // $interventionsLast = Intervention::wheredat('date', '', date('Y') - 1)
-        //     ->where('status', '=', 1)
-        //     ->select(DB::raw('count(*) as total'), DB::raw('MONTH(date) AS mes'))
-        //     ->groupBy('mes')
-        //     ->orderBy('mes', 'asc')
-        //     ->get();
-            
-        $hora = Carbon::now();
+
         $mqttdata = MqttData::where('topic_id', 'like', '%pm01sr01%')
-                        // ->whereBetween('created_at', array($hora->format('Y-m-d H:i:s'),$hora->subHours(12)->format('Y-m-d H:i:s')))
-                        ->get();
-            return $mqttdata;
-        return view('panel.agua.sensors.index');
+            ->whereBetween('created_at', [Carbon::now()->subHours(24)->format('Y-m-d H:i:s'), Carbon::now()->format('Y-m-d H:i:s')])
+            ->get(['message', 'created_at']);
+
+        foreach ($mqttdata as $data) {
+            $label[] = $data->created_at->format('H:i');
+            $presion[] = round(json_decode($data->message, true)['values']['Presion'] / 10, 2);
+        }
+
+        $dataSensor = MqttData::where('topic_id', 'like', '%pm01sr01%')
+            ->orderBy('id', 'desc')
+            ->first();
+        $pm01sr01 = json_decode($dataSensor->message, true);
+        $pm01sr01['values']['Presion'] = round($pm01sr01['values']['Presion'] / 10, 2);
+
+        return view('panel.agua.sensors.index', compact('label', 'presion', 'pm01sr01', 'dataSensor'));
     }
 
     /**
