@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.8.3
+> 1. Se añade log viewer.
+> 2. Se arregla bug del botón mantenimiento.
 ### 2.8.2
 > 1. Se añade sección Agua>Sensores con gráfico de últimas 24hs.
 > 2. Se bloquea botón de mantenimiento al hacer click.
