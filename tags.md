@@ -1,5 +1,8 @@
 # Versionado 📌
 ## Versión 2
+### 2.8.4
+> 1. Se modifica vista de expedientes.
+> 2. Se añade modal a vistas.
 ### 2.8.3
 > 1. Se añade log viewer.
 > 2. Se arregla bug del botón mantenimiento.

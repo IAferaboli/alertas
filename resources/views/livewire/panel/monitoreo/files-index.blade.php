@@ -6,8 +6,39 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" placeholder="Buscar por fecha de ingreso, Nº exp, Nº nota o fecha de filmación"
-                class="form-control">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="datein">Fecha Ingreso</label>
+                    <input type="date" wire:model="datein" class="form-control form-control-sm" name=""
+                        id="datein">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="filenumber">Expediente</label>
+                    <input type="text" wire:model="filenumber" class="form-control form-control-sm" name=""
+                        id="filenumber">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="notenumber">Nº Nota </label>
+                    <input type="text" wire:model="notenumber" class="form-control form-control-sm" name=""
+                        id="notenumber">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="init">Iniciador</label>
+                    <input type="text" wire:model="init" class="form-control form-control-sm" name=""
+                        id="init">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="starttime">Fecha Registros</label>
+                    <input type="date" wire:model="starttime" class="form-control form-control-sm" name=""
+                        id="starttime">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="month">Mes</label>
+                    <input type="month" wire:model="month" class="form-control form-control-sm" name=""
+                        id="month">
+                </div>
+            </div>
+
         </div>
 
         @if ($files->count())
@@ -15,15 +46,11 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Fec. Ing.</th>
-                            <th>Nº Exp</th>
-                            <th>Inicia</th>
+                            <th>Fecha ingreso</th>
+                            <th>Nº Expediente</th>
                             <th>Nº Nota</th>
-                            <th>Desde</th>
-                            <th>Hasta</th>
-                            <th>Adj</th>
-                            <th>Fec. Sal.</th>
-                            <th colspan="2" class="text-center">Acciones</th>
+                            <th>Fecha salida</th>
+                            <th colspan="3" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,23 +58,15 @@
                             <tr>
                                 <td>{{ \Carbon\Carbon::parse($file->datein)->format('d/m/Y') }}</td>
                                 <td>{{ $file->filenumber }}</td>
-                                <td>{{ $file->init }}</td>
                                 <td>{{ $file->notenumber }}</td>
-                            
-                                <td>@if ($file->starttime)
-                                    {{ \Carbon\Carbon::parse($file->starttime)->format('d/m/y H:i')}}
-                                    @else
-                                    Sin datos
-                                    @endif
-                                </td>
-                                <td>@if ($file->endtime)
-                                    {{ \Carbon\Carbon::parse($file->endtime)->format('d/m/y H:i')}}
-                                @else
-                                    Sin datos
-                                @endif</td>
-                                <td>{{ $file->attach }}</td>
+
                                 <td>{{ \Carbon\Carbon::parse($file->dateout)->format('d/m/Y') }}</td>
 
+                                <td width="10px">
+                                    <button wire:click="showFile({{ $file }})"data-toggle="modal"
+                                        data-target="#modalFiles" class="btn btn-secondary btn-xs" type=""><i
+                                            class="fas fa-plus"></i></button>
+                                </td>
                                 <td width="10px">
                                     <a class="btn btn-warning btn-xs"
                                         href="{{ route('panel.monitoreo.files.edit', $file) }}"><i
@@ -77,4 +96,36 @@
         @endif
 
     </div>
+
+    {{-- Minimal --}}
+    
+    <x-adminlte-modal wire:ignore.self id="modalFiles" title="Expediente: {{ $expediente->filenumber }}">
+        <div>
+            <div class="row">
+                <div class="col col-md-6">
+                    <strong>Fecha Ingreso:</strong> {{ \Carbon\Carbon::parse($expediente->datein)->format('d/m/Y') }}
+                </div>
+                <div class="col col-md-6">
+                    <strong>Fecha Salida:</strong> {{ \Carbon\Carbon::parse($expediente->dateout)->format('d/m/Y') }}   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-6">
+                    <strong>Iniciador:</strong> {{ $expediente->init }}   
+                </div>
+                <div class="col col-md-6">
+                    <strong>Nº de Nota:</strong> {{ $expediente->notenumber }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-6">
+                    <strong>Desde:</strong> {{ \Carbon\Carbon::parse($expediente->starttime)->format('d/m/Y - H:i') }}   
+                </div>
+                <div class="col col-md-6">
+                    <strong>Hasta:</strong> {{ \Carbon\Carbon::parse($expediente->endtime)->format('d/m/Y - H:i') }}
+                </div>
+            </div>
+        </div>
+    </x-adminlte-modal>
 </div>
