@@ -11,7 +11,7 @@
        
         <div class="col col-lg-6 col-6">
             <div class="small-box bg-info">
-                <div id="canvas-holder" class="canvas pt-2" style="width:15vw">
+                <div id="canvas-holder" class="canvas pt-2" style="width:30vw">
                     <canvas id="temperaturaServer"></canvas>
                 </div>
                 <div class="inner text-center">
@@ -22,7 +22,7 @@
         </div>
         <div class="col col-lg-6 col-6">
             <div class="small-box bg-info">
-                <div id="canvas-holder" class="canvas pt-2" style="width:15vw">
+                <div id="canvas-holder" class="canvas pt-2" style="width:30vw">
                     <canvas id="pm01sr01"></canvas>
                 </div>
                 <div class="inner text-center">
