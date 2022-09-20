@@ -1,5 +1,11 @@
 # Versionado 📌
 ## Versión 2
+### 2.8.5
+> 1. Se añade controlador para TV.
+> 2. Se añade vista de mapa dentro de TV.
+> 3. Se añade vista de sensor dentro de TV.
+> 4. Se agrega TV al menú.
+> 5. Se elimina vista de mapa anterior.
 ### 2.8.4
 > 1. Se modifica vista de expedientes.
 > 2. Se añade modal a vistas.

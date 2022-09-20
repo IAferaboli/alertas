@@ -12,7 +12,7 @@ use App\Http\Controllers\Panel\Monitoreo\FlawController;
 use App\Http\Controllers\Panel\Monitoreo\InterventionController;
 use App\Http\Controllers\Panel\Monitoreo\MapController;
 use App\Http\Controllers\Panel\Monitoreo\ReportController;
-
+use App\Http\Controllers\Panel\TV\TvController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,9 +33,11 @@ Route::resource('monitoreo/flaws', FlawController::class)->except('show')->names
 Route::resource('monitoreo/cameras', CameraController::class)->names('panel.monitoreo.cameras');
 
 Route::get('monitoreo/maps/camaras', [MapController::class,'cameras'])->name('panel.monitoreo.maps.index');
-Route::get('monitor', function () {
-    return view('panel.monitoreo.maps.index2');
-})->name('panel.monitoreo.maps.index2');
+
+//      --- TV ---
+Route::get('tv/map', [TvController::class,'map'])->name('panel.tv.map');
+Route::get('tv/sensors', [TvController::class,'sensor'])->name('panel.tv.sensors');
+
 
 
 //      --- AGUA ---

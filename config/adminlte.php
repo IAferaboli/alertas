@@ -301,14 +301,6 @@ return [
                             'active' => ['panel.monitoreo.maps.index'],
                             'can'   =>  'panel.monitoreo.maps.index',
                         ],
-                        [
-                            'text' => 'Mapa TV',
-                            'route'  => 'panel.monitoreo.maps.index2',
-                            'active' => ['panel.monitoreo.maps.index2'],
-                            'can'   =>  'panel.monitoreo.maps.TV',
-                        ],
-                       
-                        
                     ],
                 ],
             ],
@@ -328,13 +320,40 @@ return [
                     'active' => ['panel/agua/sensors*'],
                     'can'   =>  'panel.agua.sensors.index',
                 ],
-                
+
             ],
         ],
-     
+        [
+            'text'    => 'TV',
+            'icon'    => 'fas fa-fw fa-tv',
+            'active'    => ['panel/tv*'],
+            'can'   =>  'panel.tv.menu',
+            'submenu' => [
+                //Mapa de cámaras
+                [
+                    'text' => 'Mapa cámaras',
+                    'icon'  => 'fas fa-fw fa-map-marker',
+                    'route'  => 'panel.tv.map',
+                    'active' => ['panel/tv/map'],
+                    'can'   =>  'panel.tv.map',
+                ],
+                //Sensores
+                [
+                    'text' => 'Sensores',
+                    'icon'  => 'fas fa-fw fa-tachometer-alt',
+                    'route'  => 'panel.tv.sensors',
+                    'active' => ['panel/tv/sensors'],
+                    'can'   =>  'panel.tv.sensors',
+                ],
 
-        ['header' => 'REPORTES',
-            'can'   =>  'panel.reports.menu',],
+            ],
+        ],
+
+
+        [
+            'header' => 'REPORTES',
+            'can'   =>  'panel.reports.menu',
+        ],
         [
             'text'    => 'Monitoreo',
             'icon'    => 'fas fa-fw fa-print',
