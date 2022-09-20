@@ -117,6 +117,7 @@
                     color: 'rgba(255, 255, 255, 1)',
                     backgroundColor: 'rgba(0, 0, 0, 1)',
                     borderRadius: 5,
+                    fontSize: 15,
                     padding: {
                         top: 10,
                         bottom: 10
@@ -152,6 +153,7 @@
                     color: 'rgba(255, 255, 255, 1)',
                     backgroundColor: 'rgba(0, 0, 0, 1)',
                     borderRadius: 5,
+                    fontSize: 15,
                     padding: {
                         top: 10,
                         bottom: 10
