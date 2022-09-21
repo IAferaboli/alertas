@@ -1,5 +1,7 @@
 # Versionado 📌
 ## Versión 2
+### 2.8.6
+> 1. Se añade upload y download de IS a TV - Sensores mediante livewire, consultando por API a Zabbix.
 ### 2.8.5
 > 1. Se añade controlador para TV.
 > 2. Se añade vista de mapa dentro de TV.

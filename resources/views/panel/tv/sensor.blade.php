@@ -33,6 +33,7 @@
         </div>
     </div>
 
+    @livewire('panel.tv.sensors-index')
 @stop
 
 @section('css')
