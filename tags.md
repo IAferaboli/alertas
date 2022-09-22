@@ -3,6 +3,7 @@
 ### 2.8.7
 > 1. Se arregla mapa, no se desplazaba por cámaras fuera de servicio.
 > 2. Se agrega upload y download de FiberCorp (muni) a TV.
+> 3. Se agrega upload y download de FiberCorp (Anexo) a TV.
 ### 2.8.6
 > 1. Se añade upload y download de IS a TV - Sensores mediante livewire, consultando por API a Zabbix.
 ### 2.8.5

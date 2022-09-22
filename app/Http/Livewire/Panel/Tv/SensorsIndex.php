@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class SensorsIndex extends Component
 {
-    public $downIs, $upIs, $downFiberMuni, $upFiberMuni;
+    public $downIs, $upIs, $downFiberMuni, $upFiberMuni, $downFiberAnexo, $upFiberAnexo;
 
     public function mount()
     {
@@ -62,6 +62,31 @@ class SensorsIndex extends Component
         } catch (\Throwable $th) {
             $this->downFiberMuni = "Err";
             $this->upFiberMuni = "Err";
+        }
+
+        try {
+            $response = $client->post('http://monitoreo.intranet.villaconstitucion.gob.ar/zabbix/api_jsonrpc.php', [
+                'json' => [
+                   'jsonrpc' => '2.0',
+                   'method' => 'history.get',
+                   'params' => [
+                        'output' => 'extend',
+                        'history' => 3,
+                        'itemids' => ['28366','28365'],
+                        'sortfield' => 'clock',
+                        'sortorder' => 'DESC',
+                        'limit' => 2,
+                   ],
+                   'auth' => env('TOKEN_ZABBIX'),
+                   'id' => 1
+                 ]
+            ]);
+            $data = json_decode($response->getBody());
+            $this->downFiberAnexo = round($data->result[0]->value/1000000, 2);
+            $this->upFiberAnexo = round($data->result[1]->value/1000000, 2);
+        } catch (\Throwable $th) {
+            $this->downFiberAnexo = "Err";
+            $this->upFiberAnexo = "Err";
         }
 
     }
@@ -131,6 +156,35 @@ class SensorsIndex extends Component
         } catch (\Throwable $th) {
             $this->downFiberMuni = "Err";
             $this->upFiberMuni = "Err";
+        }
+    }
+
+    public function fibercorpAnexo()
+    {
+        $client = new Client();
+        try {
+            $response = $client->post('http://monitoreo.intranet.villaconstitucion.gob.ar/zabbix/api_jsonrpc.php', [
+                'json' => [
+                   'jsonrpc' => '2.0',
+                   'method' => 'history.get',
+                   'params' => [
+                        'output' => 'extend',
+                        'history' => 3,
+                        'itemids' => ['28366','28365'],
+                        'sortfield' => 'clock',
+                        'sortorder' => 'DESC',
+                        'limit' => 2,
+                   ],
+                   'auth' => env('TOKEN_ZABBIX'),
+                   'id' => 1
+                 ]
+            ]);
+            $data = json_decode($response->getBody());
+            $this->downFiberAnexo = round($data->result[0]->value/1000000, 2);
+            $this->upFiberAnexo = round($data->result[1]->value/1000000, 2);
+        } catch (\Throwable $th) {
+            $this->downFiberAnexo = "Err";
+            $this->upFiberAnexo = "Err";
         }
     }
 }
