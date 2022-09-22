@@ -95,8 +95,8 @@ class SensorsIndex extends Component
             ]);
 
             $data = json_decode($response->getBody());
-            $this->downIs = round($data->result[1]->value/1000000, 2);
-            $this->upIs = round($data->result[0]->value/1000000, 2);
+            $this->downIs = round($data->result[0]->value/1000000, 2);
+            $this->upIs = round($data->result[1]->value/1000000, 2);
         } catch (\Throwable $th) {
             $this->downIs = "Err";
             $this->upIs = "Err";
