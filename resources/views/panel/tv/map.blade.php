@@ -343,7 +343,6 @@
                     domos.clearLayers();
                     fijas.clearLayers();
                     value = false;
-                    getTemp();
                     clearInterval(myTimer);
                     var flightNumber = 0;
                     // clearInterval(myTimerProgress);
@@ -355,7 +354,6 @@
                             out.clearLayers();
                             getISS();
                             value = true;
-                            getTemp();
                             clearInterval(myTimer2);
                             myTimerInit();
                         } else {
@@ -369,8 +367,8 @@
                     fijas.clearLayers();
                     out.clearLayers();
                     getISS();
-                    getTemp();
-
+                    // clearInterval(myTimer2);
+                    //         myTimerInit();
                 }
             }, 100000);
         }
